@@ -131,22 +131,18 @@
 	}
 
 	/**
-	 * Merge object 1 with same properties from obj2. 
+	 * Merge two objects or arrays
 	 * Add properties from obj2 to obj1. Override properties from obj1 with same properties from obj2
 	 * @param  {Object} obj1 object in which we want to change properties
 	 * @param  {Object} obj2 properties that we will take
+	 * @example s.merge(obj1, obj2);
 	*/
 	_s.merge = function (obj1, obj2) {
-		if (!obj2) {
-			return obj1;
-		} else if (!obj1) {
-			return obj2;
-		}
+		if (!obj2) return obj1;
 
 		for (var key in obj2) {
-			if (obj2.hasOwnProperty(key)) {
+			if (obj2.hasOwnProperty(key)) 
 				obj1[key] = obj2[key];
-			}
 		}
 
 		return obj1;

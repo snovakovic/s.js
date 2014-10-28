@@ -117,10 +117,18 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 
 	var mergedObject = s.merge(obj1, obj2);
 
-	assert.equal(mergedObject.prop1, "obj2 prop1", "prop1 is equal to obj2 prop1");
-	assert.equal(mergedObject.prop2, "obj1 prop2", "prop2 is equal to obj1 prop2");
-	assert.equal(mergedObject.prop3, "obj2 prop3", "prop3 is equal to obj2 prop3");
+	var testObject = {
+		prop1: "obj2 prop1",
+		prop2: "obj1 prop2",
+		prop3: "obj2 prop3",
+	}
 
+	//var aa = [1, 2, 4];
+	//var bb = [1, 3, 4];
+	//var mm = s.merge(aa, bb);
+
+	//assert.deepEqual(mm, [1, 2, 3, 4], "two arrays are merged");
+	assert.deepEqual(mergedObject, testObject, "two objects are merged together");
 
 });
 
