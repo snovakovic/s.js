@@ -1,4 +1,4 @@
-QUnit.test("s.js String Modification Module Part", function (assert) {
+QUnit.test("s.js String Modification", function (assert) {
 
 	var string1 = "unit";
 	var string2 = "test";
@@ -17,6 +17,110 @@ QUnit.test("s.js String Modification Module Part", function (assert) {
 	//s.capitalize
 	assert.notEqual(string1, "Unit", "String is not capitalized");
 	assert.equal(s.capitalize(string1), "Unit", "String is capitalized");
+
+});
+
+
+QUnit.test("s.js Array and Object Modification", function (assert) {
+
+	var testArray = ["a", "b", "c", "d", "e", "f", "g", "h"],
+		a, b, c,
+		lastIndex,
+		counter = 0,
+		tmp;
+
+	var bigArray = [];
+	for (var i = 0; i <= 1000000; i++) {
+		bigArray.push(i);
+	}
+
+	//each
+	s.each(testArray, function (val, i) {
+		if (val === "a")
+			a = testArray[i];
+		else if (val === "b")
+			b = testArray[i];
+		else if (val === "c")
+			c = testArray[i];
+
+	});
+
+	s.each(bigArray, function (val, i) {
+		lastIndex = i;
+	});
+
+	var lastValue;
+	s.each(testArray, function (val, i) {
+		lastValue = val;
+		return false;
+	});
+
+	assert.equal(a, testArray[0], "1. array value is a");
+	assert.equal(b, testArray[1], "2. array value is b");
+	assert.equal(c, testArray[2], "3 array value is c!");
+	assert.equal(lastValue, "a", "break (return false) is working.");
+	assert.equal(lastIndex, 1000000, "last index is a million");
+
+
+	//iterate
+	s.iterate(1000000, function (i) {
+		counter++;
+	});
+	assert.equal(lastIndex, 1000000, "counter is a million");
+
+	s.iterate(1000000, function (i) {
+		tmp = i;
+		if (i === 3) return false;
+	});
+	assert.equal(tmp, 3, "return false in iteration is working");
+
+
+	//without
+	assert.deepEqual(s.remove(['c','a', 'b', 'c', 'd', 'c'], 'c'), ['a', 'b', 'd'], "all c occurances are removed from array");
+	assert.deepEqual(s.remove([1, 2, 2, 3, 4], 2), [1, 3, 4], "all 2 are removed from array");
+	assert.deepEqual(s.remove([1, 2, '2', 3, 4], 2), [1, '2', 3, 4], "string two is not removed from array");
+	assert.deepEqual(s.remove([1, 2, 3], 5), [1, 2, 3], "there is nop value in array to be removed array is intacted.");
+
+	//removeFirst
+	assert.deepEqual(s.removeFirst(['a', 'b', 'c', 'd', 'c'], 'c'), ['a', 'b', 'd', 'c'], "first c is removed from array");
+	assert.deepEqual(s.removeFirst([1, 2, 2, 3, 4], 2), [1, 2, 3, 4], "first 2 is removed from array");
+	assert.deepEqual(s.removeFirst([1, 2, 3], 5), [1, 2, 3], "there is no value in array to be removed array is intacted.");
+
+	//removeByIndex
+	assert.deepEqual(s.removeByIndex([1, 2, 3, 4], 2), [1, 2, 4], "remove by index is working");
+	assert.deepEqual(s.removeByIndex([1, 2, 3, 4], 3), [1, 2, 3], "remove last by index is working");
+	assert.deepEqual(s.removeByIndex([1, 2, 3, 4], 4), [1, 2, 3, 4], "index is greater than arr size nothing should be removed");
+	assert.deepEqual(s.removeByIndex([1, 2, 3, 4], 4), [1, 2, 3, 4], "index is less then 0 nothing should be removed");
+
+	//shuffle
+	var beforeShuffle = testArray.join();
+	s.shuffle(testArray);
+	var afterShuffle = testArray.join();
+
+	assert.equal(beforeShuffle.length, afterShuffle.length, "shuffled array is the same size as startArray");
+	assert.notEqual(beforeShuffle, afterShuffle, "shuffled array is not same as test array ");
+	assert.notEqual(testArray.indexOf("a"), -1, "shuffled array has a in it");
+	assert.notEqual(testArray.indexOf("b"), -1, "shuffled array has b in it");
+	assert.notEqual(testArray.indexOf("c"), -1, "shuffled array has c in it");
+
+
+	//merge
+	var obj1 = {
+		prop1: "obj1 prop1",
+		prop2: "obj1 prop2"
+	};
+
+	var obj2 = {
+		prop1: "obj2 prop1",
+		prop3: "obj2 prop3"
+	};
+
+	var mergedObject = s.merge(obj1, obj2);
+
+	assert.equal(mergedObject.prop1, "obj2 prop1", "prop1 is equal to obj2 prop1");
+	assert.equal(mergedObject.prop2, "obj1 prop2", "prop2 is equal to obj1 prop2");
+	assert.equal(mergedObject.prop3, "obj2 prop3", "prop3 is equal to obj2 prop3");
+
 
 });
 
@@ -100,75 +204,4 @@ QUnit.test( "s.js test module part unit tests", function( assert ) {
 
 });
 
-
-QUnit.test( "s.js Array and objects module part", function( assert ) {
-
-	var testArray = ["a","b","c","d","e","f","g","h"];
-	var a,b,c;
-	var lastIndex;
-	var counter = 0;
-
-	var bigArray = [];
-    for (var i = 0; i <= 1000000; i++ ) {
-    	bigArray.push(i);
-    }
-
-    //each
-  	s.each(testArray, function(val, i){
-    	if(val === "a")
-    		a = testArray[i];
-    	else if (val === "b")
-    		b = testArray[i];
-    	else if (val === "c")
-    		c = testArray[i];
-
-	});
-
-  	s.each(bigArray, function(val, i){
-    	lastIndex = i;
-	});
-
-	assert.equal(a, testArray[0] , "1. array value is a" );
-	assert.equal(b, testArray[1] , "2. array value is b" );
-	assert.equal(c, testArray[2] , "3 array value is c!" );
-	assert.equal(lastIndex, 1000000 , "last index is a million" );
-
-
-	//iterate
-	s.iterate(1000000, function(i){
-		counter++;
-	});
-
-	assert.equal( lastIndex, 1000000 , "counter is a million" );
-
-	//merge
-	var obj1 = {
-		prop1: "obj1 prop1",
-		prop2: "obj1 prop2"
-	};
-
-	var obj2 = {
-		prop1 : "obj2 prop1",
-		prop3 : "obj2 prop3"
-	};
-
-	var mergedObject = s.merge(obj1, obj2);
-	
-	assert.equal( mergedObject.prop1, "obj2 prop1" , "prop1 is equal to obj2 prop1");
-	assert.equal( mergedObject.prop2, "obj1 prop2" , "prop2 is equal to obj1 prop2");
-	assert.equal(mergedObject.prop3, "obj2 prop3", "prop3 is equal to obj2 prop3");
-
-	//shuffle
-	var beforeShuffle = testArray.join();
-	s.shuffle(testArray);
-	var afterShuffle = testArray.join();
-
-	assert.equal(beforeShuffle.length, afterShuffle.length, "shuffled array is the same size as startArray");
-	assert.notEqual(beforeShuffle, afterShuffle, "shuffled array is not same as test array ");
-	assert.notEqual(testArray.indexOf("a"), -1, "shuffled array has a in it");
-	assert.notEqual(testArray.indexOf("b"), -1, "shuffled array has b in it");
-	assert.notEqual(testArray.indexOf("c"), -1, "shuffled array has c in it");
-
-
-});
 

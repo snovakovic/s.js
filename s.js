@@ -1,13 +1,13 @@
 
 /*****************************************************
- 			  String Modification Module Part.
+ 			  String Modification.
  ***************************************************/
 (function (_s, undefined) {
 
 	/**
 	 * Replace all occurrences in a string with a new value   
 	 * @param  str {String} string where occurances will be replaced
-	 * @param find {String} string that we want ot replace with new value    
+	 * @param find {String} string that we want to replace with new value    
 	 * @param replace {String} new string value which will replace old value   
 	 * @return {[string]} new string with replaced values
 	 * @example console.log(s.replaceAll("this is old value in old string", "old", "new"))
@@ -17,8 +17,8 @@
 	};
 
 	/**
- 	 * String Concatenation variation based on C# string concatanation      
- 	 * @return {[string]} [formated string]
+ 	 * String concatenation variation based on .net            
+ 	 * @return {[string]} formatted  string
  	 * @example console.log(s.format("Hi {0}, your rank is {1}.", "Foo", 100))
  	 */
 	_s.format = function () {
@@ -46,42 +46,89 @@
 
 
 /*****************************************************
-	  Arrays and object modification Module part
+	  Array and Object Modification
  ***************************************************/
+
 (function (_s, undefined) {
 
-	/*
-	* for each loop for the arrays
-	* var testArray = ["a","b","c"];
-	* s.each(testArray, function(val, i){
-	*     console.log(val);
-	*  });
-	*/
+	/**
+	 * foreach loop 
+	 * @param arr {Array} array that we want to loop over     
+	 * @return callback {[string]} function that will be called for each loop iteration. 
+	 **** function will be provided with the current value and the number of current iteration as parametars. callback return false is equal to break.
+	 * @example s.each([1,2,3,4,5], function(val, i) { console.log(val); } );
+	 */
 	_s.each = function (arr, callback) {
-		var length = arr.length;
-
-		for (var i = 0; i < length; i++) {
-			if (callback(arr[i], i) === false) {
+		for (var i = 0, l = arr.length; i < l; i++) {
+			if (callback(arr[i], i) === false) 
 				break;
-			}
 		}
 	};
 
 	/**
 	 * Iterate specific number of times
-	 * @param  {Integer}   n  number of times to iterate
-	 * @param  {Function} callback function that we will call
-	 *  s.iterate(10, function(i){
-	 *     console.log(i);
-	 *  });
+	 * @param  {Integer}   n  number of iterations
+	 * @param  {Function} callback function that will be call per each iteration. use return false to break from iterations
+	 * @example s.iterate(10, function(i) { console.log(i); } );
 	 */
-	_s.iterate = function (length, callback) {
-		for (var i = 0 ; i < length; i++) {
-			if (callback(i) === false) {
+	_s.iterate = function (l, callback) {
+		for (var i = 0 ; i < l; i++) {
+			if (callback(i) === false) 
 				break;
-			}
 		}
 	};
+
+	/**
+	 * Remove all occurrences of element from array
+	 * @param arr {Array} array from where we want  to remove the values
+	 * @param elToRemove {...} element that we want to remove from array
+	  * @return {Array} new array without the removed values
+	 * @example s.remove(['a', 'b', 'c', 'd', 'c'], 'c');
+	 */
+	_s.remove = function (arr, elToRemove) {
+		var pos;
+		while (pos !== -1) {
+			pos = arr.indexOf(elToRemove);
+			pos > -1 && arr.splice(pos, 1);
+		}
+		return arr;
+	};
+
+	/**
+	 * Remove first occurrence of element from array
+	 * @param arr {Array} array from where we whant to remove the value
+	 * @param elToRemove {...} element that we want to remove from array
+	 * @return {Array} array without the removed value
+	 * @example s.removeFirst(['a', 'b', 'c', 'd', 'c'], 'c');
+	 */
+	_s.removeFirst = function (arr, elToRemove) {
+		var pos = arr.indexOf(elToRemove);
+		pos > -1 && arr.splice(pos, 1);
+		return arr;
+	};
+
+	/**
+	 * Remove value form array by index
+	 * @param arr {Array} array from where we whant to remove the value
+	 * @param index {...} index in the array from where we want to remove the value
+	 * @return {Array} array without the removed value
+	 * @example s.removeFirst(['a', 'b', 'c', 'd', 'c'], 'c');
+	 */
+	_s.removeByIndex = function (arr, index) {
+		arr.splice(index, 1);
+		return arr;
+	};
+
+	/**
+	 * Shuffle values in the array
+	 * @param arr {Array} input array that we want to shuffle
+	 * @return {Array} shuffled array
+	 * @example s.shuffle(['a', 'b', 'c', 'd', 'c']);
+	 */
+	_s.shuffle = function (arr) {
+		for (var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
+		return arr;
+	}
 
 	/**
 	 * Merge object 1 with same properties from obj2. 
@@ -90,9 +137,9 @@
 	 * @param  {Object} obj2 properties that we will take
 	*/
 	_s.merge = function (obj1, obj2) {
-		if (!_s.hasValue(obj2)) {
+		if (!obj2) {
 			return obj1;
-		} else if (!_s.hasValue(obj1)) {
+		} else if (!obj1) {
 			return obj2;
 		}
 
@@ -104,27 +151,6 @@
 
 		return obj1;
 	};
-
-	//Remove easily an known element from an array
-	//var arr = ['a', 'b', 'c', 'd'];
-	//_s.remove(arr, 'c');
-	_s.removeByValue = function (arr, elToRemove) {
-		var pos = arr.indexOf(elToRemove);
-		pos > -1 && arr.splice(pos, 1);
-	};
-
-	// Remove element from array by index
-	// var arr = ['a', 'b', 'c', 'd'];
-	// _s.removeByIndex(2); //c is removed from array
-	_s.removeByIndex = function (arr, index) {
-		arr.splice(index, 1);
-	};
-
-	//shuffle values in the array
-	_s.shuffle = function (arr) {
-		for (var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
-		return arr;
-	}
 
 
 })(window.s = window.s || {});
