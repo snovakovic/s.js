@@ -1,22 +1,45 @@
 
 /*****************************************************
- 			  String Module part.
+ 			  String Modification Module Part.
  ***************************************************/
 (function (_s, undefined) {
 
 	/**
- 	 * format string ("Hi {0}, you are {1}!", "Foo", 100) --> Hi Foo you are 100        
+	 * Replace all occurrences in a string with a new value   
+	 * @param  str {String} string where occurances will be replaced
+	 * @param find {String} string that we want ot replace with new value    
+	 * @param replace {String} new string value which will replace old value   
+	 * @return {[string]} new string with replaced values
+	 * @example console.log(s.replaceAll("this is old value in old string", "old", "new"))
+	*/
+	_s.replaceAll = function (str, find, replace) {
+		return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
+	};
+
+	/**
+ 	 * String Concatenation variation based on C# string concatanation      
  	 * @return {[string]} [formated string]
- 	 * @example console.log(S.format("Hi {0}, you are {1}!", "Foo", 100))
+ 	 * @example console.log(s.format("Hi {0}, your rank is {1}.", "Foo", 100))
  	 */
 	_s.format = function () {
-		var s = arguments[0],
+		var str = arguments[0],
 			 length = arguments.length - 1;
 		for (var i = 0; i < length; i++) {
-			s = s.replace("{" + i + "}", arguments[i + 1]);
+			str = _s.replaceAll(str, "{" + i + "}", arguments[i + 1]);
 		}
-		return s;
+		return str;
 	};
+
+	/**
+	 * Capitalize the first letter in the string. 
+	 * @param str {String} input string that we want to capitalize     
+	 * @return {[string]} string with capitalized first letter
+	 * @example console.log(s.capitalize("hello")) //>>Hello
+	 */
+	_s.capitalize = function (str) {
+		return str[0].toUpperCase() + str.slice(1);
+	}
+
 
 })(window.s = window.s || {});
 
@@ -85,7 +108,7 @@
 	//Remove easily an known element from an array
 	//var arr = ['a', 'b', 'c', 'd'];
 	//_s.remove(arr, 'c');
-	_s.removeByValue = function(arr, elToRemove) {
+	_s.removeByValue = function (arr, elToRemove) {
 		var pos = arr.indexOf(elToRemove);
 		pos > -1 && arr.splice(pos, 1);
 	};
@@ -93,14 +116,14 @@
 	// Remove element from array by index
 	// var arr = ['a', 'b', 'c', 'd'];
 	// _s.removeByIndex(2); //c is removed from array
-	_s.removeByIndex = function(arr, index) {
+	_s.removeByIndex = function (arr, index) {
 		arr.splice(index, 1);
 	};
 
 	//shuffle values in the array
 	_s.shuffle = function (arr) {
 		for (var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
-			return arr;
+		return arr;
 	}
 
 
@@ -160,9 +183,10 @@
 		return typeof testVar === 'boolean';
 	};
 
-	///REGEX
+	_s.isStringNumber = function (testVar) {
+		return /^\d+$/.test(testVar);
+	}
 
-	//check if this is email
 	_s.isEmail = function (email) {
 		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		return re.test(email);
@@ -206,7 +230,7 @@
 /*****************************************************
    New feature support for older browsers
  ***************************************************/
-(function (_s, undefined) {
+( function ( _s, undefined ) {
 	// Add JavaScript-1.6 array features if not supported natively
 	if (![].indexOf) {
 		Array.prototype.indexOf = function (find) {
