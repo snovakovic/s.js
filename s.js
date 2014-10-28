@@ -131,20 +131,17 @@
 	}
 
 	/**
-	 * Merge two objects or arrays
-	 * Add properties from obj2 to obj1. Override properties from obj1 with same properties from obj2
-	 * @param  {Object} obj1 object in which we want to change properties
-	 * @param  {Object} obj2 properties that we will take
-	 * @example s.merge(obj1, obj2);
+	 * Merge properties of the second object to the first object.
+	 * In case of the same property value form second object will oweride property value in first object
+	 * @param  {Object} obj1 properties will be merged in this object
+	 * @param  {Object} obj2 object from where we will merge properties
+	 * @example s.merge({prop1:1,prop2:2}, {prop1:0,prop3:3});
 	*/
 	_s.merge = function (obj1, obj2) {
-		if (!obj2) return obj1;
-
 		for (var key in obj2) {
 			if (obj2.hasOwnProperty(key)) 
 				obj1[key] = obj2[key];
 		}
-
 		return obj1;
 	};
 
@@ -179,7 +176,7 @@
 			if (testVar.length > 0) return true;
 			if (testVar.length === 0) return false;
 
-			if (testVar === "") return false
+			if (testVar === "") return false;
 
 			for (var key in testVar) {
 				if (hasOwnProperty.call(testVar, key)) return true;
@@ -203,6 +200,14 @@
 
 	_s.isBoolean = function (testVar) {
 		return typeof testVar === 'boolean';
+	};
+
+	_s.isArray = function (testVar) {
+		return Array.isArray(testVar);
+	};
+
+	_s.isObject = function (testVar) {
+		return typeof testVar === 'object';
 	};
 
 	_s.isStringNumber = function (testVar) {
