@@ -133,7 +133,8 @@ In case of the same property value from second object will override the value in
 
     var obj2 = {
         prop1: "obj2 prop1",
-        prop3: "obj2 prop3"
+        prop3: "obj2 prop3",
+        prop4: 1,
     };
     var merged = s.merge(obj1, obj2);
     console.log(merged);
@@ -141,9 +142,143 @@ In case of the same property value from second object will override the value in
         {
             prop1: "obj2 prop1",
             prop2: "obj1 prop2",
-            prop3: "obj2 prop3"
+            prop3: "obj2 prop3",
+            prop4: 1
         } 
     */
 ```
 
 
+
+Tests
+-----
+
+### isDefined
+Test if variable is initialized
+
+```javascript
+    var not,
+        arr = [],
+        nll = null;
+    s.isDefined(not); //>> false
+    s.isDefined(arr); //>> true
+    s.isDefined(nll); //>> true
+```
+
+### hasValue
+Test if variable has been defined and is not empty.
+
+    Things that are treated as if they don't have value:
+        1) null
+        2) not initialized variable
+        3) empty array
+        4) empty object
+        5) empty string
+        6) string with only spaces in
+
+```javascript
+    var tmp;
+
+    s.hasValue(tmp); //>> false
+    s.hasValue(null); //>> false
+    s.hasValue([]); //>> false
+    s.hasValue({}); //>> false
+    s.hasValue(""); //>> false
+    s.hasValue("  "); //>> false
+
+    s.hasValue(0); //>> true
+    s.hasValue(false); //>> true
+    s.hasValue(true); //>> true
+    s.hasValue(","); //>> true
+
+```
+
+### isString
+Check if variable type is string
+
+```javascript
+    s.isString(""); //>> true
+    s.isString(2); //>> false
+```
+
+### isNumber
+Check if variable type is isNumber
+
+```javascript
+    s.isNumber(2); //>> true
+    s.isNumber(""); //>> false
+```
+
+### isBoolean
+Check if variable type is Boolean
+
+```javascript
+    s.isBoolean(false); //>> true
+    s.isBoolean(2); //>> false
+```
+
+### isObject
+Check if variable type is Object. 
+Array is also considered as object in JS. 
+type of NULL is object in JS but isObject returns false for null.
+
+```javascript
+    s.isObject({}); //>> true
+    s.isObject([]); //>> true
+    s.isObject(null); //>> false
+    s.isObject(false); //>> false
+```   
+
+### isArray
+Check if variable is Array.
+
+```javascript
+    s.isArray([]); //>> true
+    s.isArray({}); //>> false
+    s.isArray(null); //>> false
+```  
+
+### is
+Test string using any regular expresion or by using any of defined keywords. 
+
+Example of testing the string by using regular expresion:
+
+```javascript
+    //test if string contains only alphabetical characters spaces are ignored
+    s.is("te st", /^[a-zA-Z ]*$/); //>>true
+    s.is("te st2", /^[a-zA-Z ]*$/); //>>false
+
+    //test if the string is valid eMail
+    s.is("stefan.novakovich@gmail.com", /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); // >> true
+    s.is("not.email", /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); // >> false
+
+```  
+
+the same thing from above could be achived by using already defined keywords alphabetic and email. 
+
+```javascript
+    //test if string contains only alphabetical characters spaces are ignored
+    s.is("te st", 'alphabetic'); //>>true
+    s.is("te st2", 'alphabetic'); //>>false
+
+    //test if the string is valid eMail
+    s.is("stefan.novakovich@gmail.com", 'email');// >> true
+    s.is("not.email", 'email'); // >> false
+```  
+
+Available keywords:
+
+    - alphabetic : string contains only alphabetic characters (spaces are alowed, empty string is valid)
+    - numeric : string contains only numeric characters (spaces are alowed, empty string is valid)
+    - alphanumeric : string contains only alphanumeric characters (spaces are alowed, empty string is valid)
+    - lowercase : string contains only lowercase characters (spaces are alowed, empty string is valid)
+    - uppercase : string contains only uppercase characters (spaces are alowed, empty string is valid)
+    - email : check if string is valid email address
+    - strongPassword : check if string is strong password
+                       To be strong password string must conatain at least:
+	                        - one lowercase latter, 
+	                        - one uppercase letter
+	                        - one number
+	                        - 6 characters
+
+Keyword is case in-sensitive.

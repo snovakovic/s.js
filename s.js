@@ -154,101 +154,119 @@
  ***************************************************/
 (function (_s, undefined) {
 
+	/**
+	* Check if variable is initialized
+	*/
 	_s.isDefined = function (testVar) {
 		return typeof testVar !== 'undefined';
 	};
 
 	/**
-	* Test to see if variable has been defined and if it has associated value.
-	* @param  {var} testVar any var that we want to check
-	* @return {boolean} true - value is defined and have value, false - value is eater undefined or null ({} and [] return false)
+	* Test if variable has been defined and is not empty, 
+   * Things that are treated as if they don't have value:
+   *     1) null
+   *     2) not initialized variable
+   *     3) empty array
+   *     4) empty object
+   *     5) empty string
+   *     6) string with only spaces
 	*/
 	_s.hasValue = function (testVar) {
 		//TODO add check for empty testVarect and empty array
-		if (typeof testVar === 'undefined' || testVar === null || testVar === "") return false;
+		if (typeof testVar === 'undefined' || testVar === null
+			|| (typeof testVar === 'string' && testVar.trim().length === 0)) return false;
 
-		var type = typeof testVar;
-
-		if (type === "object") {
-			// Assume if it has a length property with a non-zero value
-			// that that property is correct.
-			if (testVar.length > 0) return true;
-			if (testVar.length === 0) return false;
-
-			if (testVar === "") return false;
-
+		//Array and object only
+		if (typeof testVar === 'object') {
 			for (var key in testVar) {
 				if (hasOwnProperty.call(testVar, key)) return true;
 			}
-
 			return false;
-
 		}
 
 		return true;
-
 	};
 
+	/**
+	* Check if variable type is string
+	*/
 	_s.isString = function (testVar) {
 		return typeof testVar === 'string';
 	};
 
+	/**
+	* Check if variable type is number
+	*/
 	_s.isNumber = function (testVar) {
 		return typeof testVar === 'number';
 	};
 
+	/**
+	* Check if variable type is boolean
+	*/
 	_s.isBoolean = function (testVar) {
 		return typeof testVar === 'boolean';
 	};
 
+	/**
+	* Check if variable type is object
+	* variable type of array is also object
+	* tyoe for null returns object, but is object will return false for null
+	*/
+	_s.isObject = function (testVar) {
+		return typeof testVar === 'object' && testVar != null;
+	};
+
+	/**
+	* Check if variable is array. 
+	*/
 	_s.isArray = function (testVar) {
 		return Array.isArray(testVar);
 	};
 
-	_s.isObject = function (testVar) {
-		return typeof testVar === 'object';
-	};
+	/**
+	 * Test string using any regular expresion or by using any of defined keywords
+	 * @param str {string} string that will be tested
+	 * @param expr {string|regExpresion} expresion can be defined keyword in string format or any regular expresion.
+	 * @example s.is("test", alphabetic); same as s.is("test", /^[a-zA-Z ]*$/)
+	*/
+	_s.is = function (str, expr) {
+		var re = expr;
+		if (typeof str !== 'string') return false;
 
-	_s.isStringNumber = function (testVar) {
-		return /^\d+$/.test(testVar);
+		//look for keywords
+		if (typeof expr === 'string') {
+			expr = expr.trim().toLowerCase();
+
+			switch (expr) {
+				case "alphabetic":
+					re = /^[a-zA-Z ]*$/;
+					break;
+				case "alphanumeric":
+					re = /^[a-zA-Z0-9 ]*$/;
+					break;
+				case "numeric":
+					re = /^[0-9 ]*$/;
+					break;
+				case "lowercase":
+					re = /^[a-z ]*$/;
+					break;
+				case "uppercase":
+					re = /^[A-Z ]*$/;
+					break;
+				case "email":
+					re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+					break;
+				case "strongpassword":
+					re = /^(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*$/;
+					break;
+				default :
+					throw "expresion keyword is not recognised";
+			}
+		} 
+
+		return re.test(str);
 	}
-
-	_s.isEmail = function (email) {
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		return re.test(email);
-	};
-
-	_s.isAlphaNumeric = function (string) {
-		var re = /^[a-zA-Z0-9 ]*$/;
-		return re.test(email);
-	};
-
-	_s.isAlphabetic = function (string) {
-		var re = /^[a-zA-Z]*$/;
-		return re.test(string);
-	};
-
-	_s.isLowerCaseOnly = function (string) {
-		var re = /^[a-z]*$/;
-		return re.test(string);
-	};
-
-	_s.isUpperCaseOnly = function (string) {
-		var re = /^[A-Z]*$/;
-		return re.test(string);
-	};
-
-	_s.isDigitOnly = function (string) {
-		var re = /^[0-9]*$/;
-		return re.test(string);
-	};
-
-	//Test for a strong password with this regex. 
-	//The password must contain one lowercase letter, one uppercase letter, one number, and be at least 6 characters long.
-	_s.isStrongPassword = function (string) {
-		var re = /^(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*$/;
-		return re.test(string);
-	};
 
 })(window.s = window.s || {});
 
