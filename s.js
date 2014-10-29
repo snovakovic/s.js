@@ -40,7 +40,6 @@
 		return str[0].toUpperCase() + str.slice(1);
 	}
 
-
 })(window.s = window.s || {});
 
 
@@ -132,7 +131,7 @@
 
 	/**
 	 * Merge properties of the second object to the first object.
-	 * In case of the same property value form second object will oweride property value in first object
+	 * In case of the same property value from second object will override the value in the first object
 	 * @param  {Object} obj1 properties will be merged in this object
 	 * @param  {Object} obj2 object from where we will merge properties
 	 * @example s.merge({prop1:1,prop2:2}, {prop1:0,prop3:3});

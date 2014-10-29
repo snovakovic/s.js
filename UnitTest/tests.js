@@ -131,7 +131,7 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 		obj: {
 			a: 'a2',
 		},
-		arr: [1, 2, 4, 5],
+		arr: 1,
 		upd: [
 			{
 				prop1: 4,
@@ -148,7 +148,7 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 			a: 'a2',
 		},
 		prop3: "obj2 prop3",
-		arr: [1, 2, 4],
+		arr: 1,
 		upd: [
 			{
 				prop1: 4,

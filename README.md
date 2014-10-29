@@ -120,3 +120,30 @@ Shuffle values in the array
 ```
 
 
+### merge
+Merge properties of the second object to the first object.
+In case of the same property value from second object will override the value in the first object
+
+```javascript
+    var obj1 = {
+        prop1: "obj1 prop1",
+        prop2: "obj1 prop2",
+        prop3: [1,2,3,4],
+    };
+
+    var obj2 = {
+        prop1: "obj2 prop1",
+        prop3: "obj2 prop3"
+    };
+    var merged = s.merge(obj1, obj2);
+    console.log(merged);
+    /*>> 
+        {
+            prop1: "obj2 prop1",
+            prop2: "obj1 prop2",
+            prop3: "obj2 prop3"
+        } 
+    */
+```
+
+
