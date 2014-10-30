@@ -77,6 +77,15 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 	assert.deepEqual(s.remove([1, 2, '2', 3, 4], 2), [1, '2', 3, 4], "string two is not removed from array");
 	assert.deepEqual(s.remove([1, 2, 3], 5), [1, 2, 3], "there is nop value in array to be removed array is intacted.");
 
+
+	assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', 1), ['a', 'b', 'c', 'd', 'c'], "first c is removed from array");
+	assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', 2), ['a', 'b', 'd', 'c'], "first 2 c are removed from array");
+	assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', -1), ['c', 'a', 'b', 'c', 'd'], "last c is removed from array");
+	assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', -2), ['c', 'a', 'b', 'd'], "last 2 c are removed from array");
+	assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', 10), ['a', 'b', 'd'], "all c are removed from array");
+
+
+
 	//shuffle
 	var beforeShuffle = testArray.join();
 	s.shuffle(testArray);

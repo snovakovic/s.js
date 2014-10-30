@@ -85,6 +85,27 @@ Remove all occurrences of element from array.
     //>>a b d
 ```
 
+Remove accepts optional third parametar that tels what is the maximim number of occurences to remove. 
+If number is negative it will remove that many occurrences but starting from end of array.
+
+```javascript
+    //remove first c from the array
+    var withoutC = s.remove(['a', 'b', 'c', 'd', 'c'], 'c', 1);
+    console.log(withoutC);
+    //>>a b d c
+
+    //remove last c from the array
+    var withoutC = s.remove(['a', 'b', 'c', 'd', 'c'], 'c', -1);
+    console.log(withoutC);
+    //>>a b c d
+
+    //remove last 2 c from the array
+    var withoutC = s.remove(['c','a', 'b', 'c', 'd', 'c'], 'c', -2);
+    console.log(withoutC);
+    //>>c a b d
+```
+
+
 ### shuffle
 Shuffle values in the array
 

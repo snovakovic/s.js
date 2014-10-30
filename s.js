@@ -72,13 +72,27 @@
 	 * Remove all occurrences of element from array
 	 * @param arr {Array} array from where we want  to remove the values
 	 * @param elToRemove {...} element that we want to remove from array
+	 * @param max {whole number integer} mux number of occurences to remove. 1 - remove first, -1 remove last.
 	  * @return {Array} new array without the removed values
 	 * @example s.remove(['a', 'b', 'c', 'd', 'c'], 'c');
 	 */
-	_s.remove = function (arr, elToRemove) {
+	_s.remove = function (arr, elToRemove, max) {
 		var pos;
-		while (pos !== -1) {
-			pos = arr.indexOf(elToRemove);
+		if (max && (typeof max !== "number" || max % 1 !== 0)) throw "Invalid argument exception";
+		while (pos !== -1 && max !== 0) {
+			if (max) {
+				if (max >= 1) {
+					pos = arr.indexOf(elToRemove);
+					max--;
+				} else {
+					pos = arr.lastIndexOf(elToRemove);
+					max++;
+				}
+
+			} else {
+				pos = arr.indexOf(elToRemove);
+			}
+
 			pos > -1 && arr.splice(pos, 1);
 		}
 		return arr;
