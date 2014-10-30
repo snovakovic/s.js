@@ -71,22 +71,11 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 	assert.equal(tmp, 3, "return false in iteration is working");
 
 
-	//without
+	//remove
 	assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c'), ['a', 'b', 'd'], "all c occurances are removed from array");
 	assert.deepEqual(s.remove([1, 2, 2, 3, 4], 2), [1, 3, 4], "all 2 are removed from array");
 	assert.deepEqual(s.remove([1, 2, '2', 3, 4], 2), [1, '2', 3, 4], "string two is not removed from array");
 	assert.deepEqual(s.remove([1, 2, 3], 5), [1, 2, 3], "there is nop value in array to be removed array is intacted.");
-
-	//removeFirst
-	assert.deepEqual(s.removeFirst(['a', 'b', 'c', 'd', 'c'], 'c'), ['a', 'b', 'd', 'c'], "first c is removed from array");
-	assert.deepEqual(s.removeFirst([1, 2, 2, 3, 4], 2), [1, 2, 3, 4], "first 2 is removed from array");
-	assert.deepEqual(s.removeFirst([1, 2, 3], 5), [1, 2, 3], "there is no value in array to be removed array is intacted.");
-
-	//removeByIndex
-	assert.deepEqual(s.removeByIndex([1, 2, 3, 4], 2), [1, 2, 4], "remove by index is working");
-	assert.deepEqual(s.removeByIndex([1, 2, 3, 4], 3), [1, 2, 3], "remove last by index is working");
-	assert.deepEqual(s.removeByIndex([1, 2, 3, 4], 4), [1, 2, 3, 4], "index is greater than arr size nothing should be removed");
-	assert.deepEqual(s.removeByIndex([1, 2, 3, 4], 4), [1, 2, 3, 4], "index is less then 0 nothing should be removed");
 
 	//shuffle
 	var beforeShuffle = testArray.join();

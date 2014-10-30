@@ -85,31 +85,6 @@
 	};
 
 	/**
-	 * Remove first occurrence of element from array
-	 * @param arr {Array} array from where we whant to remove the value
-	 * @param elToRemove {...} element that we want to remove from array
-	 * @return {Array} array without the removed value
-	 * @example s.removeFirst(['a', 'b', 'c', 'd', 'c'], 'c');
-	 */
-	_s.removeFirst = function (arr, elToRemove) {
-		var pos = arr.indexOf(elToRemove);
-		pos > -1 && arr.splice(pos, 1);
-		return arr;
-	};
-
-	/**
-	 * Remove value form array by index
-	 * @param arr {Array} array from where we whant to remove the value
-	 * @param index {...} index in the array from where we want to remove the value
-	 * @return {Array} array without the removed value
-	 * @example s.removeFirst(['a', 'b', 'c', 'd', 'c'], 'c');
-	 */
-	_s.removeByIndex = function (arr, index) {
-		arr.splice(index, 1);
-		return arr;
-	};
-
-	/**
 	 * Shuffle values in the array
 	 * @param arr {Array} input array that we want to shuffle
 	 * @return {Array} shuffled array

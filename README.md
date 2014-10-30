@@ -85,23 +85,6 @@ Remove all occurrences of element from array.
     //>>a b d
 ```
 
-### removeFirst
-Remove first occurrence of element from array.
-
-```javascript
-    var withoutC = s.removeFirst(['a', 'b', 'c', 'd', 'c'], 'c');
-    console.log(withoutC);
-    //>>a b d c
-```
-
-### removeByIndex
-Remove value form array by index.
-
-```javascript
-    var withoutC = s.removeByIndex(['a', 'b', 'c', 'd', 'c'], 2);
-    console.log(withoutC);
-    //>>a b d c
-```
 ### shuffle
 Shuffle values in the array
 
