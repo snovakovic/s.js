@@ -31,14 +31,6 @@ Replace all occurrences in a string with a new value.
     //>> one 1 two 2 one 1
 ```
 
-### capitalize
- Capitalize the first letter in the string.    
-
-```javascript
-   s.capitalize("hello");
-    //>> Hello.
-```
-
 
 
 Array and Object Modification

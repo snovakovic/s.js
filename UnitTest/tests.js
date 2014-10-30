@@ -14,10 +14,6 @@ QUnit.test("s.js String Modification", function (assert) {
 	assert.equal(merge1, merge2, "strings are equal.");
 	assert.equal(s.format("this is {0} and {0}-{1} {0}", string1, string2), "this is unit and unit-test unit", "strings are equal.");
 
-	//s.capitalize
-	assert.notEqual(string1, "Unit", "String is not capitalized");
-	assert.equal(s.capitalize(string1), "Unit", "String is capitalized");
-
 });
 
 

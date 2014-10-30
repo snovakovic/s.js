@@ -30,15 +30,6 @@
 		return str;
 	};
 
-	/**
-	 * Capitalize the first letter in the string. 
-	 * @param str {String} input string that we want to capitalize     
-	 * @return {[string]} string with capitalized first letter
-	 * @example console.log(s.capitalize("hello")) //>>Hello
-	 */
-	_s.capitalize = function (str) {
-		return str[0].toUpperCase() + str.slice(1);
-	}
 
 })(window.s = window.s || {});
 
