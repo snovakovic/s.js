@@ -82,7 +82,15 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 	assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', 2), ['a', 'b', 'd', 'c'], "first 2 c are removed from array");
 	assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', -1), ['c', 'a', 'b', 'c', 'd'], "last c is removed from array");
 	assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', -2), ['c', 'a', 'b', 'd'], "last 2 c are removed from array");
-	assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', 10), ['a', 'b', 'd'], "all c are removed from array");
+
+	var exceptionIsThrown = false;
+	try {
+		assert.deepEqual(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', 10.1), ['a', 'b', 'd'], "all c are removed from array");
+	} catch (e) {
+		exceptionIsThrown = true;
+	} 
+	assert.equal(exceptionIsThrown, true, "exception whas throwed as expected");
+
 
 
 
@@ -206,6 +214,8 @@ QUnit.test("s.js test module part unit tests", function (assert) {
 	assert.equal(s.isNumber(notDefined), false, "notDefined is not number!");
 	assert.equal(s.isNumber(obj), false, "obj is not number!");
 	assert.equal(s.isNumber(num), true, "num is number!");
+	assert.equal(s.isNumber(1.23), true, "1.23 is number!");
+	assert.equal(s.isNumber(-1.23), true, "-1.23 is number!");
 	assert.equal(s.isNumber(empty), false, "null is not number!");
 	assert.equal(s.isNumber(str), false, "string is not number!");
 	assert.equal(s.isNumber(emptyString), false, "emptyString is not number!");
@@ -299,7 +309,6 @@ QUnit.test("s.js test module part unit tests", function (assert) {
 	assert.equal(s.is("  ", "uppercase"), true, "string containing only spaces is uppercase");
 	assert.equal(s.is("asd12", "uppercase"), false, "asd12 is not uppercase");
 
-	
 
 	//is - email
 	assert.equal(s.is(notDefined, "email"), false, "notDefined is not email!");
@@ -323,6 +332,22 @@ QUnit.test("s.js test module part unit tests", function (assert) {
 	assert.equal(s.is("  ", "strongPassword"), false, "string containing only spaces is not strongPassword");
 	assert.equal(s.is("asd12", "strongPassword"), false, "asd12 is not strongPassword");
 
+	//is - ip
+	assert.equal(s.is("73.60.124.136", "ip"), true, "this is valid ip address");
+	assert.equal(s.is("256.60.124.136", "ip"), false, "this is not valid ip address");
+
 });
+
+
+
+//QUnit.test("s.js utilitest module part test", function (assert) {
+
+//	assert.equal(s.getUrlParameter("name"), '"test"', "url parametar of name is test");
+//	assert.equal(s.getUrlParameter("count"), 2, "url count parameter is 2");
+//	assert.equal(s.getUrlHash("test3"), 'yes', "url count parameter is 2");
+//	assert.equal(s.getUrlHash("test4"), 'no', "url count parameter is 2");
+
+
+//});
 
 

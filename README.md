@@ -276,5 +276,11 @@ Available keywords:
 	                        - one uppercase letter
 	                        - one number
 	                        - 6 characters
+    -ip: check if string is valid ip address
 
 Keyword is case in-sensitive.
+
+
+
+Utilities
+-----

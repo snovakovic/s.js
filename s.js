@@ -1,3 +1,17 @@
+/*****************************************************
+ 		Shared
+ ***************************************************/
+(function (_s, undefined) {
+
+	/**
+ 	 * String concatenation variation based on .net            
+ 	 */
+	_s.exception = {
+		invalidArgument: "Invalid argument exception"
+	}
+
+})(window.s = window.s || {});
+
 
 /*****************************************************
  			  String Modification.
@@ -78,7 +92,9 @@
 	 */
 	_s.remove = function (arr, elToRemove, max) {
 		var pos;
-		if (max && (typeof max !== "number" || max % 1 !== 0)) throw "Invalid argument exception";
+		if (max && (typeof max !== "number" || max % 1 !== 0))
+			throw new Error(s.exception.invalidArgument);
+
 		while (pos !== -1 && max !== 0) {
 			if (max) {
 				if (max >= 1) {
@@ -214,6 +230,7 @@
 		var re = expr;
 		if (typeof str !== 'string') return false;
 
+
 		//look for keywords
 		if (typeof expr === 'string') {
 			expr = expr.trim().toLowerCase();
@@ -240,8 +257,11 @@
 				case "strongpassword":
 					re = /^(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*$/;
 					break;
+				case "ip":
+					re = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+					break;
 				default :
-					throw "expresion keyword is not recognised";
+					throw new Error(s.exception.invalidArgument);
 			}
 		} 
 
@@ -252,34 +272,14 @@
 
 
 /*****************************************************
-   New feature support for older browsers
+   Utilities
  ***************************************************/
 ( function ( _s, undefined ) {
-	// Add JavaScript-1.6 array features if not supported natively
-	if (![].indexOf) {
-		Array.prototype.indexOf = function (find) {
-			for (var i = 0; i < this.length; i++)
-				if (this[i] == find)
-					return i;
-			return -1;
-		};
-	}
-	if (![].map) {
-		Array.prototype.map = function (fn) {
-			var out = [];
-			for (var i = 0; i < this.length; i++)
-				out.push(fn(this[i]));
-			return out;
-		};
-	}
-	if (![].filter) {
-		Array.prototype.filter = function (fn) {
-			var out = [];
-			for (var i = 0; i < this.length; i++)
-				if (fn(this[i]))
-					out.push(this[i]);
-			return out;
-		};
+
+	_s.getUrlParameter = function(key) {
+		return decodeURI(
+			 (RegExp(key + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]
+		);
 	}
 
 })(window.s = window.s || {});
