@@ -59,6 +59,32 @@ Use return false in callback function to break from loop.
 
 ```
 
+why should you use this when there is native Array.prototype.forEach()
+and by providing polyfill it is working in every browser. https://github.com/snovakovic/poly
+
+But wait there is actualy something that forEach can't do. And I like the each sintaks more. 
+
+```javascript
+   
+    var p = document.querySelectorAll('p');
+    console.log(p);
+
+    //This will throw exception
+    //p.forEach(function(el,i) {
+    //    el.innerHTML = "new string value";
+    //});
+
+    //And this is working as expected
+    s.each(p, function(el, i) {
+        el.innerHTML = "new string value";
+    });
+
+```
+
+There is nice article on this issue here 
+http://toddmotto.com/ditch-the-array-foreach-call-nodelist-hack/
+
+
 ### iterate
 Iterate specific number of times. Iteration starts from 0. 
 Use return false in callback function to stop iterating. 
