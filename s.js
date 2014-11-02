@@ -31,7 +31,8 @@
 	};
 
 	/**
- 	 * String concatenation variation based on .net            
+ 	 * String concatenation variation based on .net   
+ 	 * Don't use in high intensive loops as it is much slower than normal string concatenation         
  	 * @return {[string]} formatted  string
  	 * @example console.log(s.format("Hi {0}, your rank is {1}.", "Foo", 100))
  	 */

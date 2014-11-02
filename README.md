@@ -22,7 +22,9 @@ Replace all occurrences in a string with a new value.
 ```
 
 ### format
- String Concatenation variation based on C# string concatanation    
+String Concatenation variation based on C# string concatenation.
+Don't use in high intensive loops or time critical code as it is much slower than normal string concatenation!    
+http://jsperf.com/s-format
 
 ```javascript
    s.format("Hi {0}, your rank is {1}.", "Foo", 100);
