@@ -286,7 +286,18 @@
 /*****************************************************
    Utilities
  ***************************************************/
-( function ( _s, undefined ) {
+(function (_s, undefined) {
+
+
+	/**
+	* Returns random number using Math.random() between 2 numbers
+	* @param from {string} min number
+	* @param to {string|regExpresion} max number
+	* @example s.random(1, 10); get random number between 1 and 10 (1 and 10 are included)
+	*/
+	_s.random = function (from, to) {
+		return Math.floor((Math.random() * to) + from);
+	}
 
 	_s.getUrlParameter = function(key) {
 		return decodeURI(

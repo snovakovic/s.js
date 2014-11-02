@@ -318,4 +318,15 @@ Keyword is case in-sensitive.
 
 
 Utilities
------
+------
+
+### random
+Get the random number between 2 numbers.
+Random is using Math.random().
+
+```javascript
+    s.random(1,10); //Get the random number between 1 and 10. 1 and 10 are also included.
+    
+    //above is shorthand for flowing
+    Math.floor((Math.random() * 10) + 1);
+```
