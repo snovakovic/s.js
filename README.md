@@ -141,6 +141,15 @@ Shuffle values in the array
     //>> new order cannot be determined
 ```
 
+### getFilledArray
+Returns new array filled with default values. 
+s.getFilledArray(defaultValue, arrayLength);
+
+```javascript
+    s.getFilledArray(0, 3); //>> [0,0,0]
+    s.getFilledArray("a", 3); //>> ["a","a","a"]
+```
+
 
 ### merge
 Merge properties of the second object to the first object.

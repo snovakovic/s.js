@@ -40,9 +40,16 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 			c = testArray[i];
 
 	});
+	
 
 	s.each(bigArray, function (val, i) {
 		lastIndex = i;
+	});
+
+	testArray.forEach(function(val, i, arr) {
+		console.log(val);
+		console.log(i);
+		console.log(arr);
 	});
 
 	var lastValue;
@@ -92,8 +99,6 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 	assert.equal(exceptionIsThrown, true, "exception whas throwed as expected");
 
 
-
-
 	//shuffle
 	var beforeShuffle = testArray.join();
 	s.shuffle(testArray);
@@ -104,6 +109,13 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 	assert.notEqual(testArray.indexOf("a"), -1, "shuffled array has a in it");
 	assert.notEqual(testArray.indexOf("b"), -1, "shuffled array has b in it");
 	assert.notEqual(testArray.indexOf("c"), -1, "shuffled array has c in it");
+
+
+	//getFilledArray
+	assert.deepEqual(s.getFilledArray(0, 3), [0, 0, 0], "array is filed with 0");
+	assert.deepEqual(s.getFilledArray("b", 4), ["b", "b", "b", "b"], "array is filed with b");
+	assert.deepEqual(s.getFilledArray({ a: "b" }, 2), [{ a: "b" }, { a: "b" }], "array is filed with {a:b}");
+	assert.deepEqual(s.getFilledArray(null, 2), [null, null], "array is filed with null");
 
 
 	//merge

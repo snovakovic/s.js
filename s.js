@@ -56,11 +56,7 @@
 (function (_s, undefined) {
 
 	/**
-	 * foreach loop 
-	 * @param arr {Array} array that we want to loop over     
-	 * @return callback {[string]} function that will be called for each loop iteration. 
-	 **** function will be provided with the current value and the number of current iteration as parametars. callback return false is equal to break.
-	 * @example s.each([1,2,3,4,5], function(val, i) { console.log(val); } );
+	 * foreach polyfil
 	 */
 	_s.each = function (arr, callback) {
 		for (var i = 0, l = arr.length; i < l; i++) {
@@ -120,10 +116,27 @@
 	 * @return {Array} shuffled array
 	 * @example s.shuffle(['a', 'b', 'c', 'd', 'c']);
 	 */
-	_s.shuffle = function (arr) {
+	_s.shuffle = function(arr) {
 		for (var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
 		return arr;
-	}
+	};
+
+
+	/**
+	 * Get the new array filled with default values
+	 * @param val {....} default value that will fill the array
+	 * @return len {Integer} size of the new array
+	 * @example s.getFilledArray(0, 5);
+	 */
+	_s.getFilledArray = function (val, len) {
+		var rv = new Array(len);
+		while (--len >= 0) {
+			rv[len] = val;
+		}
+		return rv;
+	};
+
+
 
 	/**
 	 * Merge properties of the second object to the first object.
@@ -168,7 +181,6 @@
    *     6) string with only spaces
 	*/
 	_s.hasValue = function (testVar) {
-		//TODO add check for empty testVarect and empty array
 		if (typeof testVar === 'undefined' || testVar === null
 			|| (typeof testVar === 'string' && testVar.trim().length === 0)) return false;
 
