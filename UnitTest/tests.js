@@ -354,11 +354,6 @@ QUnit.test("s.js test module part unit tests", function (assert) {
 
 QUnit.test("s.js utilitest module part test", function (assert) {
 
-//	assert.equal(s.getUrlParameter("name"), '"test"', "url parametar of name is test");
-//	assert.equal(s.getUrlParameter("count"), 2, "url count parameter is 2");
-//	assert.equal(s.getUrlHash("test3"), 'yes', "url count parameter is 2");
-//	assert.equal(s.getUrlHash("test4"), 'no', "url count parameter is 2");
-
 	var random = s.random(1, 5);
 	var inrange = random >= 1 && random <= 5;
 

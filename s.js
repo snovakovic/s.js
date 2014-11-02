@@ -299,10 +299,16 @@
 		return Math.floor((Math.random() * to) + from);
 	}
 
-	_s.getUrlParameter = function(key) {
-		return decodeURI(
-			 (RegExp(key + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]
-		);
+	/**
+	* Get the parameter from URL by the name
+	* @param key {string} the key for which value will be retrieved
+	* @example s.getUrlParameter("firstName"); 
+	*/
+	_s.getUrlParameter = function (key) {
+		var val = RegExp(key + '=' + '(.+?)(&|$)').exec(location.search) || null;
+		if (val === null) return null;
+
+		return decodeURI( val[1]);
 	}
 
 })(window.s = window.s || {});
