@@ -137,7 +137,19 @@
 		return rv;
 	};
 
-
+	/**
+	 * Returns new array containing only unique values from original array
+	 * Doesn't support nested objects and array
+	 */
+	_s.unique = function (originalArr) {
+		var arr = [];
+		for (var i = 0; i < originalArr.length; i++) {
+			if (arr.indexOf(originalArr[i]) === -1) {
+				arr.push(originalArr[i]);
+			}
+		}
+		return arr;
+	}
 
 	/**
 	 * Merge properties of the second object to the first object.

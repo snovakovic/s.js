@@ -117,6 +117,10 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 	assert.deepEqual(s.getFilledArray({ a: "b" }, 2), [{ a: "b" }, { a: "b" }], "array is filed with {a:b}");
 	assert.deepEqual(s.getFilledArray(null, 2), [null, null], "array is filed with null");
 
+	//unique
+	assert.deepEqual(s.unique([1,1,2,3,2,1,3]), [1,2,3], "[1,2,3 is unique]");
+	assert.deepEqual(s.unique(["a", "b", "a"]), ["a","b"], '["a","b"] is unique');
+
 
 	//merge
 	var obj1 = {
