@@ -148,6 +148,15 @@ s.getFilledArray(defaultValue, arrayLength);
     s.getFilledArray("a", 3); //>> ["a","a","a"]
 ```
 
+### unique
+Returns new array containing only unique values from input array.
+Doesn't support nested objects and arrays.
+
+```javascript
+    s.unique([1,1,2,3,2,1,3]); //>> [1,2,3]
+    s.unique(["a", "b", "a"]); //>> ["a","b"]
+```
+
 
 ### merge
 Merge properties of the second object to the first object.
