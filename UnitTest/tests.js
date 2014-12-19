@@ -339,6 +339,7 @@ QUnit.test("s.js test module part unit tests", function (assert) {
 	assert.equal(s.is("test22@net@hr", "email"), false, "test22@net@hr is not email");
 	assert.equal(s.is("test22@net", "email"), false, "test22@net is not email");
 	assert.equal(s.is("a@net.bc", "email"), true, "a@net.bc is email");
+	assert.equal(s.is("a@net.bc nije", "email"), false, "a@net.bc nije is not email");
 
 	//is - strongPassword
 	assert.equal(s.is("ABC", "strongPassword"), false, "ABC is not strongPassword");
