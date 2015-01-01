@@ -366,7 +366,7 @@ Alias for document.querySelectorAll()
 Alias for document.querySelector()
 
 ```javascript
-    s.s('p'); //return first paragraph on page
+    s.first('p'); //return first paragraph on page
 
     //same as
     document.querySelector('p');
