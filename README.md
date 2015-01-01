@@ -346,6 +346,7 @@ Get the value from url parameter.
     s.getUrlParameter("firstName"); //John
     s.getUrlParameter("lastName"); //Doe
     s.getUrlParameter("something"); //null
+```
 
 
 HTML modifications
@@ -396,4 +397,14 @@ Toggle class
 
 ```javascript
     s.toggleClass(elem, 'testClass');
+```
+
+### getHeight
+Get and set height. It’s a lot trickier in native JS than it should be, 
+because there are multiple APIs for getting height, and they all return slightly different measurements. 
+The s.getHeight() method provided below returns the largest measurement.
+
+```javascript
+    elem.style.height = '200px'; // Set height
+    s.getHeight(elem); // return 200
 ```

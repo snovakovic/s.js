@@ -372,7 +372,7 @@ QUnit.test("s.js utilitest module part test", function (assert) {
 QUnit.test("s.js HTML modifications module part test", function (assert) {
 
     //Insert test html to page
-    document.querySelector('body').innerHTML += "<span id='test-span-element' class='class1 class2 class3'></span>";
+    document.querySelector('body').innerHTML += "<div id='test-span-element' class='class1 class2 class3'></div>";
 
     var elem = document.querySelector('#test-span-element');
 
@@ -395,6 +395,10 @@ QUnit.test("s.js HTML modifications module part test", function (assert) {
     assert.equal(s.haveClass(elem, 'newClass'), false, "toggle have removed class");
     s.toggleClass(elem, 'newClass');
     assert.equal(s.haveClass(elem, 'newClass'), true, "toggle have created class");
+
+    //getHeight
+    elem.style.height = '222px'; // Set height
+    assert.equal(s.getHeight(elem), 222, "the height of elem is 222px");
 
 
 });

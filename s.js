@@ -1,5 +1,5 @@
 /*****************************************************
- 		s.js v0.11
+ 		s.js v0.12
  ***************************************************/
 
 /*****************************************************
@@ -358,6 +358,7 @@
     * We can check for class combination by separating names with spaces "class1 class2"
     * @param elem html element that we are checking
     * @param className name of the class
+    * @return bool
     */
     _s.haveClass = function (elem, className) {
         var classes = className.split(" ");
@@ -398,6 +399,17 @@
         else
             _s.addClass(elem, className);
     }
+
+    /**
+    * Get and set height. It’s a lot trickier in native JS than it should be, 
+    * because there are multiple APIs for getting height, and they all return slightly different measurements. 
+    * The getHeight() method provided below returns the largest measurement.
+    * @param elem which height we want to get
+    * @return height in px
+    */
+    _s.getHeight = function (elem) {
+        return Math.max(elem.scrollHeight, elem.offsetHeight, elem.clientHeight);
+    };
 
 
 })(window.s = window.s || {});
