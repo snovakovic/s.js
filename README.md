@@ -356,7 +356,7 @@ HTML modifications
 Alias for document.querySelectorAll()
 
 ```javascript
-    s.s('p'); //return all paragraph elements
+    s.all('p'); //return all paragraph elements
 
     //same as
     document.querySelectorAll('p');
