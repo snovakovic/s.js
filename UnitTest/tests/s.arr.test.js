@@ -27,12 +27,6 @@
         lastIndex = i;
     });
 
-    testArray.forEach(function (val, i, arr) {
-        console.log(val);
-        console.log(i);
-        console.log(arr);
-    });
-
     var lastValue;
     s.each(testArray, function (val, i) {
         lastValue = val;

@@ -53,7 +53,6 @@
     //siblings
     var siblings = s.siblings(startElement);
     var noSiblings = s.siblings(s.first("#level1"));
-    console.log(siblings);
     assert.equal(siblings[0].id, 'sibling1', "this is first sibling");
     assert.equal(siblings[1].id, 'sibling2', "this is first sibling");
     assert.equal(siblings.length, 2, "there are two siblings");
