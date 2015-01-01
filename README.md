@@ -362,9 +362,9 @@ Toggle class
 ```
 
 #### height
-Get and set height. It’s a lot trickier in native JS than it should be, 
+Get height is a lot trickier in native JS than it should be, 
 because there are multiple APIs for getting height, and they all return slightly different measurements. 
-The s.getHeight() method provided below returns the largest measurement.
+The s.getHeight() method returns the largest measurement.
 
 ```javascript
     elem.style.height = '200px'; // Set height
