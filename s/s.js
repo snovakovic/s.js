@@ -1,67 +1,67 @@
+﻿///#source 1 1 /s/s.common.js
+
 /*****************************************************
  		s.js v0.14
  ***************************************************/
 
 /*****************************************************
- 		Shared
+ 		Common
  ***************************************************/
-(function (_s, undefined) {
+(function (s, undefined) {
 
-    _s.exception = {
+    s.exception = {
         invalidArgument: "Invalid argument exception"
     }
 
+
 })(window.s = window.s || {});
 
 
+
+
+
+///#source 1 1 /s/s.utiliti.js
 /*****************************************************
- 			  String Modification.
+   Utilities
  ***************************************************/
-(function (_s, undefined) {
+(function (s, undefined) {
 
     /**
-	 * Replace all occurrences in a string with a new value   
-	 * @param  str {String} string where occurrences will be replaced
-	 * @param find {String} string that we want to replace with new value    
-	 * @param replace {String} new string value which will replace old value   
-	 * @return {[string]} new string with replaced values
-	 * @example console.log(s.replaceAll("this is old value in old string", "old", "new"))
+	* Returns random number using Math.random() between 2 numbers
+	* @param from {string} min number
+	* @param to {string|regExpresion} max number
+	* @example s.random(1, 10); get random number between 1 and 10 (1 and 10 are included)
 	*/
-    _s.replaceAll = function (str, find, replace) {
-        return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
-    };
+    s.random = function (from, to) {
+        return Math.floor((Math.random() * to) + from);
+    }
 
     /**
- 	 * String concatenation variation based on .net   
- 	 * Don't use in high intensive loops as it is much slower than normal string concatenation         
- 	 * @return {[string]} formatted  string
- 	 * @example console.log(s.format("Hi {0}, your rank is {1}.", "Foo", 100))
- 	 */
-    _s.format = function () {
-        var str = arguments[0],
-			 length = arguments.length - 1;
-        for (var i = 0; i < length; i++) {
-            str = _s.replaceAll(str, "{" + i + "}", arguments[i + 1]);
-        }
-        return str;
-    };
+	* Get the parameter from URL by the name
+	* @param key {string} the key for which value will be retrieved
+	* @example s.getUrlParameter("firstName"); 
+	*/
+    s.getUrlParameter = function (key) {
+        var val = RegExp(key + '=' + '(.+?)(&|$)').exec(location.search) || null;
+        if (val === null) return null;
 
+        return decodeURI(val[1]);
+    }
 
 })(window.s = window.s || {});
-
-
+///#source 1 1 /s/s.arr.js
 
 /*****************************************************
-	  Array and Object Modification
+	  Array Modification
  ***************************************************/
 
-(function (_s, undefined) {
+(function (s, undefined) {
 
     /**
 	 * Loop through any array
 	 * @example s.each([1,2,3,4,5,6,7], function(val, i) { console.log(val); } );
 	 */
-    _s.each = function (arr, callback) {
+    s.each = function (arr, callback) {
         for (var i = 0, l = arr.length; i < l; i++) {
             if (callback(arr[i], i) === false)
                 break;
@@ -74,7 +74,7 @@
 	 * @param  {Function} callback function that will be call per each iteration. use return false to break from iterations
 	 * @example s.iterate(10, function(i) { console.log(i); } );
 	 */
-    _s.iterate = function (l, callback) {
+    s.iterate = function (l, callback) {
         for (var i = 0 ; i < l; i++) {
             if (callback(i) === false)
                 break;
@@ -89,7 +89,7 @@
 	  * @return {Array} new array without the removed values
 	 * @example s.remove(['a', 'b', 'c', 'd', 'c'], 'c');
 	 */
-    _s.remove = function (arr, elToRemove, max) {
+    s.remove = function (arr, elToRemove, max) {
         var pos;
         if (max && (typeof max !== "number" || max % 1 !== 0))
             throw new Error(s.exception.invalidArgument);
@@ -114,26 +114,12 @@
     };
 
     /**
-      * Loop over object properties. 
-      * @param arr {Object} object which properties will be looped over
-      * @example s.getProperties({prop1:'val1', prop2:'val2'}, function(key, value){console.log(key + ' >> ' + value);});
-      */
-    _s.getProperties = function(obj, callback) {
-        for (var prop in obj) {
-            if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-                if (callback(prop, obj[prop]) === false)
-                    break;
-            }
-        }
-    }
-
-    /**
 	 * Shuffle values in the array
 	 * @param arr {Array} input array that we want to shuffle
 	 * @return {Array} shuffled array
 	 * @example s.shuffle(['a', 'b', 'c', 'd', 'c']);
 	 */
-    _s.shuffle = function (arr) {
+    s.shuffle = function (arr) {
         for (var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
         return arr;
     };
@@ -145,7 +131,7 @@
 	 * @return len {Integer} size of the new array
 	 * @example s.getFilledArray(0, 5);
 	 */
-    _s.getFilledArray = function (val, len) {
+    s.getFilledArray = function (val, len) {
         var rv = new Array(len);
         while (--len >= 0) {
             rv[len] = val;
@@ -157,7 +143,7 @@
 	 * Returns new array containing only unique values from original array
 	 * Doesn't support nested objects and array
 	 */
-    _s.unique = function (originalArr) {
+    s.unique = function (originalArr) {
         var arr = [];
         for (var i = 0; i < originalArr.length; i++) {
             if (arr.indexOf(originalArr[i]) === -1) {
@@ -167,6 +153,30 @@
         return arr;
     }
 
+
+
+})(window.s = window.s || {});
+///#source 1 1 /s/s.obj.js
+/*****************************************************
+	  Array Modification
+ ***************************************************/
+
+(function (s, undefined) {
+
+    /**
+      * Loop over object properties. 
+      * @param arr {Object} object which properties will be looped over
+      * @example s.getProperties({prop1:'val1', prop2:'val2'}, function(key, value){console.log(key + ' >> ' + value);});
+      */
+    s.getProperties = function (obj, callback) {
+        for (var prop in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+                if (callback(prop, obj[prop]) === false)
+                    break;
+            }
+        }
+    }
+
     /**
 	 * Merge properties of the second object to the first object.
 	 * In case of the same property value from second object will override the value in the first object
@@ -174,7 +184,7 @@
 	 * @param  {Object} obj2 object from where we will merge properties
 	 * @example s.merge({prop1:1,prop2:2}, {prop1:0,prop3:3});
 	*/
-    _s.merge = function (obj1, obj2) {
+    s.merge = function (obj1, obj2) {
         for (var key in obj2) {
             if (obj2.hasOwnProperty(key))
                 obj1[key] = obj2[key];
@@ -183,19 +193,144 @@
     };
 
 
+
 })(window.s = window.s || {});
 
 
 
+
+
+///#source 1 1 /s/s.html.js
+/*****************************************************
+   HTML modifications module part
+ ***************************************************/
+(function (s, undefined) {
+
+    /**
+	* Alias for document.querySelectorAll()
+	* @param selector DOM selector recognizable with document.querySelectorAll
+	* @example s.all('p'); select all paragraphs in page
+	*/
+    s.all = function (selector) {
+        return document.querySelectorAll(selector);
+    }
+
+    /**
+    * Alias for document.querySelector()
+    * @param selector DOM selector recognizable with document.querySelector
+    * @example s.first('p'); select first paragraphs in page
+    */
+    s.first = function (selector) {
+        return document.querySelector(selector);
+    }
+
+    /**
+    * Check if element have specified class
+    * We can check for class combination by separating names with spaces "class1 class2"
+    * @param elem html element that we are checking
+    * @param className name of the class
+    * @return bool
+    * example s.haveClass(s.first('p'), 'testClass');
+    */
+    s.haveClass = function (elem, className) {
+        var classes = className.split(" ");
+        for (var i = 0; i < classes.length; i++) {
+            if (elem.className.indexOf(classes[i]) === -1)
+                return false;
+        }
+        return true;
+    }
+
+    /**
+    * Add class to element
+    * @param elem that we are adding the class
+    * @param className name of the class
+    */
+    s.addClass = function (elem, className) {
+        if (!s.haveClass(elem, className))
+            elem.className = elem.className.length === 0 ? className : elem.className + ' ' + className;
+    }
+
+    /**
+    * Add class to element
+    * @param elem that we are adding the class
+    * @param className name of the class
+    */
+    s.removeClass = function (elem, className) {
+        elem.className = elem.className.replace(className, '');
+    }
+
+    /**
+    * Toggle class
+    * @param elem that we are toggling class
+    * @param className name of the class
+    */
+    s.toggleClass = function (elem, className) {
+        if (s.haveClass(elem, className))
+            s.removeClass(elem, className);
+        else
+            s.addClass(elem, className);
+    }
+
+    /**
+    * Get and set height. It’s a lot trickier in native JS than it should be, 
+    * because there are multiple APIs for getting height, and they all return slightly different measurements. 
+    * The getHeight() method provided below returns the largest measurement.
+    * @param elem which height we want to get
+    * @return height in px
+    */
+    s.getHeight = function (elem) {
+        return Math.max(elem.scrollHeight, elem.offsetHeight, elem.clientHeight);
+    };
+
+
+})(window.s = window.s || {});
+
+///#source 1 1 /s/s.string.js
+/*****************************************************
+ 			  String Modification.
+ ***************************************************/
+(function (s, undefined) {
+
+    /**
+	 * Replace all occurrences in a string with a new value   
+	 * @param  str {String} string where occurrences will be replaced
+	 * @param find {String} string that we want to replace with new value    
+	 * @param replace {String} new string value which will replace old value   
+	 * @return {[string]} new string with replaced values
+	 * @example console.log(s.replaceAll("this is old value in old string", "old", "new"))
+	*/
+    s.replaceAll = function (str, find, replace) {
+        return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
+    };
+
+    /**
+ 	 * String concatenation variation based on .net   
+ 	 * Don't use in high intensive loops as it is much slower than normal string concatenation         
+ 	 * @return {[string]} formatted  string
+ 	 * @example console.log(s.format("Hi {0}, your rank is {1}.", "Foo", 100))
+ 	 */
+    s.format = function () {
+        var str = arguments[0],
+			 length = arguments.length - 1;
+        for (var i = 0; i < length; i++) {
+            str = s.replaceAll(str, "{" + i + "}", arguments[i + 1]);
+        }
+        return str;
+    };
+
+
+})(window.s = window.s || {});
+///#source 1 1 /s/s.test.js
 /*****************************************************
 	  Test Module part
  ***************************************************/
-(function (_s, undefined) {
+(function (s, undefined) {
 
     /**
 	* Check if variable is initialized
 	*/
-    _s.isDefined = function (testVar) {
+    s.isDefined = function (testVar) {
         return typeof testVar !== 'undefined';
     };
 
@@ -209,7 +344,7 @@
    *     5) empty string
    *     6) string with only spaces
 	*/
-    _s.hasValue = function (testVar) {
+    s.hasValue = function (testVar) {
         if (typeof testVar === 'undefined' || testVar === null
 			|| (typeof testVar === 'string' && testVar.trim().length === 0)) return false;
 
@@ -227,21 +362,21 @@
     /**
 	* Check if variable type is string
 	*/
-    _s.isString = function (testVar) {
+    s.isString = function (testVar) {
         return typeof testVar === 'string';
     };
 
     /**
 	* Check if variable type is number
 	*/
-    _s.isNumber = function (testVar) {
+    s.isNumber = function (testVar) {
         return typeof testVar === 'number';
     };
 
     /**
 	* Check if variable type is boolean
 	*/
-    _s.isBoolean = function (testVar) {
+    s.isBoolean = function (testVar) {
         return typeof testVar === 'boolean';
     };
 
@@ -250,14 +385,14 @@
 	* variable type of array is also object
 	* type for null returns object, but is object will return false for null
 	*/
-    _s.isObject = function (testVar) {
+    s.isObject = function (testVar) {
         return typeof testVar === 'object' && testVar != null;
     };
 
     /**
 	* Check if variable is array. 
 	*/
-    _s.isArray = function (testVar) {
+    s.isArray = function (testVar) {
         return Array.isArray(testVar);
     };
 
@@ -267,7 +402,7 @@
 	 * @param expr {string|regExpresion} expression can be defined keyword in string format or any regular expression.
 	 * @example s.is("test", alphabetic); same as s.is("test", /^[a-zA-Z ]*$/)
 	*/
-    _s.is = function (str, expr) {
+    s.is = function (str, expr) {
         var re = expr;
         if (typeof str !== 'string') return false;
 
@@ -310,133 +445,3 @@
     }
 
 })(window.s = window.s || {});
-
-
-/*****************************************************
-   Utilities
- ***************************************************/
-(function (_s, undefined) {
-
-    /**
-	* Returns random number using Math.random() between 2 numbers
-	* @param from {string} min number
-	* @param to {string|regExpresion} max number
-	* @example s.random(1, 10); get random number between 1 and 10 (1 and 10 are included)
-	*/
-    _s.random = function (from, to) {
-        return Math.floor((Math.random() * to) + from);
-    }
-    
-    /**
-	* Alias for document.querySelectorAll()
-	* @param selector DOM selector recognizable with document.querySelectorAll
-	* @param to {string|regExpresion} max number
-	* @example s.select('p'); select all paragraphs in page
-	*/
-    _s.s = function( selector ) {
-        return document.querySelectorAll( selector );
-    }
-
-    /**
-	* Get the parameter from URL by the name
-	* @param key {string} the key for which value will be retrieved
-	* @example s.getUrlParameter("firstName"); 
-	*/
-    _s.getUrlParameter = function (key) {
-        var val = RegExp(key + '=' + '(.+?)(&|$)').exec(location.search) || null;
-        if (val === null) return null;
-
-        return decodeURI(val[1]);
-    }
-
-})(window.s = window.s || {});
-
-
-/*****************************************************
-   HTML modifications module part
- ***************************************************/
-(function (_s, undefined) {
-
-
-    /**
-	* Alias for document.querySelectorAll()
-	* @param selector DOM selector recognizable with document.querySelectorAll
-	* @example s.all('p'); select all paragraphs in page
-	*/
-    _s.all = function (selector) {
-        return document.querySelectorAll(selector);
-    }
-
-    /**
-    * Alias for document.querySelector()
-    * @param selector DOM selector recognizable with document.querySelector
-    * @example s.first('p'); select first paragraphs in page
-    */
-    _s.first = function(selector) {
-        return document.querySelector(selector);
-    }
-
-    /**
-    * Check if element have specified class
-    * We can check for class combination by separating names with spaces "class1 class2"
-    * @param elem html element that we are checking
-    * @param className name of the class
-    * @return bool
-    * example s.haveClass(s.first('p'), 'testClass');
-    */
-    _s.haveClass = function (elem, className) {
-        var classes = className.split(" ");
-        for (var i = 0; i < classes.length; i++) {
-            if(elem.className.indexOf(classes[i]) === -1 )
-                return false;
-        }
-        return true;
-    }
-
-    /**
-    * Add class to element
-    * @param elem that we are adding the class
-    * @param className name of the class
-    */
-    _s.addClass = function (elem, className) {
-        if(!_s.haveClass(elem, className))
-            elem.className = elem.className.length === 0 ? className : elem.className + ' ' + className;
-    }
-
-    /**
-    * Add class to element
-    * @param elem that we are adding the class
-    * @param className name of the class
-    */
-    _s.removeClass = function (elem, className) {
-        elem.className = elem.className.replace(className, '');
-    }
-
-    /**
-    * Toggle class
-    * @param elem that we are toggling class
-    * @param className name of the class
-    */
-    _s.toggleClass = function(elem, className) {
-        if(_s.haveClass(elem, className))
-            _s.removeClass(elem, className);
-        else
-            _s.addClass(elem, className);
-    }
-
-    /**
-    * Get and set height. It�s a lot trickier in native JS than it should be, 
-    * because there are multiple APIs for getting height, and they all return slightly different measurements. 
-    * The getHeight() method provided below returns the largest measurement.
-    * @param elem which height we want to get
-    * @return height in px
-    */
-    _s.getHeight = function (elem) {
-        return Math.max(elem.scrollHeight, elem.offsetHeight, elem.clientHeight);
-    };
-
-
-})(window.s = window.s || {});
-
-
-

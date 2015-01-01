@@ -6,7 +6,7 @@ All methods are under Unit Test.
 
 
 
-String Modification
+String Helpers
 -----
 
 #### replaceAll
@@ -31,7 +31,7 @@ http://jsperf.com/s-format
 
 
 
-Array and Object Modification
+Array Helpers
 -----
 
 #### each
@@ -129,30 +129,6 @@ If number is negative it will remove that many occurrences but starting from end
     //>>c a b d
 ```
 
-#### getProperties
-Loop over object properties.
-Looping can be terminated by using return false in callback function.
-
-```javascript
-    var obj = {
-        prop1: 'val1',
-        prop2: 'val2'
-    };
-    s.getProperties(obj, function(key, value) {
-        console.log(key + ' >> ' + value);
-    });
-    //prop1 >> val1
-    //prop2 >> val2
-
-    s.getProperties(obj, function(key, value) {
-        console.log(key + ' >> ' + value);
-        if(key === 'prop1')
-            return false;
-    });
-    //prop1 >> val1
-
-```
-
 #### shuffle
 Shuffle values in the array
 
@@ -180,6 +156,32 @@ Doesn't support nested objects and arrays.
     s.unique(["a", "b", "a"]); //>> ["a","b"]
 ```
 
+Object Helpers
+-----
+
+#### getProperties
+Loop over object properties.
+Looping can be terminated by using return false in callback function.
+
+```javascript
+    var obj = {
+        prop1: 'val1',
+        prop2: 'val2'
+    };
+    s.getProperties(obj, function(key, value) {
+        console.log(key + ' >> ' + value);
+    });
+    //prop1 >> val1
+    //prop2 >> val2
+
+    s.getProperties(obj, function(key, value) {
+        console.log(key + ' >> ' + value);
+        if(key === 'prop1')
+            return false;
+    });
+    //prop1 >> val1
+
+```
 
 #### merge
 Merge properties of the second object to the first object.
@@ -207,6 +209,100 @@ In case of the same property value from second object will override the value in
             prop4: 1
         } 
     */
+```
+
+
+Utilities
+------
+
+#### random
+Get the random number between 2 numbers.
+Random is using Math.random().
+
+```javascript
+    s.random(1,10); //Get the random number between 1 and 10. 1 and 10 are also included.
+    
+    //above is shorthand for flowing
+    Math.floor((Math.random() * 10) + 1);
+```
+
+#### getUrlParameter
+Get the value from url parameter.
+
+```javascript
+    //exampe url: http://localhost:1285/UnitTest/s_unit_test.html?firstName=John&LastName=Doe
+    s.getUrlParameter("firstName"); //John
+    s.getUrlParameter("lastName"); //Doe
+    s.getUrlParameter("something"); //null
+```
+
+
+HTML Helpers
+-------
+
+#### all
+Alias for document.querySelectorAll()
+
+```javascript
+    s.all('p'); //return all paragraph elements
+
+    //same as
+    document.querySelectorAll('p');
+```
+
+#### first
+Alias for document.querySelector()
+
+```javascript
+    s.first('p'); //return first paragraph on page
+
+    //same as
+    document.querySelector('p');
+```
+
+#### haveClass
+Check if html element have a class. 
+We can check for multiple class-es by separating names with spaces.
+
+```javascript
+    //elem = <span id="testElem" class="class1 class2 class3"></span>
+    var elem = document.querySelector('#testElem');
+    
+    s.haveClass(elem, 'class2'); //true
+    s.haveClass(elem, 'no'); //false
+    s.haveClass(elem, 'class1 class3'); //true
+    s.haveClass(elem, 'class1 no'); //false
+```
+
+#### addClass
+Add class to html element
+
+```javascript
+    s.addClass(elem, 'testClass');
+```
+
+#### removeClass
+Remove class from html element
+
+```javascript
+    s.removeClass(elem, 'testClass');
+```
+
+#### toggleClass
+Toggle class
+
+```javascript
+    s.toggleClass(elem, 'testClass');
+```
+
+#### getHeight
+Get and set height. It’s a lot trickier in native JS than it should be, 
+because there are multiple APIs for getting height, and they all return slightly different measurements. 
+The s.getHeight() method provided below returns the largest measurement.
+
+```javascript
+    elem.style.height = '200px'; // Set height
+    s.getHeight(elem); // return 200
 ```
 
 
@@ -344,98 +440,3 @@ Available keywords:
     -ip: check if string is valid ip address
 
 Keyword is case in-sensitive.
-
-
-
-Utilities
-------
-
-#### random
-Get the random number between 2 numbers.
-Random is using Math.random().
-
-```javascript
-    s.random(1,10); //Get the random number between 1 and 10. 1 and 10 are also included.
-    
-    //above is shorthand for flowing
-    Math.floor((Math.random() * 10) + 1);
-```
-
-#### getUrlParameter
-Get the value from url parameter.
-
-```javascript
-    //exampe url: http://localhost:1285/UnitTest/s_unit_test.html?firstName=John&LastName=Doe
-    s.getUrlParameter("firstName"); //John
-    s.getUrlParameter("lastName"); //Doe
-    s.getUrlParameter("something"); //null
-```
-
-
-HTML modifications
--------
-
-#### all
-Alias for document.querySelectorAll()
-
-```javascript
-    s.all('p'); //return all paragraph elements
-
-    //same as
-    document.querySelectorAll('p');
-```
-
-#### first
-Alias for document.querySelector()
-
-```javascript
-    s.first('p'); //return first paragraph on page
-
-    //same as
-    document.querySelector('p');
-```
-
-#### haveClass
-Check if html element have a class. 
-We can check for multiple class-es by separating names with spaces.
-
-```javascript
-    //elem = <span id="testElem" class="class1 class2 class3"></span>
-    var elem = document.querySelector('#testElem');
-    
-    s.haveClass(elem, 'class2'); //true
-    s.haveClass(elem, 'no'); //false
-    s.haveClass(elem, 'class1 class3'); //true
-    s.haveClass(elem, 'class1 no'); //false
-```
-
-#### addClass
-Add class to html element
-
-```javascript
-    s.addClass(elem, 'testClass');
-```
-
-#### removeClass
-Remove class from html element
-
-```javascript
-    s.removeClass(elem, 'testClass');
-```
-
-#### togleClass
-Toggle class
-
-```javascript
-    s.toggleClass(elem, 'testClass');
-```
-
-#### getHeight
-Get and set height. It’s a lot trickier in native JS than it should be, 
-because there are multiple APIs for getting height, and they all return slightly different measurements. 
-The s.getHeight() method provided below returns the largest measurement.
-
-```javascript
-    elem.style.height = '200px'; // Set height
-    s.getHeight(elem); // return 200
-```
