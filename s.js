@@ -302,7 +302,6 @@
  ***************************************************/
 (function (_s, undefined) {
 
-
     /**
 	* Returns random number using Math.random() between 2 numbers
 	* @param from {string} min number
