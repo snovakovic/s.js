@@ -1,20 +1,8 @@
-﻿///#source 1 1 /s/s.common.js
+﻿///#source 1 1 /s/s.version.js
 
 /*****************************************************
  		s.js v0.14
  ***************************************************/
-
-/*****************************************************
- 		Common
- ***************************************************/
-(function (s, undefined) {
-
-    s.exception = {
-        invalidArgument: "Invalid argument exception"
-    }
-
-
-})(window.s = window.s || {});
 
 
 
@@ -92,7 +80,7 @@
     s.remove = function (arr, elToRemove, max) {
         var pos;
         if (max && (typeof max !== "number" || max % 1 !== 0))
-            throw new Error(s.exception.invalidArgument);
+            throw new Error("Invalid argument exception");
 
         while (pos !== -1 && max !== 0) {
             if (max) {

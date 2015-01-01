@@ -40,7 +40,7 @@
     s.remove = function (arr, elToRemove, max) {
         var pos;
         if (max && (typeof max !== "number" || max % 1 !== 0))
-            throw new Error(s.exception.invalidArgument);
+            throw new Error("Invalid argument exception");
 
         while (pos !== -1 && max !== 0) {
             if (max) {

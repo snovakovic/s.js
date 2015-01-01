@@ -10,7 +10,7 @@
   </settings>
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
-    <file>/s/s.common.js</file>
+    <file>/s/s.version.js</file>
     <file>/s/s.utiliti.js</file>
     <file>/s/s.arr.js</file>
     <file>/s/s.obj.js</file>
