@@ -1,7 +1,13 @@
 ﻿QUnit.test("s.html.js Unit Test", function (assert) {
 
     //Insert test html to page
-    document.querySelector('body').innerHTML += "<div id='test-span-element' class='class1 class2 class3'></div>";
+    document.querySelector('body').innerHTML += "<div id='test-span-element' class='class1 class2 class3'>" +
+            "<section id='level1' class='getClosest' demo-attr='demo2'>" +
+                "<div id='level2' class='getClosest' demo-attr='demo1'>" +
+                    "<div id='startClosestSearch' class='getClosest'><div>" +
+                "<div>" +
+            "<section>" +
+        "</div>";
 
     var elem = document.querySelector('#test-span-element');
 
@@ -27,7 +33,20 @@
 
     //getHeight
     elem.style.height = '222px'; // Set height
-    assert.equal(s.getHeight(elem), 222, "the height of elem is 222px");
+    assert.equal(s.height(elem), 222, "the height of elem is 222px");
+
+    //getClosest
+    var startElement = s.first("#startClosestSearch");
+    var c1 = s.closest(startElement, ".getClosest");
+    var c2 = s.closest(startElement.parentNode, ".getClosest");
+    var c3 = s.closest(startElement, "section");
+    var c4 = s.closest(startElement, "[demo-attr]");
+
+    assert.equal(c1.id, 'startClosestSearch', "it will include itself");
+    assert.equal(c2.id, 'level2', "exclude itself by searching by using parent node");
+    assert.equal(c3.id, 'level1', "find by element");
+    assert.equal(c4.id, 'level2', "find by attribute");
+
 
 
 });

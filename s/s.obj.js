@@ -50,7 +50,7 @@
             for (var prop in obj) {
                 if (Object.prototype.hasOwnProperty.call(obj, prop)) {
                     if (Object.prototype.toString.call(obj[prop]) === '[object Object]') {
-                        merged[prop] = deepMerge(merged[prop], obj[prop]);
+                        merged[prop] = s.deepMerge(merged[prop], obj[prop]);
                     }
                     else {
                         merged[prop] = obj[prop];

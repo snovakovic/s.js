@@ -76,8 +76,50 @@
     * @param elem which height we want to get
     * @return height in px
     */
-    s.getHeight = function (elem) {
+    s.height = function (elem) {
         return Math.max(elem.scrollHeight, elem.offsetHeight, elem.clientHeight);
+    };
+
+    /**
+    * Get closest DOM element up the tree that contains a class, ID, data attribute, or tag. Includes the element itself. Supported back to IE6.
+    * @param elem html element
+    * @param selector css selector
+    * @return html element that match condition or false
+    */
+    s.closest = function (elem, selector) {
+
+        var firstChar = selector.charAt(0);
+
+        // Get closest match
+        for (; elem && elem !== document; elem = elem.parentNode) {
+
+            // If selector is a class
+            if (firstChar === '.') {
+                if (s.haveClass(elem, selector.substr(1)))
+                    return elem;
+            }
+
+            // If selector is an ID
+            if (firstChar === '#') {
+                if (elem.id === selector.substr(1))
+                    return elem;
+            }
+
+            // If selector is a data attribute
+            if (firstChar === '[') {
+                if (elem.hasAttribute(selector.substr(1, selector.length - 2)))
+                    return elem;
+            }
+
+            // If selector is a tag
+            if (elem.tagName.toLowerCase() === selector) {
+                return elem;
+            }
+
+        }
+
+        return false;
+
     };
 
 

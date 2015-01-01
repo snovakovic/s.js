@@ -361,16 +361,26 @@ Toggle class
     s.toggleClass(elem, 'testClass');
 ```
 
-#### getHeight
+#### height
 Get and set height. It’s a lot trickier in native JS than it should be, 
 because there are multiple APIs for getting height, and they all return slightly different measurements. 
 The s.getHeight() method provided below returns the largest measurement.
 
 ```javascript
     elem.style.height = '200px'; // Set height
-    s.getHeight(elem); // return 200
+    s.height(elem); // return 200
 ```
+#### closest
+Get closest DOM element up the tree that contains a class, ID, data attribute, or tag. 
+Includes the element itself. Supported back to IE6.
 
+```javascript
+    var elem = document.querySelector('#some-element');
+    var closest = s.closest(elem, '.some-class');
+    var closestLink = s.closest(elem, 'a');
+    var closestAttribute = s.closest(elem, '[demo-attr]'); //does not support values inside of attributes!
+    var closestExcludingElement = s.closest(elem.parentNode, '.some-class');
+```
 
 
 Tests

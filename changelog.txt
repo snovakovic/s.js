@@ -1,4 +1,12 @@
-﻿/***************** Version 0.21 ***********************/
+﻿/***************** Version 0.22 ***********************/
+
+rename s.getHeight to s.height
+
+add s.closest
+
+/******************************************************/
+
+/***************** Version 0.21 ***********************/
 
 s.merge is extended to accept arbitrary number of objects to merge
 
