@@ -3,6 +3,7 @@ s.js
 
 Collection of helper methods. 
 All methods are under Unit Test.
+Particular us full for vanila js development. 
 
 
 
