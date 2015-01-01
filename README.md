@@ -9,7 +9,7 @@ All methods are under Unit Test.
 String Modification
 -----
 
-### replaceAll
+#### replaceAll
 Replace all occurrences in a string with a new value. 
 
 ```javascript
@@ -17,7 +17,7 @@ Replace all occurrences in a string with a new value.
     //>> this is new value in new string 
 ```
 
-### format
+#### format
 String Concatenation variation based on C# string concatenation.
 Don't use in high intensive loops or time critical code as it is much slower than normal string concatenation!    
 http://jsperf.com/s-format
@@ -34,7 +34,7 @@ http://jsperf.com/s-format
 Array and Object Modification
 -----
 
-###each
+#### each
 Loop over arrays. 
 Use return false in callback function to break from loop. 
 
@@ -83,7 +83,7 @@ There is nice article on this issue here
 http://toddmotto.com/ditch-the-array-foreach-call-nodelist-hack/
 
 
-### iterate
+#### iterate
 Iterate specific number of times. Iteration starts from 0. 
 Use return false in callback function to stop iterating. 
 
@@ -100,7 +100,7 @@ Use return false in callback function to stop iterating.
     //>>0 1 2
 ```
 
-### remove
+#### remove
 Remove all occurrences of element from array.
 
 ```javascript
@@ -129,8 +129,31 @@ If number is negative it will remove that many occurrences but starting from end
     //>>c a b d
 ```
 
+#### getProperties
+Loop over object properties.
+Looping can be terminated by using return false in callback function.
 
-### shuffle
+```javascript
+    var obj = {
+        prop1: 'val1',
+        prop2: 'val2'
+    };
+    s.getProperties(obj, function(key, value) {
+        console.log(key + ' >> ' + value);
+    });
+    //prop1 >> val1
+    //prop2 >> val2
+
+    s.getProperties(obj, function(key, value) {
+        console.log(key + ' >> ' + value);
+        if(key === 'prop1')
+            return false;
+    });
+    //prop1 >> val1
+
+```
+
+#### shuffle
 Shuffle values in the array
 
 ```javascript
@@ -139,7 +162,7 @@ Shuffle values in the array
     //>> new order cannot be determined
 ```
 
-### getFilledArray
+#### getFilledArray
 Returns new array filled with default values. 
 s.getFilledArray(defaultValue, arrayLength);
 
@@ -148,7 +171,7 @@ s.getFilledArray(defaultValue, arrayLength);
     s.getFilledArray("a", 3); //>> ["a","a","a"]
 ```
 
-### unique
+#### unique
 Returns new array containing only unique values from input array.
 Doesn't support nested objects and arrays.
 
@@ -158,7 +181,7 @@ Doesn't support nested objects and arrays.
 ```
 
 
-### merge
+#### merge
 Merge properties of the second object to the first object.
 In case of the same property value from second object will override the value in the first object
 
@@ -191,7 +214,7 @@ In case of the same property value from second object will override the value in
 Tests
 -----
 
-### isDefined
+#### isDefined
 Test if variable is initialized
 
 ```javascript
@@ -203,7 +226,7 @@ Test if variable is initialized
     s.isDefined(nll); //>> true
 ```
 
-### hasValue
+#### hasValue
 Test if variable has been defined and is not empty.
 
     Things that are treated as if they don't have value:
@@ -231,7 +254,7 @@ Test if variable has been defined and is not empty.
 
 ```
 
-### isString
+#### isString
 Check if variable type is string
 
 ```javascript
@@ -239,7 +262,7 @@ Check if variable type is string
     s.isString(2); //>> false
 ```
 
-### isNumber
+#### isNumber
 Check if variable type is isNumber
 
 ```javascript
@@ -247,7 +270,7 @@ Check if variable type is isNumber
     s.isNumber(""); //>> false
 ```
 
-### isBoolean
+#### isBoolean
 Check if variable type is Boolean
 
 ```javascript
@@ -267,7 +290,7 @@ type of NULL is object in JS but isObject returns false for null.
     s.isObject(false); //>> false
 ```   
 
-### isArray
+#### isArray
 Check if variable is Array.
 
 ```javascript
@@ -276,7 +299,7 @@ Check if variable is Array.
     s.isArray(null); //>> false
 ```  
 
-### is
+#### is
 Test string using any regular expresion or by using any of defined keywords. 
 
 Example of testing the string by using regular expresion:
@@ -327,7 +350,7 @@ Keyword is case in-sensitive.
 Utilities
 ------
 
-### random
+#### random
 Get the random number between 2 numbers.
 Random is using Math.random().
 
@@ -338,7 +361,7 @@ Random is using Math.random().
     Math.floor((Math.random() * 10) + 1);
 ```
 
-### getUrlParameter
+#### getUrlParameter
 Get the value from url parameter.
 
 ```javascript
@@ -384,8 +407,6 @@ We can check for multiple class-es by separating names with spaces.
     s.haveClass(elem, 'no'); //false
     s.haveClass(elem, 'class1 class3'); //true
     s.haveClass(elem, 'class1 no'); //false
-
-    //returns true if first p element have class testClass
 ```
 
 #### addClass
@@ -402,14 +423,14 @@ Remove class from html element
     s.removeClass(elem, 'testClass');
 ```
 
-### togleClass
+#### togleClass
 Toggle class
 
 ```javascript
     s.toggleClass(elem, 'testClass');
 ```
 
-### getHeight
+#### getHeight
 Get and set height. It’s a lot trickier in native JS than it should be, 
 because there are multiple APIs for getting height, and they all return slightly different measurements. 
 The s.getHeight() method provided below returns the largest measurement.

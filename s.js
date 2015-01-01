@@ -1,5 +1,5 @@
 /*****************************************************
- 		s.js v0.13
+ 		s.js v0.14
  ***************************************************/
 
 /*****************************************************
@@ -58,7 +58,8 @@
 (function (_s, undefined) {
 
     /**
-	 * foreach polyfil
+	 * Loop through any array
+	 * @example s.each([1,2,3,4,5,6,7], function(val, i) { console.log(val); } );
 	 */
     _s.each = function (arr, callback) {
         for (var i = 0, l = arr.length; i < l; i++) {
@@ -111,6 +112,20 @@
         }
         return arr;
     };
+
+    /**
+      * Loop over object properties. 
+      * @param arr {Object} object which properties will be looped over
+      * @example s.getProperties({prop1:'val1', prop2:'val2'}, function(key, value){console.log(key + ' >> ' + value);});
+      */
+    _s.getProperties = function(obj, callback) {
+        for (var prop in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+                if (callback(prop, obj[prop]) === false)
+                    break;
+            }
+        }
+    }
 
     /**
 	 * Shuffle values in the array

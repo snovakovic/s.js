@@ -96,7 +96,28 @@ QUnit.test("s.js Array and Object Modification", function (assert) {
 	} catch (e) {
 		exceptionIsThrown = true;
 	} 
-	assert.equal(exceptionIsThrown, true, "exception whas throwed as expected");
+	assert.equal(exceptionIsThrown, true, "exception was trowed as expected");
+
+
+    //getProperties
+	var testObj = {
+	    prop1: 'val1',
+	    prop2: 'val2'
+	};
+    var testString1 = '';
+    s.getProperties(testObj, function (key, value) {
+	    testString1 += key + value;
+	});
+	var testString2 = '';
+
+	s.getProperties(testObj, function (key, value) {
+	    testString2 += key + value;
+	    if (key === 'prop1')
+	        return false;
+	});
+
+	assert.equal(testString1, 'prop1val1prop2val2', "we have successfully loop over all object properties");
+	assert.equal(testString2, 'prop1val1', "we have successfully break the properties loop");
 
 
 	//shuffle
