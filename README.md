@@ -383,6 +383,15 @@ Includes the element itself. Supported back to IE6.
     var closestExcludingElement = s.closest(elem.parentNode, '.some-class');
 ```
 
+#### siglings
+Get all siblings of an element. 
+Supported back to IE6
+
+```javascript
+    var elem = document.querySelector('#some-element');
+    var siblings = s.siblings(elem);
+```
+
 
 Tests
 -----

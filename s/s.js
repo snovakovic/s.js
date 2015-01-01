@@ -1,7 +1,7 @@
 ﻿///#source 1 1 /s/s.version.js
 
 /*****************************************************
- 		s.js v0.22
+ 		s.js v0.23
  ***************************************************/
 
 
@@ -343,6 +343,22 @@
 
         return false;
 
+    };
+
+    /**
+    * Get all siblings of the selected element
+    * @param elem html element
+    * @return list of html elements
+    */
+    s.siblings = function (elem) {
+        var siblings = [];
+        var sibling = elem.parentNode.firstChild;
+        for (; sibling; sibling = sibling.nextSibling) {
+            if (sibling.nodeType === 1 && sibling !== elem) {
+                siblings.push(sibling);
+            }
+        }
+        return siblings;
     };
 
 

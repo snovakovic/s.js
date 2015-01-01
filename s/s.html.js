@@ -122,5 +122,21 @@
 
     };
 
+    /**
+    * Get all siblings of the selected element
+    * @param elem html element
+    * @return list of html elements
+    */
+    s.siblings = function (elem) {
+        var siblings = [];
+        var sibling = elem.parentNode.firstChild;
+        for (; sibling; sibling = sibling.nextSibling) {
+            if (sibling.nodeType === 1 && sibling !== elem) {
+                siblings.push(sibling);
+            }
+        }
+        return siblings;
+    };
+
 
 })(window.s = window.s || {});
