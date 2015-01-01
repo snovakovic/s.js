@@ -385,11 +385,11 @@ Alias for document.querySelectorAll()
     document.querySelectorAll('p');
 ```
 
-#### frist
+#### frst
 Alias for document.querySelector()
 
 ```javascript
-    s.first('p'); //return first paragraph on page
+    s.frst('p'); //return first paragraph on page
 
     //same as
     document.querySelector('p');
