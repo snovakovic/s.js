@@ -1,5 +1,5 @@
 /*****************************************************
- 		s.js v0.12
+ 		s.js v0.13
  ***************************************************/
 
 /*****************************************************
@@ -346,11 +346,19 @@
     /**
 	* Alias for document.querySelectorAll()
 	* @param selector DOM selector recognizable with document.querySelectorAll
-	* @param to {string|regExpresion} max number
-	* @example s.select('p'); select all paragraphs in page
+	* @example s.all('p'); select all paragraphs in page
 	*/
-    _s.s = function (selector) {
+    _s.all = function (selector) {
         return document.querySelectorAll(selector);
+    }
+
+    /**
+    * Alias for document.querySelector()
+    * @param selector DOM selector recognizable with document.querySelector
+    * @example s.first('p'); select first paragraphs in page
+    */
+    _s.first = function(selector) {
+        return document.querySelector(selector);
     }
 
     /**
@@ -359,6 +367,7 @@
     * @param elem html element that we are checking
     * @param className name of the class
     * @return bool
+    * example s.haveClass(s.first('p'), 'testClass');
     */
     _s.haveClass = function (elem, className) {
         var classes = className.split(" ");

@@ -352,14 +352,24 @@ Get the value from url parameter.
 HTML modifications
 -------
 
-#### s
+#### all
 Alias for document.querySelectorAll()
 
 ```javascript
     s.s('p'); //return all paragraph elements
 
     //same as
-    document.querySelectorAll();
+    document.querySelectorAll('p');
+```
+
+#### frist
+Alias for document.querySelector()
+
+```javascript
+    s.s('p'); //return first paragraph on page
+
+    //same as
+    document.querySelector('p');
 ```
 
 #### haveClass
