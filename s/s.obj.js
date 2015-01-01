@@ -18,19 +18,51 @@
         }
     }
 
+
     /**
-	 * Merge properties of the second object to the first object.
-	 * In case of the same property value from second object will override the value in the first object
-	 * @param  {Object} obj1 properties will be merged in this object
-	 * @param  {Object} obj2 object from where we will merge properties
-	 * @example s.merge({prop1:1,prop2:2}, {prop1:0,prop3:3});
-	*/
-    s.merge = function (obj1, obj2) {
-        for (var key in obj2) {
-            if (obj2.hasOwnProperty(key))
-                obj1[key] = obj2[key];
+     * Shallow merge provided objects
+     * In case of the same property value from second object will override the value in the first object
+     * @param  {Objects} arbitrary number of objects that we want to merge
+     * @example s.merge({prop1:1,prop2:2}, {prop1:0,prop3:3}, {prop4: '4'});
+    */
+    s.merge = function ( ) {
+        var merged = {};
+        var _merge = function (obj) {
+            for (var prop in obj) {
+                if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+                    merged[prop] = obj[prop];
+                }
+            }
+        };
+        _merge(arguments[0]);
+        for (var i = 1; i < arguments.length; i++) {
+            _merge(arguments[i]);
         }
-        return obj1;
+        return merged;
+    };
+
+    /**
+     * Same as merge. But with support for merging nested objects
+    */
+    s.deepMerge = function ( ) {
+        var merged = {};
+        var _merge = function (obj) {
+            for (var prop in obj) {
+                if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+                    if (Object.prototype.toString.call(obj[prop]) === '[object Object]') {
+                        merged[prop] = deepMerge(merged[prop], obj[prop]);
+                    }
+                    else {
+                        merged[prop] = obj[prop];
+                    }
+                }
+            }
+        };
+        _merge(arguments[0]);
+        for (var i = 1; i < arguments.length; i++) {
+            _merge(arguments[i]);
+        }
+        return merged;
     };
 
 

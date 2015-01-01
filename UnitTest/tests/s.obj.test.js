@@ -56,7 +56,14 @@
         ]
     };
 
-    var mergedObject = s.merge(obj1, obj2);
+
+    var obj3 = {
+        prop3: "obj3 prop3",
+        prop5: 3,
+    };
+
+
+    var mergedObject = s.merge(obj1, obj2, obj3);
 
     var expectedObj = {
         prop1: "obj2 prop1",
@@ -64,7 +71,8 @@
         obj: {
             a: 'a2',
         },
-        prop3: "obj2 prop3",
+        prop3: "obj3 prop3",
+        prop5: 3,
         arr: 1,
         upd: [
 			{
@@ -74,5 +82,29 @@
     }
 
     assert.deepEqual(mergedObject, expectedObj, "two objects are merged together");
+
+
+    //Deep Merge
+   
+    var deepMergeObject = s.deepMerge(obj1, obj2, obj3);
+
+    var deepMergeExpected = {
+        prop1: "obj2 prop1",
+        prop2: "obj1 prop2",
+        prop3: "obj3 prop3",
+        prop5: 3,
+        obj: {
+            a: 'a2',
+            b: 'b1'
+        },
+        arr: 1,
+        upd: [
+            {
+                "prop1": 4
+            }
+        ]
+    }
+
+    assert.deepEqual(deepMergeObject, deepMergeExpected, "deep merge is as expected");
 
 });

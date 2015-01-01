@@ -35,7 +35,7 @@
 	 * @param elToRemove {...} element that we want to remove from array
 	 * @param max {whole number integer} max number of occurrences to remove. 1 - remove first, -1 remove last.
 	  * @return {Array} new array without the removed values
-	 * @example s.remove(['a', 'b', 'c', 'd', 'c'], 'c');
+	 * @example s.remove( ['a', 'b', 'c', 'd', 'c'], 'c' );
 	 */
     s.remove = function (arr, elToRemove, max) {
         var pos;

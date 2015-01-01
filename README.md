@@ -184,8 +184,9 @@ Looping can be terminated by using return false in callback function.
 ```
 
 #### merge
-Merge properties of the second object to the first object.
-In case of the same property value from second object will override the value in the first object
+Shallow merge provided objects.
+In case of the same property value from second object will override the values in the first object.
+Method accepts arbitrary number of object that will be merged together.
 
 ```javascript
     var obj1 = {
@@ -199,15 +200,80 @@ In case of the same property value from second object will override the value in
         prop3: "obj2 prop3",
         prop4: 1,
     };
-    var merged = s.merge(obj1, obj2);
+
+    var obj3 = {
+        prop3: "obj3 prop3",
+        prop5: 3,
+    };
+
+    var merged = s.merge(obj1, obj2, obj3);
     console.log(merged);
     /*>> 
         {
             prop1: "obj2 prop1",
             prop2: "obj1 prop2",
-            prop3: "obj2 prop3",
-            prop4: 1
+            prop3: "obj3 prop3",
+            prop4: 1,
+            prop5:3
         } 
+    */
+```
+
+
+#### deepMerge
+Deep merge provided objects.
+Objects inside array will not be taken into consideration for deep merging.
+In case of the same property value from second object will override the values in the first object.
+Method accepts arbitrary number of object that will be merged together.
+
+```javascript
+    var obj1 = {
+        prop1: "obj1 prop1",
+        prop2: {
+            a: "a1",
+            b: "b1",
+            c: {
+                d:"d1",
+                e: "e1",
+            }, 
+            f: {
+                g: "g1",
+            }
+        },
+        prop3: [{
+            a: "a1",
+            b: "b1"
+        }],
+    };
+
+    var obj2 = {
+        prop2: {
+            a: "a2",
+            c: {
+                d: "d2",
+            },
+            f: "f2",
+        },
+        prop3: [{a:"a2"}],
+    };
+
+
+    var merged = s.merge(obj1, obj2);
+    console.log(merged);
+    /*>> 
+     {
+        prop1: "obj1 prop1",
+        prop2: {
+            a: "a2",
+            b: "b1",
+            c: {
+                d:"d2",
+                e: "e1",
+                }, 
+            f: "f2"
+        },
+        prop3: [{a:"a2"}],
+     }
     */
 ```
 
