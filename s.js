@@ -1,5 +1,5 @@
 /*****************************************************
- 		s.js v0.1
+ 		s.js v0.11
  ***************************************************/
 
 /*****************************************************
@@ -312,6 +312,16 @@
     _s.random = function (from, to) {
         return Math.floor((Math.random() * to) + from);
     }
+    
+    /**
+	* Alias for document.querySelectorAll()
+	* @param selector DOM selector recognizable with document.querySelectorAll
+	* @param to {string|regExpresion} max number
+	* @example s.select('p'); select all paragraphs in page
+	*/
+    _s.s = function( selector ) {
+        return document.querySelectorAll( selector );
+    }
 
     /**
 	* Get the parameter from URL by the name
@@ -324,6 +334,72 @@
 
         return decodeURI(val[1]);
     }
+
+})(window.s = window.s || {});
+
+
+/*****************************************************
+   HTML modifications module part
+ ***************************************************/
+(function (_s, undefined) {
+
+
+    /**
+	* Alias for document.querySelectorAll()
+	* @param selector DOM selector recognizable with document.querySelectorAll
+	* @param to {string|regExpresion} max number
+	* @example s.select('p'); select all paragraphs in page
+	*/
+    _s.s = function (selector) {
+        return document.querySelectorAll(selector);
+    }
+
+    /**
+    * Check if element have specified class
+    * We can check for class combination by separating names with spaces "class1 class2"
+    * @param elem html element that we are checking
+    * @param className name of the class
+    */
+    _s.haveClass = function (elem, className) {
+        var classes = className.split(" ");
+        for (var i = 0; i < classes.length; i++) {
+            if(elem.className.indexOf(classes[i]) === -1 )
+                return false;
+        }
+        return true;
+    }
+
+    /**
+    * Add class to element
+    * @param elem that we are adding the class
+    * @param className name of the class
+    */
+    _s.addClass = function (elem, className) {
+        if(!_s.haveClass(elem, className))
+            elem.className = elem.className.length === 0 ? className : elem.className + ' ' + className;
+    }
+
+    /**
+    * Add class to element
+    * @param elem that we are adding the class
+    * @param className name of the class
+    */
+    _s.removeClass = function (elem, className) {
+        elem.className = elem.className.replace(className, '');
+    }
+
+    /**
+    * Toggle class
+    * @param elem that we are toggling class
+    * @param className name of the class
+    */
+    _s.toggleClass = function(elem, className) {
+        if(_s.haveClass(elem, className))
+            _s.removeClass(elem, className);
+        else
+            _s.addClass(elem, className);
+    }
+
 
 })(window.s = window.s || {});
 

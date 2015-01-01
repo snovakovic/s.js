@@ -1,0 +1,8 @@
+﻿/***************** Version 0.11 ***********************/
+-Added:
+	s.haveClass()
+	s.addClass()
+	s.removeClass()
+	s.toggleClass()
+
+/***************** Version 0.11 ***********************/

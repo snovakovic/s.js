@@ -346,3 +346,54 @@ Get the value from url parameter.
     s.getUrlParameter("firstName"); //John
     s.getUrlParameter("lastName"); //Doe
     s.getUrlParameter("something"); //null
+
+
+HTML modifications
+-------
+
+#### s
+Alias for document.querySelectorAll()
+
+```javascript
+    s.s('p'); //return all paragraph elements
+
+    //same as
+    document.querySelectorAll();
+```
+
+#### haveClass
+Check if html element have a class. 
+We can check for multiple class-es by separating names with spaces.
+
+```javascript
+    //elem = <span id="testElem" class="class1 class2 class3"></span>
+    var elem = document.querySelector('#testElem');
+    
+    s.haveClass(elem, 'class2'); //true
+    s.haveClass(elem, 'no'); //false
+    s.haveClass(elem, 'class1 class3'); //true
+    s.haveClass(elem, 'class1 no'); //false
+
+    //returns true if first p element have class testClass
+```
+
+#### addClass
+Add class to html element
+
+```javascript
+    s.addClass(elem, 'testClass');
+```
+
+#### removeClass
+Remove class from html element
+
+```javascript
+    s.removeClass(elem, 'testClass');
+```
+
+### togleClass
+Toggle class
+
+```javascript
+    s.toggleClass(elem, 'testClass');
+```
