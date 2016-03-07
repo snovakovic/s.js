@@ -5,30 +5,26 @@
  ***************************************************/
 (function (s) {
 
-  /**
-* Check if variable is initialized
-*/
   s.isDefined = function (testVar) {
     return typeof testVar !== 'undefined';
   };
 
   /**
-* Test if variable has been defined and is not empty, 
- * Following will be treated as false
- *     1) null
- *     2) not initialized variable
- *     3) empty array
- *     4) empty object
- *     5) empty string
- *     6) string with only spaces
-*/
+   * Test if variable has been defined and is not empty, 
+   * Following will be treated as false
+   *     1) null
+   *     2) not initialized variable
+   *     3) empty array
+   *     4) empty object
+   *     5) empty string
+   *     6) string with only spaces
+  */
   s.hasValue = function (testVar) {
     if (typeof testVar === 'undefined' || testVar === null
       || (typeof testVar === 'string' && testVar.trim().length === 0)) {
       return false;
-    } 
+    }
 
-    //Array and object only
     if (typeof testVar === 'object') {
       for (var key in testVar) {
         if (hasOwnProperty.call(testVar, key)) {
@@ -41,49 +37,37 @@
     return true;
   };
 
-  /**
-* Check if variable type is string
-*/
   s.isString = function (testVar) {
     return typeof testVar === 'string';
   };
 
-  /**
-* Check if variable type is number
-*/
   s.isNumber = function (testVar) {
     return typeof testVar === 'number';
   };
 
-  /**
-* Check if variable type is boolean
-*/
   s.isBoolean = function (testVar) {
     return typeof testVar === 'boolean';
   };
 
   /**
-* Check if variable type is object
-* variable type of array is also object
-* type for null returns object, but is object will return false for null
-*/
+  * Check if variable type is object
+  * variable type of array is also object
+  * type for null returns object, but is object will return false for null
+  */
   s.isObject = function (testVar) {
-    return typeof testVar === 'object' && testVar !== null;
+    return typeof testVar === 'object' && testVar !== null && !Array.isArray(testVar);
   };
 
-  /**
-* Check if variable is array. 
-*/
   s.isArray = function (testVar) {
     return Array.isArray(testVar);
   };
 
   /**
- * Test string using any regular expression or by using any of defined keywords
- * @param str {string} string that will be tested
- * @param expr {string|regExpresion} expression can be defined keyword in string format or any regular expression.
- * @example s.is("test", alphabetic); same as s.is("test", /^[a-zA-Z ]*$/)
-*/
+   * Test string using any regular expression or by using any of defined keywords
+   * @param str {string} string that will be tested
+   * @param expr {string|regExpresion} expression can be defined keyword in string format or any regular expression.
+   * @example s.is("test", alphabetic); same as s.is("test", /^[a-zA-Z ]*$/)
+  */
   s.is = function (str, expr) {
     var re = expr;
     if (typeof str !== 'string') {
