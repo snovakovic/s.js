@@ -1,9 +1,10 @@
 s.js
 ======
+##!!!WORK IN PROGRESS
 
-Collection of helper methods. 
+Collection of helper methods.
 All methods are under Unit Test.
-Particularly useful for vanila js development. 
+Particularly useful for vanilla js development.
 
 
 
@@ -11,11 +12,11 @@ String Helpers
 -----
 
 #### replaceAll
-Replace all occurrences in a string with a new value. 
+Replace all occurrences in a string with a new value.
 
 ```javascript
    s.replaceAll("this is old value in old string", "old", "new");
-    //>> this is new value in new string 
+    //>> this is new value in new string
 ```
 
 #### format
@@ -36,23 +37,23 @@ Array Helpers
 -----
 
 #### each
-Loop over arrays. 
-Use return false in callback function to break from loop. 
+Loop over arrays.
+Use return false in callback function to break from loop.
 
 ```javascript
-   
+
     var testArr = [1, 2, 3, 4, 5];
     s.each(testArr, function(val, i) {
-        console.log(val);
+      console.log(val);
     });
     //>> 1 2 3 4 5
 
     //break from foreach loop
     s.each(testArr, function (val, i) {
-        console.log(val);
-        if (val === 2) 
-            return false; //break the each loop
-	
+      console.log(val);
+      if (val === 2) {
+        return false; //break the each loop
+        }
     });
     //>> 1 2
 
@@ -85,18 +86,20 @@ http://toddmotto.com/ditch-the-array-foreach-call-nodelist-hack/
 
 
 #### iterate
-Iterate specific number of times. Iteration starts from 0. 
-Use return false in callback function to stop iterating. 
+Iterate specific number of times. Iteration starts from 0.
+Use return false in callback function to stop iterating.
 
 ```javascript
     s.iterate(4, function(i) {
-        console.log(i);
+      console.log(i);
     });
     //>> 0 1 2 3
 
     s.iterate(10, function (i) {
-        console.log(i);
-        if (i === 2) return false;
+      console.log(i);
+      if (i === 2) {
+        return false;
+      }
     });
     //>>0 1 2
 ```
@@ -209,21 +212,21 @@ Method accepts arbitrary number of object that will be merged together.
 
     var merged = s.merge(obj1, obj2, obj3);
     console.log(merged);
-    /*>> 
+    /*>>
         {
             prop1: "obj2 prop1",
             prop2: "obj1 prop2",
             prop3: "obj3 prop3",
             prop4: 1,
             prop5:3
-        } 
+        }
     */
 ```
 
 
 #### deepMerge
 Deep merge provided objects.
-Objects inside array will not be taken into consideration for deep merging.
+Objects inside array won't be taken into consideration for deep merging.
 In case of the same property value from second object will override the values in the first object.
 Method accepts arbitrary number of object that will be merged together.
 
@@ -236,7 +239,7 @@ Method accepts arbitrary number of object that will be merged together.
             c: {
                 d:"d1",
                 e: "e1",
-            }, 
+            },
             f: {
                 g: "g1",
             }
@@ -261,7 +264,7 @@ Method accepts arbitrary number of object that will be merged together.
 
     var merged = s.merge(obj1, obj2);
     console.log(merged);
-    /*>> 
+    /*>>
      {
         prop1: "obj1 prop1",
         prop2: {
@@ -270,7 +273,7 @@ Method accepts arbitrary number of object that will be merged together.
             c: {
                 d:"d2",
                 e: "e1",
-                }, 
+                },
             f: "f2"
         },
         prop3: [{a:"a2"}],
@@ -288,7 +291,7 @@ Random is using Math.random().
 
 ```javascript
     s.random(1,10); //Get the random number between 1 and 10. 1 and 10 are also included.
-    
+
     //above is shorthand for flowing
     Math.floor((Math.random() * 10) + 1);
 ```
@@ -334,7 +337,7 @@ We can check for multiple class-es by separating names with spaces.
 ```javascript
     //elem = <span id="testElem" class="class1 class2 class3"></span>
     var elem = document.querySelector('#testElem');
-    
+
     s.haveClass(elem, 'class2'); //true
     s.haveClass(elem, 'no'); //false
     s.haveClass(elem, 'class1 class3'); //true
@@ -370,7 +373,7 @@ The s.getHeight() method returns the largest measurement.
 ```javascript
     elem.style.height = '200px'; // Set height
     s.height(elem); // return 200
-```
+
 #### closest
 Get closest DOM element up the tree that contains a class, ID, data attribute, or tag. 
 Includes the element itself. Supported back to IE6.
@@ -384,7 +387,7 @@ Includes the element itself. Supported back to IE6.
 ```
 
 #### siglings
-Get all siblings of an element. 
+Get all siblings of an element.
 Supported back to IE6
 
 ```javascript
@@ -495,7 +498,7 @@ Example of testing the string by using regular expresion:
     s.is("stefan.novakovich@gmail.com", /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); // >> true
     s.is("not.email", /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); // >> false
 
-```  
+```
 
 the same thing from above could be achived by using already defined keywords alphabetic and email. 
 
@@ -507,7 +510,7 @@ the same thing from above could be achived by using already defined keywords alp
     //test if the string is valid eMail
     s.is("stefan.novakovich@gmail.com", 'email');// >> true
     s.is("not.email", 'email'); // >> false
-```  
+```
 
 Available keywords:
 
@@ -519,10 +522,10 @@ Available keywords:
     - email : check if string is valid email address
     - strongPassword : check if string is strong password
                        To be strong password string must conatain at least:
-	                        - one lowercase latter, 
-	                        - one uppercase letter
-	                        - one number
-	                        - 6 characters
+                        - one lowercase latter,
+                       - one uppercase letter
+                        - one number
+                        - 6 characters
     -ip: check if string is valid ip address
 
 Keyword is case in-sensitive.
