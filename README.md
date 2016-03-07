@@ -19,19 +19,6 @@ Replace all occurrences in a string with a new value.
     //>> this is new value in new string
 ```
 
-#### format
-String Concatenation variation based on C# string concatenation.
-Don't use in high intensive loops or time critical code as it is much slower than normal string concatenation!    
-http://jsperf.com/s-format
-
-```javascript
-   s.format("Hi {0}, your rank is {1}.", "Foo", 100);
-    //>> Hi Foo, your rank is 100
-    s.format("one {0} two {1} one {0}", 1, 2);
-    //>> one 1 two 2 one 1
-```
-
-
 
 Array Helpers
 -----
