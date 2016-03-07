@@ -14,6 +14,10 @@ module.exports = function (config) {
       'src/*.js'
     ],
 
+    preprocessors: {
+      // ignore test files from coverage
+      'src/*.js': ['coverage']
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
