@@ -52,10 +52,10 @@
   /**
   * Check if variable type is object
   * variable type of array is also object
-  * type for null returns object, but is object will return false for null
+  * type for null returns object, but is.object will return false for null
   */
   s.isObject = function (testVar) {
-    return typeof testVar === 'object' && testVar !== null && !Array.isArray(testVar);
+    return typeof testVar === 'object' && testVar !== null;
   };
 
   s.isArray = function (testVar) {
