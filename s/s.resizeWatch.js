@@ -65,18 +65,19 @@ if (!window.matchMedia) {
     onResizeFunctionStack = [],
     i,
     currentScreenSizes = [],
+    //based on bootstrap breakpoints
     screenSizes = [
       {
-        minWidth: 768,
+        minWidth: 992,
         name: 'desktop'
       },
       {
-        minWidth: 481,
-        maxWidth: 767,
+        minWidth: 768,
+        maxWidth: 991,
         name: 'tablet'
       },
       {
-        maxWidth: 480,
+        maxWidth: 767,
         name: 'mobile'
       }
     ];

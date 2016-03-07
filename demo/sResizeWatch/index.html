@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>sResizeWatch example</title>
+
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <script type="text/javascript" src="../../s/s.resizeWatch.js"></script>
+
+</head>
+
+<body>
+
+  <div class="visible-md visible-lg" style="height: 200px; background-color: blue;"> <h1>DESKTOP</h1> </div>
+  <div class="visible-sm" style="height: 200px; background-color: yellow;"> <h1>Tablet</h1> </div>
+  <div class="visible-xs" style="height: 200px; background-color: red;"> <h1>MOBILE</h1></div>
+
+  <div>
+    <h4>Screen change log (resize browser to inspect changes)</h4>
+    <div id="log-wrapper">
+
+    </div>
+  </div>
+
+  <script>
+    var logWrapper = document.getElementById('log-wrapper');
+    
+    s.resizeWatch.queueOn('desktop', function() {
+      logWrapper.innerHTML += "<p>Desktop screen size became active.</p>";
+    });
+    s.resizeWatch.queueOff('desktop', function() {
+      logWrapper.innerHTML += "<p>Desktop screen size stops been active.</p>";
+    });
+    s.resizeWatch.queueOn('tablet', function() {
+      logWrapper.innerHTML += "<p>Tablet screen size became active.</p>";
+    });
+    s.resizeWatch.queueOff('tablet', function() {
+      logWrapper.innerHTML += "<p>Tablet screen size stops been active.</p>";
+    });
+    s.resizeWatch.queueOn('mobile', function() {
+      logWrapper.innerHTML += "<p>Mobile screen size became active.</p>";
+    });
+    s.resizeWatch.queueOff('mobile', function() {
+      logWrapper.innerHTML += "<p>Mobile screen size stops been active.</p>";
+    });
+  </script>
+
+</body>
+
+</html>
