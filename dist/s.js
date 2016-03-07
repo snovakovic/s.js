@@ -6,9 +6,9 @@
 (function (s) {
 
   /**
- * Loop through any array
- * @example s.each([1,2,3,4,5,6,7], function(val, i) { console.log(val); } );
- */
+  * Loop through any array
+  * @example s.each([1,2,3,4,5,6,7], function(val, i) { console.log(val); } );
+  */
   s.each = function (arr, callback) {
     for (var i = 0, l = arr.length; i < l; i++) {
       if (callback(arr[i], i) === false) {
@@ -18,11 +18,11 @@
   };
 
   /**
- * Iterate specific number of times
- * @param  {Integer}   n  number of iterations
- * @param  {Function} callback function that will be call per each iteration. use return false to break from iterations
- * @example s.iterate(10, function(i) { console.log(i); } );
- */
+  * Iterate specific number of times
+  * @param  {Integer}   n  number of iterations
+  * @param  {Function} callback function that will be call per each iteration. use return false to break from iterations
+  * @example s.iterate(10, function(i) { console.log(i); } );
+  */
   s.iterate = function (l, callback) {
     for (var i = 0; i < l; i++) {
       if (callback(i) === false) {
@@ -32,13 +32,13 @@
   };
 
   /**
- * Remove all occurrences of element from array
- * @param arr {Array} array from where we want  to remove the values
- * @param elToRemove {...} element that we want to remove from array
- * @param max {whole number integer} max number of occurrences to remove. 1 - remove first, -1 remove last.
-  * @return {Array} new array without the removed values
- * @example s.remove( ['a', 'b', 'c', 'd', 'c'], 'c' );
- */
+  * Remove all occurrences of element from array
+  * @param arr {Array} array from where we want  to remove the values
+  * @param elToRemove {...} element that we want to remove from array
+  * @param max {whole number integer} max number of occurrences to remove. 1 - remove first, -1 remove last.
+   * @return {Array} new array without the removed values
+  * @example s.remove( ['a', 'b', 'c', 'd', 'c'], 'c' );
+  */
   s.remove = function (arr, elToRemove, max) {
     var pos;
     if (max && (typeof max !== 'number' || max % 1 !== 0)) {
@@ -65,22 +65,22 @@
   };
 
   /**
- * Shuffle values in the array
- * @param arr {Array} input array that we want to shuffle
- * @return {Array} shuffled array
- * @example s.shuffle(['a', 'b', 'c', 'd', 'c']);
- */
+  * Shuffle values in the array
+  * @param arr {Array} input array that we want to shuffle
+  * @return {Array} shuffled array
+  * @example s.shuffle(['a', 'b', 'c', 'd', 'c']);
+  */
   s.shuffle = function (arr) {
     for (var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
     return arr;
   };
 
   /**
- * Get the new array filled with default values
- * @param val {....} default value that will fill the array
- * @return len {Integer} size of the new array
- * @example s.getFilledArray(0, 5);
- */
+  * Get the new array filled with default values
+  * @param val {....} default value that will fill the array
+  * @return len {Integer} size of the new array
+  * @example s.getFilledArray(0, 5);
+  */
   s.getFilledArray = function (val, len) {
     var rv = new Array(len);
     while (--len >= 0) {
@@ -90,9 +90,9 @@
   };
 
   /**
- * Returns new array containing only unique values from original array
- * Doesn't support nested objects and array
- */
+  * Returns new array containing only unique values from original array
+  * Doesn't support nested objects and array
+  */
   s.unique = function (originalArr) {
     var arr = [];
     for (var i = 0; i < originalArr.length; i++) {
@@ -124,27 +124,14 @@
     var _conditionCb;
     var _maxTries;
     var _timeOut;
-    var _failCb;
-    var _doneCb;
     var _noTries = 0;
-
-    function done() {
-      _doneCb && _doneCb();
-    }
-    function fail() {
-      _failCb && _failCb();
-      done();
-    }
 
     function when() {
       _noTries++;
       if (_conditionCb()) {
         _executeCb();
-        done();
       } else if (!_maxTries || (_noTries < _maxTries)) {
         setTimeout(when, _timeOut);
-      } else {
-        fail();
       }
     }
 
@@ -156,171 +143,12 @@
         setTimeout(when);
         return this;
       },
-      fail: function (failCb) {
-        _failCb = failCb;
-        return this;
-      },
-      done: function (doneCb) {
-        _doneCb = doneCb;
-        return this;
-      },
       limit: function (maxTries) {
         _maxTries = maxTries;
       }
     };
   }
 } (window.s = window.s || {}));
-
-'use strict';
-
-/*****************************************************
-   HTML modifications module part
- ***************************************************/
-(function (s) {
-
-  /**
-* Alias for document.querySelectorAll()
-* @param selector DOM selector recognizable with document.querySelectorAll
-* @example s.all('p'); select all paragraphs in page
-*/
-  s.all = function (selector) {
-    return document.querySelectorAll(selector);
-  };
-
-  /**
-  * Alias for document.querySelector()
-  * @param selector DOM selector recognizable with document.querySelector
-  * @example s.first('p'); select first paragraphs in page
-  */
-  s.first = function (selector) {
-    return document.querySelector(selector);
-  };
-
-  /**
-  * Check if element have specified class
-  * We can check for class combination by separating names with spaces "class1 class2"
-  * @param elem html element that we are checking
-  * @param className name of the class
-  * @return bool
-  * example s.haveClass(s.first('p'), 'testClass');
-  */
-  s.haveClass = function (elem, className) {
-    var classes = className.split(' ');
-    for (var i = 0; i < classes.length; i++) {
-      if (elem.className.indexOf(classes[i]) === -1) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  /**
-  * Add class to element
-  * @param elem that we are adding the class
-  * @param className name of the class
-  */
-  s.addClass = function (elem, className) {
-    if (!s.haveClass(elem, className)) {
-      elem.className = elem.className.length === 0 ? className : elem.className + ' ' + className;
-    }
-  };
-
-  /**
-  * Add class to element
-  * @param elem that we are adding the class
-  * @param className name of the class
-  */
-  s.removeClass = function (elem, className) {
-    elem.className = elem.className.replace(className, '');
-  };
-
-  /**
-  * Toggle class
-  * @param elem that we are toggling class
-  * @param className name of the class
-  */
-  s.toggleClass = function (elem, className) {
-    if (s.haveClass(elem, className)) {
-      s.removeClass(elem, className);
-    }
-    else {
-      s.addClass(elem, className);
-    }
-  };
-
-  /**
-  * Get and set height. It’s a lot trickier in native JS than it should be, 
-  * because there are multiple APIs for getting height, and they all return slightly different measurements. 
-  * The getHeight() method provided below returns the largest measurement.
-  * @param elem which height we want to get
-  * @return height in px
-  */
-  s.height = function (elem) {
-    return Math.max(elem.scrollHeight, elem.offsetHeight, elem.clientHeight);
-  };
-
-  /**
-  * Get closest DOM element up the tree that contains a class, ID, data attribute, or tag. Includes the element itself. Supported back to IE6.
-  * @param elem html element
-  * @param selector css selector
-  * @return html element that match condition or false
-  */
-  s.closest = function (elem, selector) {
-
-    var firstChar = selector.charAt(0);
-
-    // Get closest match
-    for (; elem && elem !== document; elem = elem.parentNode) {
-
-      // If selector is a class
-      if (firstChar === '.') {
-        if (s.haveClass(elem, selector.substr(1))) {
-          return elem;
-        }
-      }
-
-      // If selector is an ID
-      if (firstChar === '#') {
-        if (elem.id === selector.substr(1)) {
-          return elem;
-        }
-      }
-
-      // If selector is a data attribute
-      if (firstChar === '[') {
-        if (elem.hasAttribute(selector.substr(1, selector.length - 2))) {
-          return elem;
-        }
-      }
-
-      // If selector is a tag
-      if (elem.tagName.toLowerCase() === selector) {
-        return elem;
-      }
-
-    }
-
-    return false;
-
-  };
-
-  /**
-  * Get all siblings of the selected element
-  * @param elem html element
-  * @return list of html elements
-  */
-  s.siblings = function (elem) {
-    var siblings = [];
-    var sibling = elem.parentNode.firstChild;
-    for (; sibling; sibling = sibling.nextSibling) {
-      if (sibling.nodeType === 1 && sibling !== elem) {
-        siblings.push(sibling);
-      }
-    }
-    return siblings;
-  };
-
-})(window.s = window.s || {});
 
 'use strict';
 
@@ -367,8 +195,7 @@
         }
       }
     }
-  }
-
+  };
 
   /**
    * Shallow merge provided objects
@@ -700,21 +527,6 @@ if (!window.matchMedia) {
     return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
   };
 
-  /**
-   * String concatenation variation based on .net   
-   * Don't use in high intensive loops as it is much slower than normal string concatenation         
-   * @return {[string]} formatted  string
-   * @example console.log(s.format("Hi {0}, your rank is {1}.", "Foo", 100))
-   */
-  s.format = function () {
-    var str = arguments[0],
-      length = arguments.length - 1;
-    for (var i = 0; i < length; i++) {
-      str = s.replaceAll(str, '{' + i + '}', arguments[i + 1]);
-    }
-    return str;
-  };
-
 })(window.s = window.s || {});
 
 'use strict';
@@ -724,33 +536,29 @@ if (!window.matchMedia) {
  ***************************************************/
 (function (s) {
 
-  /**
-* Check if variable is initialized
-*/
   s.isDefined = function (testVar) {
     return typeof testVar !== 'undefined';
   };
 
   /**
-* Test if variable has been defined and is not empty, 
- * Things that are treated as if they don't have value:
- *     1) null
- *     2) not initialized variable
- *     3) empty array
- *     4) empty object
- *     5) empty string
- *     6) string with only spaces
-*/
+   * Test if variable has been defined and is not empty, 
+   * Following will be treated as false
+   *     1) null
+   *     2) not initialized variable
+   *     3) empty array
+   *     4) empty object
+   *     5) empty string
+   *     6) string with only spaces
+  */
   s.hasValue = function (testVar) {
     if (typeof testVar === 'undefined' || testVar === null
       || (typeof testVar === 'string' && testVar.trim().length === 0)) {
       return false;
-    } 
+    }
 
-    //Array and object only
     if (typeof testVar === 'object') {
       for (var key in testVar) {
-        if (hasOwnProperty.call(testVar, key)) {
+        if (Object.prototype.hasOwnProperty.call(testVar, key)) {
           return true;
         }
       }
@@ -760,49 +568,37 @@ if (!window.matchMedia) {
     return true;
   };
 
-  /**
-* Check if variable type is string
-*/
   s.isString = function (testVar) {
     return typeof testVar === 'string';
   };
 
-  /**
-* Check if variable type is number
-*/
   s.isNumber = function (testVar) {
     return typeof testVar === 'number';
   };
 
-  /**
-* Check if variable type is boolean
-*/
   s.isBoolean = function (testVar) {
     return typeof testVar === 'boolean';
   };
 
   /**
-* Check if variable type is object
-* variable type of array is also object
-* type for null returns object, but is object will return false for null
-*/
+  * Check if variable type is object
+  * variable type of array is also object
+  * type for null returns object, but is.object will return false for null
+  */
   s.isObject = function (testVar) {
     return typeof testVar === 'object' && testVar !== null;
   };
 
-  /**
-* Check if variable is array. 
-*/
   s.isArray = function (testVar) {
     return Array.isArray(testVar);
   };
 
   /**
- * Test string using any regular expression or by using any of defined keywords
- * @param str {string} string that will be tested
- * @param expr {string|regExpresion} expression can be defined keyword in string format or any regular expression.
- * @example s.is("test", alphabetic); same as s.is("test", /^[a-zA-Z ]*$/)
-*/
+   * Test string using any regular expression or by using any of defined keywords
+   * @param str {string} string that will be tested
+   * @param expr {string|regExpresion} expression can be defined keyword in string format or any regular expression.
+   * @example s.is("test", alphabetic); same as s.is("test", /^[a-zA-Z ]*$/)
+  */
   s.is = function (str, expr) {
     var re = expr;
     if (typeof str !== 'string') {
@@ -839,7 +635,7 @@ if (!window.matchMedia) {
           re = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
           break;
         default:
-          throw new Error(s.exception.invalidArgument);
+          throw new Error('Invalid argument exception');
       }
     }
 
