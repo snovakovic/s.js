@@ -27,7 +27,7 @@
 
     if (typeof testVar === 'object') {
       for (var key in testVar) {
-        if (hasOwnProperty.call(testVar, key)) {
+        if (Object.prototype.hasOwnProperty.call(testVar, key)) {
           return true;
         }
       }

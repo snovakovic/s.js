@@ -18,8 +18,7 @@
         }
       }
     }
-  }
-
+  };
 
   /**
    * Shallow merge provided objects
