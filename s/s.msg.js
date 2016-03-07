@@ -1,3 +1,5 @@
+'use strict';
+
 /*****************************
  * sMsg - broadcast messages
  * example s.broadcast('something-happened', objToSend)
@@ -5,7 +7,6 @@
  *  console.log(val);
  * });
  ****************************/
-
 (function (s) {
   var subscribers = [];
 
