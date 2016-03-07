@@ -88,7 +88,6 @@
       return false;
     }
 
-
     //look for keywords
     if (typeof expr === 'string') {
       expr = expr.trim().toLowerCase();
