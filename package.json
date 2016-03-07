@@ -4,7 +4,7 @@
   "description": "s.js https://github.com/snovakovic/s.js",
   "main": "dist/s.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
