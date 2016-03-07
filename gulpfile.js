@@ -4,7 +4,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 
 gulp.task('script-full', function () {
-  return gulp.src('./s/*.js')
+  return gulp.src('./src/*.js')
     .pipe(sourcemaps.init())
     .pipe(concat('s.js'))
     .pipe(sourcemaps.write('/'))
@@ -12,7 +12,7 @@ gulp.task('script-full', function () {
 });
 
 gulp.task('script-minified', function () {
-  return gulp.src('./s/*.js')
+  return gulp.src('./src/*.js')
     .pipe(sourcemaps.init())
     .pipe(concat('s.min.js'))
     .pipe(uglify())
