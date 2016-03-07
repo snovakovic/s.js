@@ -25,13 +25,13 @@ describe('s.msg', function () {
 
     it('should handle multiple listeneres', function () {
       var noOfReceivedMessages = 0;
-      s.listen('test-multiple', function (val) {
+      s.listen('test-multiple', function () {
         noOfReceivedMessages++;
       });
-      s.listen('test-multiple', function (val) {
+      s.listen('test-multiple', function () {
         noOfReceivedMessages++;
       });
-      s.listen('test-multiple', function (val) {
+      s.listen('test-multiple', function () {
         noOfReceivedMessages++;
       });
 
