@@ -10,8 +10,9 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'specs/*.js',
-      'src/*.js'
+      'test/mocks/*.js',
+      'src/*.js',
+      'specs/*.js'
     ],
 
     preprocessors: {
