@@ -2,7 +2,7 @@
 
 describe('s.msg', function () {
 
-  describe('Broadcasting', function () {
+  describe('broadcasting', function () {
 
     it('should recive messages without object', function () {
       var messageReceived = false;

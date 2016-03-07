@@ -1,8 +1,8 @@
 'use strict';
 
-describe('s.msg', function () {
+describe('s.execute', function () {
 
-  describe('Execute', function () {
+  describe('execute', function () {
 
     it('should execute on async condition change', function (done) {
       var executeCondition = false;

@@ -14,7 +14,7 @@
 
   /**
 * Test if variable has been defined and is not empty, 
- * Things that are treated as if they don't have value:
+ * Following will be treated as false
  *     1) null
  *     2) not initialized variable
  *     3) empty array
@@ -120,7 +120,7 @@
           re = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
           break;
         default:
-          throw new Error(s.exception.invalidArgument);
+          throw new Error('Invalid argument exception');
       }
     }
 
