@@ -1,0 +1,25 @@
+{
+  "name": "s.js",
+  "version": "1.0.0",
+  "description": "s.js https://github.com/snovakovic/s.js",
+  "main": "dist/s.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snovakovic/s.js.git"
+  },
+  "keywords": [
+    "s.js"
+  ],
+  "author": "stefan.novakovich@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/snovakovic/s.js/issues"
+  },
+  "homepage": "https://github.com/snovakovic/s.js#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
