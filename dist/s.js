@@ -152,6 +152,126 @@
 
 'use strict';
 
+/*****************************************************
+	  Test Module part
+ ***************************************************/
+(function (s) {
+
+  s.is = {};
+  s.is.not = {};
+
+  s.is.defined = function (testVar) {
+    return typeof testVar !== 'undefined';
+  };
+
+  /**
+   * Test if variable has been defined and is not empty, 
+   * Following will be treated as false
+   *     1) null
+   *     2) not initialized variable
+   *     3) empty array
+   *     4) empty object
+   *     5) empty string
+   *     6) string with only spaces
+  */
+  s.is.empty = function (testVar) {
+    if (typeof testVar === 'undefined' || testVar === null
+      || (typeof testVar === 'string' && testVar.trim().length === 0)) {
+      return true;
+    }
+
+    if (typeof testVar === 'object') {
+      for (var key in testVar) {
+        if (Object.prototype.hasOwnProperty.call(testVar, key)) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    return false;
+  };
+  
+  s.is.not.empty = function(testVar) {
+    return !s.is.empty(testVar);
+  };
+
+  /**
+   * VAR type check
+   */
+  s.is.string = function (testVar) {
+    return typeof testVar === 'string';
+  };
+
+  s.is.number = function (testVar) {
+    return typeof testVar === 'number';
+  };
+
+  s.is.boolean = function (testVar) {
+    return typeof testVar === 'boolean';
+  };
+
+  s.is.object = function (testVar) {
+    return typeof testVar === 'object' && testVar !== null;
+  };
+
+  s.is.array = function (testVar) {
+    return Array.isArray(testVar);
+  };
+
+  /****
+  * STRING tests
+  */
+
+  s.is.blank = function (str) {
+    return (/^\s*$/).test(str);
+  };
+
+  s.is.alphabetic = function (str) {
+    var re = /^[a-zA-Z ]*$/;
+    return re.test(str);
+  };
+
+  s.is.alphanumeric = function (str) {
+    var re = /^[a-zA-Z0-9 ]*$/;
+    return re.test(str);
+  };
+
+  s.is.numeric = function (str) {
+    var re = /^[0-9 ]*$/;
+    return re.test(str);
+  };
+
+  s.is.lowercase = function (str) {
+    var re = /^[a-z ]*$/;
+    return re.test(str);
+  };
+
+  s.is.uppercase = function (str) {
+    var re = /^[A-Z ]*$/;
+    return re.test(str);
+  };
+
+  s.is.email = function (str) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(str);
+  };
+
+  s.is.strongpassword = function (str) {
+    var re = /^(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*$/;
+    return re.test(str);
+  };
+
+  s.is.ip = function (str) {
+    var re = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    return re.test(str);
+  };
+
+
+})(window.s = window.s || {});
+
+'use strict';
+
 /*****************************
  * sMsg - broadcast messages
  * example s.broadcast('something-happened', objToSend)
@@ -546,7 +666,7 @@ if (!window.matchMedia) {
   /*
    * test if string contains substring
    * @ignore case - case is ignored on comparation
-   * @example capitalize("foo Bar", 'oo'); => "Foo Bar"; capitalize("FOO Bar", true); => "Foo bar"
+   * @example capitalize('foo Bar', 'oo'); => 'Foo Bar'; capitalize('FOO Bar', true); => 'Foo bar'
    * https://github.com/epeli/underscore.string
   */
   s.contains = function (str1, str2, ignoreCase) {
@@ -559,7 +679,7 @@ if (!window.matchMedia) {
   
   /*
    * Break string in array of substring 
-   * @example: chop("whitespace", 3); => ["whi", "tes", "pac", "e"]
+   * @example: chop("whitespace", 3); => ['whi', 'tes', 'pac', 'e']
   */
   s.chop = function (str, step) {
     if (!str) {
@@ -572,42 +692,12 @@ if (!window.matchMedia) {
   
   /*
   * Trim and replace multiple spaces with a single space.
-  * @example clean(" foo    bar   "); => "foo bar"
+  * @example clean(' foo    bar   '); => 'foo bar'
   */
   s.clean = function (str) {
     return str.trim().replace(/\s\s+/g, ' ');
   };
   
-  /**
-  * Checks whether the string begins with starts at position (default: 0).
-  */
-  s.startsWith = function (str, starts, position) {
-    position = position ? 0 : Math.min(position, str.length);
-    return str.lastIndexOf(starts, position) === position;
-  };
-  
-  /**
-  * Checks whether the string ends with ends at position (default: string.length).
-  */
-  s.endsWith = function (str, ends, position) {
-    if (position) {
-      position = str.length - ends.length;
-    } else {
-      position = Math.min(position, str.length) - ends.length;
-    }
-    return position >= 0 && str.indexOf(ends, position) === position;
-  };
-  
-  /**
-   * Check if string is blank
-   * isBlank(""); // => true
-   * isBlank("\n"); // => true
-   * isBlank(" "); // => true
-   * isBlank("a"); // => false
-   */
-  s.isBlank = function (str) {
-    return (/^\s*$/).test(str);
-  };
 
   /**
   * Truncate string if it exceed max number of caracters, 
@@ -619,121 +709,6 @@ if (!window.matchMedia) {
     return str.length > length ? str.slice(0, length) + truncateStr : str;
   };
 
-
-})(window.s = window.s || {});
-
-'use strict';
-
-/*****************************************************
-	  Test Module part
- ***************************************************/
-(function (s) {
-
-  s.isDefined = function (testVar) {
-    return typeof testVar !== 'undefined';
-  };
-
-  /**
-   * Test if variable has been defined and is not empty, 
-   * Following will be treated as false
-   *     1) null
-   *     2) not initialized variable
-   *     3) empty array
-   *     4) empty object
-   *     5) empty string
-   *     6) string with only spaces
-  */
-  s.hasValue = function (testVar) {
-    if (typeof testVar === 'undefined' || testVar === null
-      || (typeof testVar === 'string' && testVar.trim().length === 0)) {
-      return false;
-    }
-
-    if (typeof testVar === 'object') {
-      for (var key in testVar) {
-        if (Object.prototype.hasOwnProperty.call(testVar, key)) {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    return true;
-  };
-
-  s.isString = function (testVar) {
-    return typeof testVar === 'string';
-  };
-
-  s.isNumber = function (testVar) {
-    return typeof testVar === 'number';
-  };
-
-  s.isBoolean = function (testVar) {
-    return typeof testVar === 'boolean';
-  };
-
-  /**
-  * Check if variable type is object
-  * variable type of array is also object
-  * type for null returns object, but is.object will return false for null
-  */
-  s.isObject = function (testVar) {
-    return typeof testVar === 'object' && testVar !== null;
-  };
-
-  s.isArray = function (testVar) {
-    return Array.isArray(testVar);
-  };
-
-  /**
-   * Test string using any regular expression or by using any of defined keywords
-   * @param str {string} string that will be tested
-   * @param expr {string|regExpresion} expression can be defined keyword in string format or any regular expression.
-   * @example s.is("test", alphabetic); same as s.is("test", /^[a-zA-Z ]*$/)
-  */
-  s.is = function (str, expr) {
-    var re = expr;
-    if (typeof str !== 'string') {
-      return false;
-    }
-
-    //look for keywords
-    if (typeof expr === 'string') {
-      expr = expr.trim().toLowerCase();
-
-      switch (expr) {
-        case 'alphabetic':
-          re = /^[a-zA-Z ]*$/;
-          break;
-        case 'alphanumeric':
-          re = /^[a-zA-Z0-9 ]*$/;
-          break;
-        case 'numeric':
-          re = /^[0-9 ]*$/;
-          break;
-        case 'lowercase':
-          re = /^[a-z ]*$/;
-          break;
-        case 'uppercase':
-          re = /^[A-Z ]*$/;
-          break;
-        case 'email':
-          re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          break;
-        case 'strongpassword':
-          re = /^(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*$/;
-          break;
-        case 'ip':
-          re = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-          break;
-        default:
-          throw new Error('Invalid argument exception');
-      }
-    }
-
-    return re.test(str);
-  };
 
 })(window.s = window.s || {});
 

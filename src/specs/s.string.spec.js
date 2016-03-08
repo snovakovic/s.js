@@ -42,15 +42,6 @@ describe('s.string', function () {
     });
   });
 
-  describe('isBlank', function () {
-    it('should return corrent value', function () {
-      expect(s.isBlank('')).toEqual(true);
-      expect(s.isBlank('as')).toEqual(false);
-      expect(s.isBlank('\n\t')).toEqual(true);
-      expect(s.isBlank('   ')).toEqual(true);
-    });
-  });
-
   describe('truncate', function () {
     it('should truncate string correctly', function () {
       expect(s.truncate('stefan.novakovich@gmail.com', 100)).toEqual('stefan.novakovich@gmail.com');

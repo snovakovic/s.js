@@ -68,16 +68,6 @@
     return str.trim().replace(/\s\s+/g, ' ');
   };
   
-  /**
-   * Check if string is blank
-   * isBlank(""); // => true
-   * isBlank("\n"); // => true
-   * isBlank(" "); // => true
-   * isBlank("a"); // => false
-   */
-  s.isBlank = function (str) {
-    return (/^\s*$/).test(str);
-  };
 
   /**
   * Truncate string if it exceed max number of caracters, 
