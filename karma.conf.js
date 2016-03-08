@@ -11,13 +11,12 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       'test/mocks/*.js',
-      'src/*.js',
-      'specs/*.js'
+      'src/app/*.js',
+      'src/specs/*.js'
     ],
 
     preprocessors: {
-      // ignore test files from coverage
-      'src/*.js': ['coverage']
+      'src/app/*.js': ['coverage']
     },
 
     // test results reporter to use
