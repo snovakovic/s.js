@@ -36,7 +36,7 @@
   /*
    * test if string contains substring
    * @ignore case - case is ignored on comparation
-   * @example capitalize("foo Bar", 'oo'); => "Foo Bar"; capitalize("FOO Bar", true); => "Foo bar"
+   * @example capitalize('foo Bar', 'oo'); => 'Foo Bar'; capitalize('FOO Bar', true); => 'Foo bar'
    * https://github.com/epeli/underscore.string
   */
   s.contains = function (str1, str2, ignoreCase) {
@@ -49,7 +49,7 @@
   
   /*
    * Break string in array of substring 
-   * @example: chop("whitespace", 3); => ["whi", "tes", "pac", "e"]
+   * @example: chop("whitespace", 3); => ['whi', 'tes', 'pac', 'e']
   */
   s.chop = function (str, step) {
     if (!str) {
@@ -62,30 +62,10 @@
   
   /*
   * Trim and replace multiple spaces with a single space.
-  * @example clean(" foo    bar   "); => "foo bar"
+  * @example clean(' foo    bar   '); => 'foo bar'
   */
   s.clean = function (str) {
     return str.trim().replace(/\s\s+/g, ' ');
-  };
-  
-  /**
-  * Checks whether the string begins with starts at position (default: 0).
-  */
-  s.startsWith = function (str, starts, position) {
-    position = position ? 0 : Math.min(position, str.length);
-    return str.lastIndexOf(starts, position) === position;
-  };
-  
-  /**
-  * Checks whether the string ends with ends at position (default: string.length).
-  */
-  s.endsWith = function (str, ends, position) {
-    if (position) {
-      position = str.length - ends.length;
-    } else {
-      position = Math.min(position, str.length) - ends.length;
-    }
-    return position >= 0 && str.indexOf(ends, position) === position;
   };
   
   /**
