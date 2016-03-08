@@ -52,6 +52,9 @@ describe('s.test', function () {
       expect(s.is.empty(empty)).toEqual(true);
       expect(s.is.empty(emptyString)).toEqual(true);
       expect(s.is.empty(spacesOnly)).toEqual(true);
+      expect(s.is.empty('')).toEqual(true);
+      expect(s.is.empty('\n\t')).toEqual(true);
+      expect(s.is.empty('   ')).toEqual(true);
       expect(s.is.empty(obj1)).toEqual(false);
       expect(s.is.empty(arr1)).toEqual(false);
       expect(s.is.empty(num)).toEqual(false);
@@ -59,22 +62,7 @@ describe('s.test', function () {
       expect(s.is.empty(str)).toEqual(false);
       expect(s.is.empty(bool)).toEqual(false);
       expect(s.is.empty(falseBool)).toEqual(false);
-    });
-
-    it('should show correct values for is.not.empty', function () {
-      expect(s.is.not.empty(notDefined)).toEqual(false);
-      expect(s.is.not.empty(obj)).toEqual(false);
-      expect(s.is.not.empty(arr)).toEqual(false);
-      expect(s.is.not.empty(empty)).toEqual(false);
-      expect(s.is.not.empty(emptyString)).toEqual(false);
-      expect(s.is.not.empty(spacesOnly)).toEqual(false);
-      expect(s.is.not.empty(obj1)).toEqual(true);
-      expect(s.is.not.empty(arr1)).toEqual(true);
-      expect(s.is.not.empty(num)).toEqual(true);
-      expect(s.is.not.empty(zero)).toEqual(true);
-      expect(s.is.not.empty(str)).toEqual(true);
-      expect(s.is.not.empty(bool)).toEqual(true);
-      expect(s.is.not.empty(falseBool)).toEqual(true);
+      expect(s.is.empty('as')).toEqual(false);
     });
   });
 
@@ -143,13 +131,6 @@ describe('s.test', function () {
   });
 
   describe('String tests', function () {
-
-    it('should return corrent value for is.blank', function () {
-      expect(s.is.blank('')).toEqual(true);
-      expect(s.is.blank('as')).toEqual(false);
-      expect(s.is.blank('\n\t')).toEqual(true);
-      expect(s.is.blank('   ')).toEqual(true);
-    });
 
     it('should show correct values for alphabetic regex', function () {
       expect(s.is.alphabetic('abc')).toEqual(true);

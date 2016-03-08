@@ -6,7 +6,6 @@
 (function (s) {
 
   s.is = {};
-  s.is.not = {};
 
   s.is.defined = function (testVar) {
     return typeof testVar !== 'undefined';
@@ -15,16 +14,17 @@
   /**
    * Test if variable has been defined and is not empty, 
    * Following will be treated as false
-   *     1) null
-   *     2) not initialized variable
-   *     3) empty array
-   *     4) empty object
-   *     5) empty string
-   *     6) string with only spaces
+   * s.is.empty(null); => true
+   * s.is.empty(undefined); => true
+   * s.is.empty({}); => true
+   * s.is.empty([]); => true
+   * s.is.empty(' '); => true
+   * s.is.empty('\n\t'); => true
+   * s.is.empty(null); => true
   */
   s.is.empty = function (testVar) {
     if (typeof testVar === 'undefined' || testVar === null
-      || (typeof testVar === 'string' && testVar.trim().length === 0)) {
+      || (typeof testVar === 'string' && (/^\s*$/).test(testVar))) {
       return true;
     }
 
@@ -40,10 +40,6 @@
     return false;
   };
   
-  s.is.not.empty = function(testVar) {
-    return !s.is.empty(testVar);
-  };
-
   /**
    * VAR type check
    */
@@ -69,11 +65,7 @@
 
   /****
   * STRING tests
-  */
-
-  s.is.blank = function (str) {
-    return (/^\s*$/).test(str);
-  };
+  ****/
 
   s.is.alphabetic = function (str) {
     var re = /^[a-zA-Z ]*$/;
@@ -114,6 +106,5 @@
     var re = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
     return re.test(str);
   };
-
 
 })(window.s = window.s || {});
