@@ -8,14 +8,14 @@ var windowEventListenerMock = (function () {
       resizeListeners.push(cb);
     }
   };
-  
+
   window.matchMedia = function (query) {
-    if(query.indexOf('666') !== -1) {
-      return {matches: true};
+    if (query.indexOf('666') !== -1) {
+      return { matches: true };
     } else {
-      return {matches: false};
+      return { matches: false };
     }
-  }
+  };
 
   return {
     executeResizeEvent: function () {

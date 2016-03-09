@@ -1,10 +1,12 @@
 'use strict';
 
 /*************************
- * s.execute aka Pesky execute method when condition becomes true
- * exampte a = false; 
- * s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 
- * setTimeout(function(){ a= true; },30);
+ * s.execute aka Pesky 
+ * execute method when condition becomes true
+ * example: 
+ ** a = false; 
+ ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 
+ ** setTimeout(function(){ a= true; },30);
  ************************/
 (function (s) {
 
