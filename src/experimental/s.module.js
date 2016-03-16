@@ -1,3 +1,5 @@
+//TODO: FIX SILENT FAILING WHEN THERE IS NO MODULE
+//s.execute.when is failing silently
 (function(s) {
   var modules = [];
 
