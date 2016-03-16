@@ -4,7 +4,7 @@
  ****************************************/
 if (!window.matchMedia) {
 
-  window.matchMedia = (function () {
+  window.matchMedia = (function() {
 
     // For browsers that support matchMedium api such as IE 9 and webkit
     var styleMedia = (window.styleMedia || window.media);
@@ -24,7 +24,7 @@ if (!window.matchMedia) {
       info = ('getComputedStyle' in window) && window.getComputedStyle(style, null) || style.currentStyle;
 
       styleMedia = {
-        matchMedium: function (media) {
+        matchMedium: function(media) {
           var text = '@media ' + media + '{ #matchmediajs-test { width: 1px; } }';
 
           // 'style.styleSheet' is used by IE <= 8 and 'style.textContent' for all other browsers
@@ -40,7 +40,7 @@ if (!window.matchMedia) {
       };
     }
 
-    return function (media) {
+    return function(media) {
       return {
         matches: styleMedia.matchMedium(media || 'all'),
         media: media || 'all'
@@ -55,7 +55,7 @@ if (!window.matchMedia) {
  * sResizeWatch : https://github.com/snovakovic/sResizeWatch
  * whatch for resize events - and switching between layouts. 
  ****************************************/
-(function (s) {
+(function(s) {
   var onFunctionStack = [],
     offFunctionStack = [],
     onceFunctionStack = [],
@@ -83,7 +83,7 @@ if (!window.matchMedia) {
   //set current screen sizes
   function setCurrentScreenSizes() {
     currentScreenSizes = [];
-    screenSizes.forEach(function (size) {
+    screenSizes.forEach(function(size) {
       if (testSize(size)) {
         currentScreenSizes.push(size);
       }
@@ -95,8 +95,8 @@ if (!window.matchMedia) {
   var doit;
 
   //MAIN RESIZE EVENT LISTENER
-  window.addEventListener('resize', function () {
-    onResizeFunctionStack.forEach(function (callback) {
+  window.addEventListener('resize', function() {
+    onResizeFunctionStack.forEach(function(callback) {
       callback();
     });
 
@@ -108,7 +108,7 @@ if (!window.matchMedia) {
 
     for (i = 0; i < screenSizes.length; i++) {
       var size = screenSizes[i];
-      if (!currentScreenSizes.some(function (currentSize) { return currentSize.name === size.name; })) {
+      if (!currentScreenSizes.some(function(currentSize) { return currentSize.name === size.name; })) {
         if (testSize(size)) {
           currentScreenSizes.push(size);
           onScreenChange(size);
@@ -117,7 +117,7 @@ if (!window.matchMedia) {
 
       // remove current screen sizes if necessary
       var indexesToRemove = [];
-      currentScreenSizes.forEach(function (currentSize, index) {
+      currentScreenSizes.forEach(function(currentSize, index) {
         if (!testSize(currentSize)) {
           indexesToRemove.push(index);
         }
@@ -132,7 +132,7 @@ if (!window.matchMedia) {
 
     /** Call any on resize end event **/
     //this should be at the bottom in case that function use any of other sResizeFunctionalities
-    resizeEndFunctionStack.forEach(function (callback) {
+    resizeEndFunctionStack.forEach(function(callback) {
       callback();
     });
 
@@ -140,12 +140,12 @@ if (!window.matchMedia) {
 
   function onScreenChange(screenSize) {
     if (onFunctionStack[screenSize.name]) {
-      onFunctionStack[screenSize.name].forEach(function (callback) {
+      onFunctionStack[screenSize.name].forEach(function(callback) {
         callback();
       });
     }
     if (onceFunctionStack[screenSize.name]) {
-      onceFunctionStack[screenSize.name].forEach(function (callback) {
+      onceFunctionStack[screenSize.name].forEach(function(callback) {
         callback();
       });
       onceFunctionStack[screenSize.name] = [];
@@ -154,7 +154,7 @@ if (!window.matchMedia) {
 
   function offScreenChange(screenSize) {
     if (offFunctionStack[screenSize.name]) {
-      offFunctionStack[screenSize.name].forEach(function (callback) {
+      offFunctionStack[screenSize.name].forEach(function(callback) {
         callback();
       });
     }
@@ -182,7 +182,7 @@ if (!window.matchMedia) {
    */
   s.resizeWatch = {};
 
-  s.resizeWatch.on = function (screenSizeName, callback) {
+  s.resizeWatch.on = function(screenSizeName, callback) {
     this.queueOn(screenSizeName, callback);
 
     var size = getSize(screenSizeName);
@@ -191,7 +191,7 @@ if (!window.matchMedia) {
     }
   };
 
-  s.resizeWatch.once = function (screenSizeName, callback) {
+  s.resizeWatch.once = function(screenSizeName, callback) {
     var size = getSize(screenSizeName);
     if (size && testSize(size)) {
       callback();
@@ -201,12 +201,12 @@ if (!window.matchMedia) {
     }
   };
 
-  s.resizeWatch.queueOn = function (screenSizeName, callback) {
+  s.resizeWatch.queueOn = function(screenSizeName, callback) {
     onFunctionStack[screenSizeName] = onFunctionStack[screenSizeName] ? onFunctionStack[screenSizeName] : [];
     onFunctionStack[screenSizeName].push(callback);
   };
 
-  s.resizeWatch.off = function (screenSizeName, callback) {
+  s.resizeWatch.off = function(screenSizeName, callback) {
     this.queueOff(screenSizeName, callback);
 
     var size = getSize(screenSizeName);
@@ -215,12 +215,12 @@ if (!window.matchMedia) {
     }
   };
 
-  s.resizeWatch.queueOff = function (screenSizeName, callback) {
+  s.resizeWatch.queueOff = function(screenSizeName, callback) {
     offFunctionStack[screenSizeName] = offFunctionStack[screenSizeName] ? offFunctionStack[screenSizeName] : [];
     offFunctionStack[screenSizeName].push(callback);
   };
 
-  s.resizeWatch.addSize = function (screenSize) {
+  s.resizeWatch.addSize = function(screenSize) {
     if (typeof screenSize === 'object') {
       screenSizes.push(screenSize);
       if (testSize(screenSize)) {
@@ -229,30 +229,30 @@ if (!window.matchMedia) {
     }
   };
 
-  s.resizeWatch.onResizeEnd = function (callback) {
+  s.resizeWatch.onResizeEnd = function(callback) {
     resizeEndFunctionStack.push(callback);
   };
 
-  s.resizeWatch.onResize = function (callback) {
+  s.resizeWatch.onResize = function(callback) {
     onResizeFunctionStack.push(callback);
   };
 
-  s.resizeWatch.setNewScreenSizes = function (newScreenSizes) {
+  s.resizeWatch.setNewScreenSizes = function(newScreenSizes) {
     screenSizes = newScreenSizes;
     setCurrentScreenSizes();
   };
 
-  s.resizeWatch.getCurrentScreenSizes = function () {
+  s.resizeWatch.getCurrentScreenSizes = function() {
     return currentScreenSizes;
   };
 
-  s.resizeWatch.is = function (screenSizeName) {
-    return currentScreenSizes.some(function (elem) {
+  s.resizeWatch.is = function(screenSizeName) {
+    return currentScreenSizes.some(function(elem) {
       return elem.name === screenSizeName;
     });
   };
 
-  s.resizeWatch.getAllScreenSizes = function () {
+  s.resizeWatch.getAllScreenSizes = function() {
     return screenSizes;
   };
 

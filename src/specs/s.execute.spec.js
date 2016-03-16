@@ -1,38 +1,38 @@
-describe('s.execute', function () {
+describe('s.execute', function() {
 
-  describe('execute', function () {
+  describe('execute', function() {
 
-    it('should execute on async condition change', function (done) {
+    it('should execute on async condition change', function(done) {
       var executeCondition = false;
-      setTimeout(function () {
+      setTimeout(function() {
         executeCondition = true;
       }, 1);
 
-      s.execute(function () {
+      s.execute(function() {
         expect(executeCondition).toEqual(true);
         done();
-      }).when(function () {
+      }).when(function() {
         return executeCondition;
       });
 
     });
 
 
-    it('should exceed max tries count', function (done) {
+    it('should exceed max tries count', function(done) {
       var executeCondition = false;
       var isExecuted = false;
-      setTimeout(function () {
+      setTimeout(function() {
         executeCondition = true;
 
-        setTimeout(function () {
+        setTimeout(function() {
           expect(isExecuted).toEqual(false);
           done();
         }, 1);
       }, 3);
 
-      s.execute(function () {
+      s.execute(function() {
         isExecuted = true;
-      }).when(function () {
+      }).when(function() {
         return executeCondition;
       }, 1).limit(2);  //timeout is 1ms with 2 tries == 2ms
     });

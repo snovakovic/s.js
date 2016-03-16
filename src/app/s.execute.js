@@ -7,9 +7,9 @@
  ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 
  ** setTimeout(function(){ a= true; },30);
  ************************/
-(function (s) {
+(function(s) {
 
-  s.execute = function (executeCb) {
+  s.execute = function(executeCb) {
     return new PeskyInstance(executeCb);
   };
 
@@ -30,14 +30,14 @@
     }
 
     return {
-      when: function (conditionCb, timeOut) {
+      when: function(conditionCb, timeOut) {
         _timeOut = timeOut || 5;
         _conditionCb = conditionCb;
 
         setTimeout(when);
         return this;
       },
-      limit: function (maxTries) {
+      limit: function(maxTries) {
         _maxTries = maxTries;
       }
     };

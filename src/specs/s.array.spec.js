@@ -1,4 +1,4 @@
-describe('s.array', function () {
+describe('s.array', function() {
   var testArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   var a;
   var b;
@@ -10,7 +10,7 @@ describe('s.array', function () {
   var bigArray;
 
 
-  beforeEach(function () {
+  beforeEach(function() {
     testArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     counter = 0;
     a = b = c = lastIndex = lastValue = null;
@@ -20,10 +20,10 @@ describe('s.array', function () {
     }
   });
 
-  describe('each', function () {
+  describe('each', function() {
 
-    it('should loop correctly', function () {
-      s.each(testArray, function (val, i) {
+    it('should loop correctly', function() {
+      s.each(testArray, function(val, i) {
         if (val === 'a') {
           a = testArray[i];
         } else if (val === 'b') {
@@ -34,11 +34,11 @@ describe('s.array', function () {
 
       });
 
-      s.each(bigArray, function (val, i) {
+      s.each(bigArray, function(val, i) {
         lastIndex = i;
       });
 
-      s.each(testArray, function (val) {
+      s.each(testArray, function(val) {
         lastValue = val;
         return false;
       });
@@ -52,15 +52,15 @@ describe('s.array', function () {
 
   });
 
-  describe('iterate', function () {
+  describe('iterate', function() {
 
-    it('should iterate correctly', function () {
-      s.iterate(1000000, function () {
+    it('should iterate correctly', function() {
+      s.iterate(1000000, function() {
         counter++;
       });
       expect(counter).toEqual(1000000);
 
-      s.iterate(1000000, function (i) {
+      s.iterate(1000000, function(i) {
         tmp = i;
         if (i === 3) {
           return false;
@@ -71,8 +71,8 @@ describe('s.array', function () {
 
   });
 
-  describe('remove', function () {
-    it('should remove items correctly', function () {
+  describe('remove', function() {
+    it('should remove items correctly', function() {
       expect(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c')).toEqual(['a', 'b', 'd']);
       expect(s.remove([1, 2, 2, 3, 4], 2)).toEqual([1, 3, 4]);
       expect(s.remove([1, 2, '2', 3, 4], 2)).toEqual([1, '2', 3, 4]);
@@ -83,15 +83,15 @@ describe('s.array', function () {
       expect(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', -1)).toEqual(['c', 'a', 'b', 'c', 'd']);
       expect(s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', -2)).toEqual(['c', 'a', 'b', 'd']);
 
-      expect(function () {
+      expect(function() {
         s.remove(['c', 'a', 'b', 'c', 'd', 'c'], 'c', 10.1);
       }).toThrow(new Error('Invalid argument exception'));
 
     });
   });
 
-  describe('shuffle', function () {
-    it('should shuffle array', function () {
+  describe('shuffle', function() {
+    it('should shuffle array', function() {
       var beforeShuffle = testArray.join();
       s.shuffle(testArray);
       var afterShuffle = testArray.join();
@@ -105,8 +105,8 @@ describe('s.array', function () {
     });
   });
 
-  describe('getFilledArray', function () {
-    it('should returned filled array', function () {
+  describe('getFilledArray', function() {
+    it('should returned filled array', function() {
       expect(s.getFilledArray(0, 3)).toEqual([0, 0, 0]);
       expect(s.getFilledArray('b', 4)).toEqual(['b', 'b', 'b', 'b']);
       expect(s.getFilledArray({ a: 'b' }, 2)).toEqual([{ a: 'b' }, { a: 'b' }]);
@@ -114,8 +114,8 @@ describe('s.array', function () {
     });
   });
 
-  describe('unique', function () {
-    it('should return unique values', function () {
+  describe('unique', function() {
+    it('should return unique values', function() {
       expect(s.unique([1, 1, 2, 3, 2, 1, 3])).toEqual([1, 2, 3]);
       expect(s.unique(['a', 'b', 'a'])).toEqual(['a', 'b']);
     });

@@ -1,23 +1,23 @@
-describe('s.array', function () {
+describe('s.array', function() {
 
   var resizeListeners = [];
 
-  beforeEach(function () {
+  beforeEach(function() {
 
   });
 
 
 
-  describe('sResize', function () {
+  describe('sResize', function() {
 
-    it('should call on resize', function (done) {
+    it('should call on resize', function(done) {
       var onResizeNumberOfCalls = 0;
       var onResizeEndNumberOfCalls = 0;
-      s.resizeWatch.onResize(function () {
+      s.resizeWatch.onResize(function() {
         onResizeNumberOfCalls++;
       });
 
-      s.resizeWatch.onResizeEnd(function () {
+      s.resizeWatch.onResizeEnd(function() {
         onResizeEndNumberOfCalls++;
       });
 
@@ -27,13 +27,13 @@ describe('s.array', function () {
 
       expect(onResizeNumberOfCalls).toEqual(3);
 
-      setTimeout(function () {
+      setTimeout(function() {
         expect(onResizeEndNumberOfCalls).toEqual(1);
         done();
       }, 55);
     });
 
-    it('should set new screen sizes', function () {
+    it('should set new screen sizes', function() {
       var newScreenSizes = [
         {
           minWidth: 992,
@@ -51,8 +51,8 @@ describe('s.array', function () {
 
     });
 
-    it('should add new screen size  to the list of screen size and to current screen', function () {
-      var newScreenSize = 
+    it('should add new screen size  to the list of screen size and to current screen', function() {
+      var newScreenSize =
         {
           minWidth: 666, //this is only size that is set to pass on matchMedia in window.mock
           name: 'test-mobile'
@@ -61,7 +61,7 @@ describe('s.array', function () {
       s.resizeWatch.addSize(newScreenSize);
 
       expect(s.resizeWatch.getAllScreenSizes()).toContain(newScreenSize);
-      expect(s.resizeWatch.getCurrentScreenSizes()).toEqual([newScreenSize]); 
+      expect(s.resizeWatch.getCurrentScreenSizes()).toEqual([newScreenSize]);
       expect(s.resizeWatch.is('test-mobile')).toEqual(true);
       expect(s.resizeWatch.is('something-else')).toEqual(false);
 

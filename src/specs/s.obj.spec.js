@@ -1,9 +1,9 @@
-describe('s.array', function () {
+describe('s.array', function() {
   var obj1;
   var obj2;
   var obj3;
 
-  beforeEach(function () {
+  beforeEach(function() {
     obj1 = {
       prop1: 'obj1 prop1',
       prop2: 'obj1 prop2',
@@ -27,9 +27,9 @@ describe('s.array', function () {
     };
   });
 
-  describe('getProperties', function () {
+  describe('getProperties', function() {
 
-    it('should get properties of object', function () {
+    it('should get properties of object', function() {
       var testString1 = '';
       var testString2 = '';
 
@@ -38,11 +38,11 @@ describe('s.array', function () {
         prop2: 'val2'
       };
 
-      s.getProperties(testObj, function (key, value) {
+      s.getProperties(testObj, function(key, value) {
         testString1 += key + value;
       });
 
-      s.getProperties(testObj, function (key, value) {
+      s.getProperties(testObj, function(key, value) {
         testString2 += key + value;
         if (key === 'prop1') {
           return false;
@@ -55,9 +55,9 @@ describe('s.array', function () {
 
   });
 
-  describe('merge', function () {
+  describe('merge', function() {
 
-    it('should merge objects', function () {
+    it('should merge objects', function() {
       var mergedObject = s.merge(obj1, obj2, obj3);
       var expectedObj = {
         prop1: 'obj2 prop1',
@@ -73,7 +73,7 @@ describe('s.array', function () {
 
     });
 
-    it('should deep merge objects', function () {
+    it('should deep merge objects', function() {
       var deepMergeObject = s.deepMerge(obj1, obj2, obj3);
 
       var deepMergeExpected = {

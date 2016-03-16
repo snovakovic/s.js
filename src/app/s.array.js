@@ -1,13 +1,13 @@
 ﻿/*****************************************************
 	  Array Modification
  ***************************************************/
-(function (s) {
+(function(s) {
 
   /**
   * Loop through any array
   * @example s.each([1,2,3,4,5,6,7], function(val, i) { console.log(val); } );
   */
-  s.each = function (arr, callback) {
+  s.each = function(arr, callback) {
     for (var i = 0, l = arr.length; i < l; i++) {
       if (callback(arr[i], i) === false) {
         break;
@@ -21,7 +21,7 @@
   * @param  {Function} callback function that will be call per each iteration. use return false to break from iterations
   * @example s.iterate(10, function(i) { console.log(i); } );
   */
-  s.iterate = function (l, callback) {
+  s.iterate = function(l, callback) {
     for (var i = 0; i < l; i++) {
       if (callback(i) === false) {
         break;
@@ -37,7 +37,7 @@
    * @return {Array} new array without the removed values
   * @example s.remove( ['a', 'b', 'c', 'd', 'c'], 'c' );
   */
-  s.remove = function (arr, elToRemove, max) {
+  s.remove = function(arr, elToRemove, max) {
     var pos;
     if (max && (typeof max !== 'number' || max % 1 !== 0)) {
       throw new Error('Invalid argument exception');
@@ -68,7 +68,7 @@
   * @return {Array} shuffled array
   * @example s.shuffle(['a', 'b', 'c', 'd', 'c']);
   */
-  s.shuffle = function (arr) {
+  s.shuffle = function(arr) {
     for (var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
     return arr;
   };
@@ -79,7 +79,7 @@
   * @return len {Integer} size of the new array
   * @example s.getFilledArray(0, 5);
   */
-  s.getFilledArray = function (val, len) {
+  s.getFilledArray = function(val, len) {
     var rv = new Array(len);
     while (--len >= 0) {
       rv[len] = val;
@@ -91,7 +91,7 @@
   * Returns new array containing only unique values from original array
   * Doesn't support nested objects and array
   */
-  s.unique = function (originalArr) {
+  s.unique = function(originalArr) {
     var arr = [];
     for (var i = 0; i < originalArr.length; i++) {
       if (arr.indexOf(originalArr[i]) === -1) {

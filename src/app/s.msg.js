@@ -5,16 +5,16 @@
  *  console.log(val);
  * });
  ****************************/
-(function (s) {
+(function(s) {
   var subscribers = [];
 
-  s.broadcast = function (to, obj) {
+  s.broadcast = function(to, obj) {
     for (var i = 0; i < subscribers[to].length; i++) {
       subscribers[to][i](obj);
     }
   };
 
-  s.listen = function (subscribe, cb) {
+  s.listen = function(subscribe, cb) {
     subscribers[subscribe] = subscribers[subscribe] ? subscribers[subscribe] : [];
     subscribers[subscribe].push(cb);
   };

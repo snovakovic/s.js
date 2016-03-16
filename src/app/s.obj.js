@@ -1,14 +1,14 @@
 ﻿/*****************************************************
 	  Array Modification
  ***************************************************/
-(function (s) {
+(function(s) {
 
   /**
     * Loop over object properties. 
     * @param arr {Object} object which properties will be looped over
     * @example s.getProperties({prop1:'val1', prop2:'val2'}, function(key, value){console.log(key + ' >> ' + value);});
     */
-  s.getProperties = function (obj, callback) {
+  s.getProperties = function(obj, callback) {
     for (var prop in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, prop)) {
         if (callback(prop, obj[prop]) === false) {
@@ -24,9 +24,9 @@
    * @param  {Objects} arbitrary number of objects that we want to merge
    * @example s.merge({prop1:1,prop2:2}, {prop1:0,prop3:3}, {prop4: '4'});
   */
-  s.merge = function () {
+  s.merge = function() {
     var merged = {};
-    var _merge = function (obj) {
+    var _merge = function(obj) {
       for (var prop in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, prop)) {
           merged[prop] = obj[prop];
@@ -43,9 +43,9 @@
   /**
    * Same as merge. But with support for merging nested objects
   */
-  s.deepMerge = function () {
+  s.deepMerge = function() {
     var merged = {};
-    var _merge = function (obj) {
+    var _merge = function(obj) {
       for (var prop in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, prop)) {
           if (Object.prototype.toString.call(obj[prop]) === '[object Object]') {
