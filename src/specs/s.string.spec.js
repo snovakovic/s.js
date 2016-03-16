@@ -1,5 +1,3 @@
-'use strict';
-
 describe('s.string', function () {
 
   describe('replaceAll', function () {

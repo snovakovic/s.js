@@ -1,5 +1,3 @@
-'use strict';
-
 /*****************************************************
 	  Array Modification
  ***************************************************/
@@ -105,13 +103,14 @@
 
 })(window.s = window.s || {});
 
-'use strict';
 
 /*************************
- * s.execute aka Pesky execute method when condition becomes true
- * exampte a = false; 
- * s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 
- * setTimeout(function(){ a= true; },30);
+ * s.execute aka Pesky 
+ * execute method when condition becomes true
+ * example: 
+ ** a = false; 
+ ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 
+ ** setTimeout(function(){ a= true; },30);
  ************************/
 (function (s) {
 
@@ -150,15 +149,12 @@
   }
 } (window.s = window.s || {}));
 
-'use strict';
-
 /*****************************************************
 	  Test Module part
  ***************************************************/
 (function (s) {
 
   s.is = {};
-  s.is.not = {};
 
   s.is.defined = function (testVar) {
     return typeof testVar !== 'undefined';
@@ -167,16 +163,17 @@
   /**
    * Test if variable has been defined and is not empty, 
    * Following will be treated as false
-   *     1) null
-   *     2) not initialized variable
-   *     3) empty array
-   *     4) empty object
-   *     5) empty string
-   *     6) string with only spaces
+   * s.is.empty(null); => true
+   * s.is.empty(undefined); => true
+   * s.is.empty({}); => true
+   * s.is.empty([]); => true
+   * s.is.empty(' '); => true
+   * s.is.empty('\n\t'); => true
+   * s.is.empty(null); => true
   */
   s.is.empty = function (testVar) {
     if (typeof testVar === 'undefined' || testVar === null
-      || (typeof testVar === 'string' && testVar.trim().length === 0)) {
+      || (typeof testVar === 'string' && (/^\s*$/).test(testVar))) {
       return true;
     }
 
@@ -192,10 +189,6 @@
     return false;
   };
   
-  s.is.not.empty = function(testVar) {
-    return !s.is.empty(testVar);
-  };
-
   /**
    * VAR type check
    */
@@ -216,16 +209,12 @@
   };
 
   s.is.array = function (testVar) {
-    return Array.isArray(testVar);
+    return typeof testVar === 'object' && Array.isArray(testVar);
   };
 
   /****
   * STRING tests
-  */
-
-  s.is.blank = function (str) {
-    return (/^\s*$/).test(str);
-  };
+  ****/
 
   s.is.alphabetic = function (str) {
     var re = /^[a-zA-Z ]*$/;
@@ -267,10 +256,7 @@
     return re.test(str);
   };
 
-
 })(window.s = window.s || {});
-
-'use strict';
 
 /*****************************
  * sMsg - broadcast messages
@@ -294,8 +280,6 @@
   };
 
 })(window.s = window.s || {});
-
-'use strict';
 
 /*****************************************************
 	  Array Modification
@@ -364,8 +348,6 @@
   };
 
 })(window.s = window.s || {});
-
-'use strict';
 
 /************************************
  * MatchMedia polyfill for IE9 or below
@@ -628,8 +610,6 @@ if (!window.matchMedia) {
 })(window.s = window.s || {});
 
 
-'use strict';
-
 /*****************************************************
  			  String Modification.
  ***************************************************/
@@ -709,6 +689,36 @@ if (!window.matchMedia) {
     return str.length > length ? str.slice(0, length) + truncateStr : str;
   };
 
+
+})(window.s = window.s || {});
+
+/*****************************************************
+   Utilities
+ ***************************************************/
+(function (s) {
+
+  /**
+	* Returns random number using Math.random() between 2 numbers
+	* @param from {string} min number
+	* @param to {string|regExpresion} max number
+	* @example s.random(1, 10); get random number between 1 and 10 (1 and 10 are included)
+	*/
+  s.random = function (from, to) {
+    return Math.floor(Math.random() * (to - from + 1) + from);
+  };
+
+  /**
+  * Get the parameter from URL by the name
+  * @param key {string} the key for which value will be retrieved
+  * @example s.getUrlParam("firstName"); 
+  */
+  s.getUrlParam = function (key) {
+    var val = RegExp(key + '=' + '(.+?)(&|$)').exec(location.search) || null;
+    if (val === null) {
+      return null;
+    }
+    return decodeURI(val[1]);
+  };
 
 })(window.s = window.s || {});
 

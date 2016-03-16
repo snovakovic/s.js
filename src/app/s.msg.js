@@ -1,5 +1,3 @@
-'use strict';
-
 /*****************************
  * sMsg - broadcast messages
  * example s.broadcast('something-happened', objToSend)

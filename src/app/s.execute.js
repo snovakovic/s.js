@@ -1,4 +1,3 @@
-'use strict';
 
 /*************************
  * s.execute aka Pesky 

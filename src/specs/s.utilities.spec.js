@@ -1,5 +1,3 @@
-'use strict';
-
 describe('s.utilities', function () {
 
   describe('random', function () {
@@ -14,13 +12,13 @@ describe('s.utilities', function () {
 
   });
 
-  describe('getUrlParameter', function () {
+  describe('getUrlParam', function () {
 
     it('should get correct url parameter', function () {
       //TODO: missing actual UT here. 
       //mocking location.search do full page reload and break test
-      expect(s.getUrlParameter('test1')).toEqual(null);
-      expect(s.getUrlParameter('')).toEqual(null);
+      expect(s.getUrlParam('test1')).toEqual(null);
+      expect(s.getUrlParam('')).toEqual(null);
     });
 
   });

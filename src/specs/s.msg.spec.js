@@ -1,5 +1,3 @@
-'use strict';
-
 describe('s.msg', function () {
 
   describe('broadcasting', function () {

@@ -1,5 +1,3 @@
-'use strict';
-
 describe('s.array', function () {
   var testArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   var a;
@@ -40,7 +38,6 @@ describe('s.array', function () {
         lastIndex = i;
       });
 
-      var lastValue;
       s.each(testArray, function (val) {
         lastValue = val;
         return false;

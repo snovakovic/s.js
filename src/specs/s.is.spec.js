@@ -1,5 +1,3 @@
-'use strict';
-
 describe('s.test', function () {
 
   var notDefined = undefined;

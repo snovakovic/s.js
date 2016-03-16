@@ -1,5 +1,3 @@
-'use strict';
-
 describe('s.array', function () {
   var obj1;
   var obj2;

@@ -1,5 +1,3 @@
-'use strict';
-
 var windowEventListenerMock = (function () {
   var resizeListeners = [];
 

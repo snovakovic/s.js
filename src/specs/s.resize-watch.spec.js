@@ -1,5 +1,3 @@
-'use strict';
-
 describe('s.array', function () {
 
   var resizeListeners = [];

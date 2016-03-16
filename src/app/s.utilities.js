@@ -1,5 +1,3 @@
-'use strict';
-
 /*****************************************************
    Utilities
  ***************************************************/
@@ -18,9 +16,9 @@
   /**
   * Get the parameter from URL by the name
   * @param key {string} the key for which value will be retrieved
-  * @example s.getUrlParameter("firstName"); 
+  * @example s.getUrlParam("firstName"); 
   */
-  s.getUrlParameter = function (key) {
+  s.getUrlParam = function (key) {
     var val = RegExp(key + '=' + '(.+?)(&|$)').exec(location.search) || null;
     if (val === null) {
       return null;

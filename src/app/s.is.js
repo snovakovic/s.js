@@ -1,6 +1,4 @@
-﻿'use strict';
-
-/*****************************************************
+﻿/*****************************************************
 	  Test Module part
  ***************************************************/
 (function (s) {
@@ -60,7 +58,7 @@
   };
 
   s.is.array = function (testVar) {
-    return Array.isArray(testVar);
+    return typeof testVar === 'object' && Array.isArray(testVar);
   };
 
   /****

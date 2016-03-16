@@ -283,14 +283,14 @@ Random is using Math.random().
     Math.floor((Math.random() * 10) + 1);
 ```
 
-#### getUrlParameter
+#### getUrlParam
 Get the value from url parameter.
 
 ```javascript
     //exampe url: http://localhost:1285/UnitTest/s_unit_test.html?firstName=John&LastName=Doe
-    s.getUrlParameter("firstName"); //John
-    s.getUrlParameter("lastName"); //Doe
-    s.getUrlParameter("something"); //null
+    s.getUrlParam("firstName"); //John
+    s.getUrlParam("lastName"); //Doe
+    s.getUrlParam("something"); //null
 ```
 
 

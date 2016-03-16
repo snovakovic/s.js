@@ -1,5 +1,3 @@
-'use strict';
-
 describe('s.execute', function () {
 
   describe('execute', function () {
