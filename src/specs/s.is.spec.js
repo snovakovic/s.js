@@ -13,6 +13,7 @@ describe('s.test', function() {
   var spacesOnly = '    ';
   var bool = true;
   var falseBool = false;
+  var func = function() {};
 
   beforeEach(function() {
     notDefined = undefined;
@@ -112,6 +113,21 @@ describe('s.test', function() {
       expect(s.is.object(emptyString)).toEqual(false);
       expect(s.is.object(bool)).toEqual(false);
       expect(s.is.object(arr)).toEqual(true);
+      expect(s.is.object(func)).toEqual(false);
+    });
+  });
+
+  describe('is.function', function() {
+    it('should show correct values for is.object', function() {
+      expect(s.is.function(func)).toEqual(true);
+      expect(s.is.function(notDefined)).toEqual(false);
+      expect(s.is.function(obj)).toEqual(false);
+      expect(s.is.function(num)).toEqual(false);
+      expect(s.is.function(empty)).toEqual(false);
+      expect(s.is.function(str)).toEqual(false);
+      expect(s.is.function(emptyString)).toEqual(false);
+      expect(s.is.function(bool)).toEqual(false);
+      expect(s.is.function(arr)).toEqual(false);
     });
   });
 
@@ -125,6 +141,7 @@ describe('s.test', function() {
       expect(s.is.array(emptyString)).toEqual(false);
       expect(s.is.array(bool)).toEqual(false);
       expect(s.is.array(arr)).toEqual(true);
+      expect(s.is.array(func)).toEqual(false);
     });
   });
 
