@@ -135,7 +135,7 @@ describe('s.array', function() {
     });
   });
 
-  fdescribe('first', function() {
+  describe('first', function() {
     it('should return first array value', function() {
       expect(s.first(testArray)).toEqual('a');
       expect(s.first(testObjArray)).toEqual(testObjArray[0]);

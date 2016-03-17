@@ -58,7 +58,7 @@
   };
 
   s.is.array = function(testVar) {
-    return testVar && Array.isArray(testVar);
+    return typeof testVar === 'object' && Array.isArray(testVar);
   };
 
   s.is.arrayWithValue = function(testVar) {

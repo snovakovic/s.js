@@ -1,4 +1,4 @@
-fdescribe('s.func', function() {
+describe('s.func', function() {
 
   describe('once', function() {
 
