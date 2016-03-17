@@ -37,12 +37,17 @@ describe('s.utilities', function() {
       var init = s.once(function() {
         noCalls++;
       });
+      var f2 = s.once(function () {
+        noCalls++;
+      });
 
       expect(noCalls).toEqual(0);
       init();
       init();
       init();
-      expect(noCalls).toEqual(1);
+      f2();
+      f2();
+      expect(noCalls).toEqual(2);
     });
 
     it('should call function only once and pass correct arguments', function() {

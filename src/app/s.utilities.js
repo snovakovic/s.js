@@ -42,19 +42,44 @@
   * return function that can be executed only once
   * @example var init = s.once(function(){ }): init();
  ************************************************/
-  s.once = function(cb) {
-    return new Once(cb);
+  s.once = function(fn, context) {
+    var result;
 
-    function Once(cb) {
-      var _executed = false;
-
-      return function() {
-        if (!_executed) {
-          _executed = true;
-          cb.apply(window, arguments);
-        }
+    return function() {
+      if (fn) {
+        result = fn.apply(context || this, arguments);
+        fn = null;
       }
-    }
+
+      return result;
+    };
+  }
+
+  /**********************************************
+  * Returns a function, that, as long as it continues to be invoked, will not
+  * be triggered. The function will be called after it stops being called for
+  * N milliseconds. If `immediate` is passed, trigger the function on the
+  * leading edge, instead of the trailing.
+   ************************************************/
+  s.debounce = function(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
   };
+
+  // // Usage
+  // var myEfficientFn = debounce(function() {
+  //   // All the taxing stuff you do
+  // }, 250);
+  // window.addEventListener('resize', myEfficientFn);
 
 })(window.s = window.s || {});
