@@ -1,7 +1,7 @@
 ﻿/*****************************************************
 	  Array Modification
  ***************************************************/
-(function(s) {
+(function(s, undefined) {
 
   /**
   * Loop through any array
@@ -100,5 +100,54 @@
     }
     return arr;
   };
+
+  /**
+  * Returns first element of array if no condition is passed, 
+  * else if there is condition returns first element of array that meets condition 
+  * if element is not found undefined is returned
+  */
+  s.first = function(arr, condition) {
+    if (!s.is.arrayWithValue(arr)) {
+      return undefined;
+    }
+
+    if (condition) {
+      for (var i = 0; i < arr.length; i++) {
+        if (condition(arr[i])) {
+          return arr[i];
+        }
+      }
+    } else {
+      return arr[0]
+    }
+
+    return undefined;
+
+  };
+
+  /**
+  * Returns last element of array if no condition is passed, 
+  * else if there is condition returns last element of array that meets condition 
+  * if element is not found undefined is returned
+  */
+  s.last = function(arr, condition) {
+    if (!s.is.arrayWithValue(arr)) {
+      return undefined;
+    }
+
+    if (condition) {
+      for (var i = arr.length - 1; i >= 0; i--) {
+        if (condition(arr[i])) {
+          return arr[i];
+        }
+      }
+    } else {
+      return arr[arr.length - 1]
+    }
+
+    return undefined;
+
+  };
+
 
 })(window.s = window.s || {});

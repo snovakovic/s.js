@@ -58,7 +58,11 @@
   };
 
   s.is.array = function(testVar) {
-    return typeof testVar === 'object' && Array.isArray(testVar);
+    return testVar && Array.isArray(testVar);
+  };
+
+  s.is.arrayWithValue = function(testVar) {
+    return s.is.array(testVar) && testVar.length > 0;
   };
 
   /****

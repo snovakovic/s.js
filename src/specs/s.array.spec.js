@@ -1,5 +1,6 @@
 describe('s.array', function() {
-  var testArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+  var testArray;
+  var testObjArray;
   var a;
   var b;
   var c;
@@ -12,6 +13,19 @@ describe('s.array', function() {
 
   beforeEach(function() {
     testArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    testObjArray = [
+      {
+        id: 1,
+        name: 'first'
+      }, {
+        id: 2,
+        name: 'second'
+      }, {
+        id: 3,
+        name: 'third'
+      }
+    ];
+
     counter = 0;
     a = b = c = lastIndex = lastValue = null;
     bigArray = [];
@@ -118,6 +132,38 @@ describe('s.array', function() {
     it('should return unique values', function() {
       expect(s.unique([1, 1, 2, 3, 2, 1, 3])).toEqual([1, 2, 3]);
       expect(s.unique(['a', 'b', 'a'])).toEqual(['a', 'b']);
+    });
+  });
+
+  fdescribe('first', function() {
+    it('should return first array value', function() {
+      expect(s.first(testArray)).toEqual('a');
+      expect(s.first(testObjArray)).toEqual(testObjArray[0]);
+      expect(s.first(undefined)).toEqual(undefined);
+
+      expect(s.first(testArray, function(letter) {
+        return letter === 'c';
+      })).toEqual('c');
+
+      expect(s.first(testObjArray, function(obj) {
+        return obj.id === 2;
+      })).toEqual(testObjArray[1]);
+    });
+  });
+
+  describe('last', function() {
+    it('should return last array value', function() {
+      expect(s.last(testArray)).toEqual('h');
+      expect(s.last(testObjArray)).toEqual(testObjArray[testObjArray.length - 1]);
+      expect(s.last(undefined)).toEqual(undefined);
+
+      expect(s.last(testArray, function(letter) {
+        return letter === 'c';
+      })).toEqual('c');
+
+      expect(s.last(testObjArray, function(obj) {
+        return obj.id === 3;
+      })).toEqual(testObjArray[2]);
     });
   });
 
