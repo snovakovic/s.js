@@ -112,7 +112,7 @@ describe('s.test', function() {
       expect(s.is.object(str)).toEqual(false);
       expect(s.is.object(emptyString)).toEqual(false);
       expect(s.is.object(bool)).toEqual(false);
-      expect(s.is.object(arr)).toEqual(true);
+      expect(s.is.object(arr)).toEqual(false);
       expect(s.is.object(func)).toEqual(false);
     });
   });

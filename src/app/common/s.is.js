@@ -54,7 +54,7 @@
   };
 
   s.is.object = function(testVar) {
-    return typeof testVar === 'object' && testVar !== null;
+    return typeof testVar === 'object' && testVar !== null && !Array.isArray(testVar);
   };
 
   s.is.function = function(testVar) {
