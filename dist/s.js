@@ -220,7 +220,7 @@
   * if element is not found undefined is returned
   */
   s.first = function(arr, condition) {
-    if (!isArrayWithValue(arr)) {
+    if (!s.is.arrayWithValue(arr)) {
       return undefined;
     }
 
@@ -244,12 +244,12 @@
   * if element is not found undefined is returned
   */
   s.last = function(arr, condition) {
-    if (!isArrayWithValue(arr)) {
+    if (!s.is.arrayWithValue(arr)) {
       return undefined;
     }
 
     if (condition) {
-      for (var i = arr.length - 1; i <= 0; i--) {
+      for (var i = arr.length - 1; i >= 0; i--) {
         if (condition(arr[i])) {
           return arr[i];
         }
@@ -261,14 +261,6 @@
     return undefined;
 
   };
-
-
-  /**********************
-   Helper methods
-   *************************** */
-  function isArrayWithValue(arr) {
-    return arr && Array.isArray(arr) && arr.length !== 0;
-  }
 
 
 })(window.s = window.s || {});
