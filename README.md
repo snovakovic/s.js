@@ -1,17 +1,13 @@
 s.js
 ======
-##!!!WORK IN PROGRESS
 
-Collection of helper methods.
-All methods are under Unit Test.
-Particularly useful for vanilla js development.
-
+In a nutshell mishmash of js methods.
 
 
 String Helpers
 -----
 
-#### replaceAll
+#### replaceAllmarkdown
 Replace all occurrences in a string with a new value.
 
 ```javascript
@@ -49,10 +45,10 @@ Use return false in callback function to break from loop.
 why should you use this when there is native Array.prototype.forEach()
 and by providing polyfill it is working in every browser. https://github.com/snovakovic/poly
 
-But wait there is actualy something that forEach can't do. And I like the each sintaks more. 
+But wait there is actualy something that forEach can't do. And I like the each sintaks more.
 
 ```javascript
-   
+
     var p = document.querySelectorAll('p');
     console.log(p);
 
@@ -68,7 +64,7 @@ But wait there is actualy something that forEach can't do. And I like the each s
 
 ```
 
-There is nice article on this issue here 
+There is nice article on this issue here
 http://toddmotto.com/ditch-the-array-foreach-call-nodelist-hack/
 
 
@@ -100,7 +96,7 @@ Remove all occurrences of element from array.
     //>>a b d
 ```
 
-Remove accepts optional third parametar that tels what is the maximim number of occurences to remove. 
+Remove accepts optional third parametar that tels what is the maximim number of occurences to remove.
 If number is negative it will remove that many occurrences but starting from end of array.
 
 ```javascript
@@ -130,7 +126,7 @@ Shuffle values in the array
 ```
 
 #### getFilledArray
-Returns new array filled with default values. 
+Returns new array filled with default values.
 s.getFilledArray(defaultValue, arrayLength);
 
 ```javascript
@@ -318,7 +314,7 @@ Alias for document.querySelector()
 ```
 
 #### haveClass
-Check if html element have a class. 
+Check if html element have a class.
 We can check for multiple class-es by separating names with spaces.
 
 ```javascript
@@ -353,8 +349,8 @@ Toggle class
 ```
 
 #### height
-Get height is a lot trickier in native JS than it should be, 
-because there are multiple APIs for getting height, and they all return slightly different measurements. 
+Get height is a lot trickier in native JS than it should be,
+because there are multiple APIs for getting height, and they all return slightly different measurements.
 The s.getHeight() method returns the largest measurement.
 
 ```javascript
@@ -362,7 +358,7 @@ The s.getHeight() method returns the largest measurement.
     s.height(elem); // return 200
 
 #### closest
-Get closest DOM element up the tree that contains a class, ID, data attribute, or tag. 
+Get closest DOM element up the tree that contains a class, ID, data attribute, or tag.
 Includes the element itself. Supported back to IE6.
 
 ```javascript
@@ -451,8 +447,8 @@ Check if variable type is Boolean
 ```
 
 ### isObject
-Check if variable type is Object. 
-Array is also considered as object in JS. 
+Check if variable type is Object.
+Array is also considered as object in JS.
 type of NULL is object in JS but isObject returns false for null.
 
 ```javascript
@@ -472,7 +468,7 @@ Check if variable is Array.
 ```  
 
 #### is
-Test string using any regular expresion or by using any of defined keywords. 
+Test string using any regular expresion or by using any of defined keywords.
 
 Example of testing the string by using regular expresion:
 
@@ -487,7 +483,7 @@ Example of testing the string by using regular expresion:
 
 ```
 
-the same thing from above could be achived by using already defined keywords alphabetic and email. 
+the same thing from above could be achived by using already defined keywords alphabetic and email.
 
 ```javascript
     //test if string contains only alphabetical characters spaces are ignored

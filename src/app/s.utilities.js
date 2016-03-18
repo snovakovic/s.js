@@ -7,6 +7,7 @@
     return Math.floor(Math.random() * (to - from + 1) + from);
   }
 
+
   /**
 	* Returns random number between 2 provided numbers numbers
   * If array is provided instead it returns random element from array
@@ -76,10 +77,51 @@
     };
   };
 
-  // // Usage
-  // var myEfficientFn = debounce(function() {
-  //   // All the taxing stuff you do
-  // }, 250);
-  // window.addEventListener('resize', myEfficientFn);
+  /*************************
+  * execute method when condition becomes true
+  * example: 
+  ** a = false; 
+  ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 
+  ** setTimeout(function(){ a= true; },30);
+  ************************/
+  s.execute = function(executeCb) {
+    return (function() {
+      var _executeCb = executeCb;
+      var _conditionCb;
+      var _maxTries;
+      var _timeOut;
+      var _noTries = 0;
+
+      function when() {
+        _noTries++;
+        if (_conditionCb()) {
+          _executeCb();
+          clean();
+        } else if (!_maxTries || (_noTries < _maxTries)) {
+          setTimeout(when, _timeOut);
+        } else {
+          clean();
+        }
+      }
+
+      function clean() {
+        _executeCb = _conditionCb = _maxTries = _timeOut = _noTries = null;
+      }
+
+      return {
+        when: function(conditionCb, timeOut) {
+          _timeOut = timeOut || 5;
+          _conditionCb = conditionCb;
+
+          setTimeout(when);
+          return this;
+        },
+        limit: function(maxTries) {
+          _maxTries = maxTries;
+        }
+      };
+    } ());
+  };
+
 
 })(window.s = window.s || {});

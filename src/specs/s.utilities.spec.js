@@ -37,7 +37,7 @@ describe('s.utilities', function() {
       var init = s.once(function() {
         noCalls++;
       });
-      var f2 = s.once(function () {
+      var f2 = s.once(function() {
         noCalls++;
       });
 
@@ -66,6 +66,43 @@ describe('s.utilities', function() {
 
       expect(noCalls).toEqual(1);
       expect(attr).toEqual('first-call');
+    });
+
+  });
+
+  describe('execute', function() {
+
+    it('should execute on async condition change', function(done) {
+      var executeCondition = false;
+      setTimeout(function() {
+        executeCondition = true;
+      }, 1);
+
+      s.execute(function() {
+        expect(executeCondition).toEqual(true);
+        done();
+      }).when(function() {
+        return executeCondition;
+      });
+
+    });
+
+    it('should exceed max tries count', function(done) {
+      var executeCondition = false;
+      var isExecuted = false;
+      setTimeout(function() {
+        executeCondition = true;
+        setTimeout(function() {
+          expect(isExecuted).toEqual(false);
+          done();
+        }, 1);
+      }, 15);
+
+      s.execute(function() {
+        isExecuted = true;
+      }).when(function() {
+        return executeCondition;
+      }, 1).limit(1);  //timeout is 1ms with 2 tries == 2ms
     });
 
   });
