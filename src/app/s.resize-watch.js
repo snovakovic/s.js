@@ -52,33 +52,35 @@ if (!window.matchMedia) {
 
 
 /************************************
- * sResizeWatch : https://github.com/snovakovic/sResizeWatch
+ * sResizeWatch
  * whatch for resize events - and switching between layouts. 
+ * Detect when media query is triggered
  ****************************************/
 (function(s) {
-  var onFunctionStack = [],
-    offFunctionStack = [],
-    onceFunctionStack = [],
-    resizeEndFunctionStack = [],
-    onResizeFunctionStack = [],
-    i,
-    currentScreenSizes = [],
-    //based on bootstrap breakpoints
-    screenSizes = [
-      {
-        minWidth: 992,
-        name: 'desktop'
-      },
-      {
-        minWidth: 768,
-        maxWidth: 991,
-        name: 'tablet'
-      },
-      {
-        maxWidth: 767,
-        name: 'mobile'
-      }
-    ];
+  var onFunctionStack = [];
+  var offFunctionStack = [];
+  var onceFunctionStack = [];
+  var resizeEndFunctionStack = [];
+  var onResizeFunctionStack = [];
+  var i;
+  var doit;
+  var currentScreenSizes = [];
+  //based on bootstrap breakpoints
+  var screenSizes = [
+    {
+      minWidth: 992,
+      name: 'desktop'
+    },
+    {
+      minWidth: 768,
+      maxWidth: 991,
+      name: 'tablet'
+    },
+    {
+      maxWidth: 767,
+      name: 'mobile'
+    }
+  ];
 
   //set current screen sizes
   function setCurrentScreenSizes() {
@@ -90,9 +92,6 @@ if (!window.matchMedia) {
     });
   }
   setCurrentScreenSizes();
-
-
-  var doit;
 
   //MAIN RESIZE EVENT LISTENER
   window.addEventListener('resize', function() {
