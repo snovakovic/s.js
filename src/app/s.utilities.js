@@ -9,10 +9,7 @@
 
 
   /**
-	* Returns random number between 2 provided numbers numbers
-  * If array is provided instead it returns random element from array
-	* @param from {string} min number
-	* @param to {string|regExpresion} max number
+  * Get random number between 2 provided numbers or random element from array if array is provided as argument.
 	* @example s.random(1, 10); get random number between 1 and 10 (1 and 10 are included)
 	*/
   s.random = function(from, to) {
@@ -40,7 +37,7 @@
   };
 
   /**********************************************
-  * return function that can be executed only once
+  * returns function that can be executed only once
   * @example var init = s.once(function(){ }): init();
  ************************************************/
   s.once = function(fn, context) {
@@ -78,7 +75,7 @@
   };
 
   /*************************
-  * execute method when condition becomes true
+  * execute function when condition becomes true
   * example: 
   ** a = false; 
   ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 

@@ -3,18 +3,136 @@ s.js
 
 In a nutshell mishmash of js methods.
 
+Utilities
+------
+
+#### random
+Get random number between 2 provided numbers or random element from array if array is provided as argument.
+
+```javascript
+s.random(1,10); //=> random number between 1 and 10 (1 and 10 are also included)
+s.random(['a', 'b', 'c']); //=> random return once element from array
+```
+
+#### getUrlParam
+Get the value from url parameter.
+
+```javascript
+//example url: http://index.html?firstName=John&LastName=Doe
+s.getUrlParam("firstName"); //=>John
+s.getUrlParam("lastName"); //=>Doe
+s.getUrlParam("something"); //=>null
+```
+
+#### once
+returns function that can be executed only once
+
+```javascript
+var init = s.once(function() { /*function implementations*/ });
+init();  //init function will be executed
+init(); // init function won't be executed
+
+```
+
+#### execute
+execute function when condition becomes true.
+
+```javascript
+var condition = false;
+s.execute(function() {
+  console.log('this will be executed after 300ms when condition becomes true.')
+}).when(function() {
+  return condition;
+});
+
+setTimeout(function() {
+  condition = true;
+}, 300);
+
+```
+
+default timeout for checking condition is set to 5ms.
+This can be configured to different time by passing argument after condition callback in when function. We can also limit max number of tries that can be preformed before we stop checking for condition to become true.
+
+```javascript
+//condition is now checked every 100ms except default 5ms
+s.execute(function() {}).when(function() {
+  return $('.something').length;
+}, 100);
+
+//this will limit to max of 10 tries.
+//We can then calculate that $('.something').length has 900ms to become true before we stop checking for it.
+//first check is performed immediately so calculation is ((limit -1 ) * timeout)
+s.execute(function() {}).when(function() {
+  return $('.something').length;
+}, 100)
+.limit(10);
+
+```
+
+
 
 String Helpers
 -----
 
-#### replaceAllmarkdown
-Replace all occurrences in a string with a new value.
+#### replaceAll
+Replace all occurrences of a string with a new value.
 
 ```javascript
-   s.replaceAll("this is old value in old string", "old", "new");
-    //>> this is new value in new string
+s.replaceAll(originalString, currentValue, newValue);
+s.replaceAll("this is old value in old string", "old", "new");
+//=> this is new value in new string
 ```
 
+#### capitalize
+Converts first letter of the string to uppercase.
+If true is passed as second argument the rest of the string will be converted to lower case.
+
+```javascript
+s.capitalize('mAte'); //=> MAte
+s.capitalize('mAte', true); //=> Mate
+s.capitalize('MAte', true); //=> Mate
+```
+
+#### contains
+test if string contains substring.
+By default it's case sensitive which can be turned of by providing last optional parameter.
+
+```javascript
+s.contains(string, substringToCheck, ignoreCase);
+s.contains('abc Da', 'da'); //=>false
+s.contains('abc Da', 'da', true); //=>true
+s.contains('abc Da', 'Da'); //=>true
+s.contains('abc Da', 'bc'); //=>true
+```
+
+#### clean
+Trim and replace multiple spaces with a single space.
+
+```javascript
+s.clean('abc')); //=> 'abc';
+s.clean('abc ')); //=> 'abc';
+s.clean('  ab   c  ')); //=> 'ab c';
+```
+
+#### truncate
+Truncate string if it exceed max number of characters.
+By default if string is truncated at the end of string will be appended "..."
+This can be changed to anything by providing last optional argument
+
+```javascript
+s.truncate = function(str, length, truncateStrAppender);
+s.truncate('stefan.novakovich@gmail.com', 100) //=> 'stefan.novakovich@gmail.com'
+s.truncate('stefan.novakovich@gmail.com', 10) //=> 'stefan.nov...'
+s.truncate('stefan.novakovich@gmail.com', 10, ' ...more') //=> 'stefan.nov ...more'
+```
+
+#### chop
+Break string in array of substring
+
+```javascript
+s.chop("whitespace", 3); => ['whi', 'tes', 'pac', 'e']
+```
 
 Array Helpers
 -----
@@ -262,120 +380,6 @@ Method accepts arbitrary number of object that will be merged together.
         prop3: [{a:"a2"}],
      }
     */
-```
-
-
-Utilities
-------
-
-#### random
-Get the random number between 2 numbers.
-Random is using Math.random().
-
-```javascript
-    s.random(1,10); //Get the random number between 1 and 10. 1 and 10 are also included.
-
-    //above is shorthand for flowing
-    Math.floor((Math.random() * 10) + 1);
-```
-
-#### getUrlParam
-Get the value from url parameter.
-
-```javascript
-    //exampe url: http://localhost:1285/UnitTest/s_unit_test.html?firstName=John&LastName=Doe
-    s.getUrlParam("firstName"); //John
-    s.getUrlParam("lastName"); //Doe
-    s.getUrlParam("something"); //null
-```
-
-
-HTML Helpers
--------
-
-#### all
-Alias for document.querySelectorAll()
-
-```javascript
-    s.all('p'); //return all paragraph elements
-
-    //same as
-    document.querySelectorAll('p');
-```
-
-#### first
-Alias for document.querySelector()
-
-```javascript
-    s.first('p'); //return first paragraph on page
-
-    //same as
-    document.querySelector('p');
-```
-
-#### haveClass
-Check if html element have a class.
-We can check for multiple class-es by separating names with spaces.
-
-```javascript
-    //elem = <span id="testElem" class="class1 class2 class3"></span>
-    var elem = document.querySelector('#testElem');
-
-    s.haveClass(elem, 'class2'); //true
-    s.haveClass(elem, 'no'); //false
-    s.haveClass(elem, 'class1 class3'); //true
-    s.haveClass(elem, 'class1 no'); //false
-```
-
-#### addClass
-Add class to html element
-
-```javascript
-    s.addClass(elem, 'testClass');
-```
-
-#### removeClass
-Remove class from html element
-
-```javascript
-    s.removeClass(elem, 'testClass');
-```
-
-#### toggleClass
-Toggle class
-
-```javascript
-    s.toggleClass(elem, 'testClass');
-```
-
-#### height
-Get height is a lot trickier in native JS than it should be,
-because there are multiple APIs for getting height, and they all return slightly different measurements.
-The s.getHeight() method returns the largest measurement.
-
-```javascript
-    elem.style.height = '200px'; // Set height
-    s.height(elem); // return 200
-
-#### closest
-Get closest DOM element up the tree that contains a class, ID, data attribute, or tag.
-Includes the element itself. Supported back to IE6.
-
-```javascript
-    var elem = document.querySelector('#some-element');
-    var closest = s.closest(elem, '.some-class');
-    var closestLink = s.closest(elem, 'a');
-    var closestAttribute = s.closest(elem, '[demo-attr]'); //does not support values inside of attributes!
-    var closestExcludingElement = s.closest(elem.parentNode, '.some-class');
-```
-
-#### siglings
-Get all siblings of an element.
-Supported back to IE6
-
-```javascript
-    var elem = document.querySelector('#some-element');
-    var siblings = s.siblings(elem);
 ```
 
 

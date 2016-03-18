@@ -5,10 +5,6 @@
 
   /**
   * Replace all occurrences in a string with a new value   
-  * @param  str {String} string where occurrences will be replaced
-  * @param find {String} string that we want to replace with new value    
-  * @param replace {String} new string value which will replace old value   
-  * @return {[string]} new string with replaced values
   * @example console.log(s.replaceAll("this is old value in old string", "old", "new"))
    */
   s.replaceAll = function(str, find, replace) {
@@ -68,7 +64,7 @@
 
 
   /**
-  * Truncate string if it exceed max number of caracters, 
+  * Truncate string if it exceed max number of characters, 
   * apply provided truncate string at the end of truncated string (default: '...')
   */
   s.truncate = function(str, length, truncateStr) {
