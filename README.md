@@ -273,76 +273,6 @@ s.last([{name:'test'}], function(e) {
 ```
 
 
-Object Helpers
------
-
-#### getProperties
-Loop over object properties.
-Looping can be terminated by using return false in callback function.
-
-```javascript
-var obj = {
-  prop1: 'val1',
-  prop2: 'val2'
-};
-s.getProperties(obj, function(key, value) {
-  console.log(key + ' => ' + value);
-});
-//=> prop1 => val1
-//=> prop2 => val2
-
-s.getProperties(obj, function(key, value) {
-  console.log(key + ' => ' + value);
-  if(key === 'prop1') { return false; }
-});
-//=> prop1 => val1
-
-```
-
-#### merge
-Shallow merge provided objects.
-In case of the same property value from second object will override the values in the first object.
-Method accepts arbitrary number of object that will be merged together.
-
-```javascript
-var obj1 = {
-  prop1: 'obj1 prop1',
-  prop2: 'obj1 prop2',
-  prop3: [1,2,3,4],
-};
-
-var obj2 = {
-  prop1: 'obj2 prop1',
-  prop3: 'obj2 prop3',
-  prop4: 1,
-};
-
-var obj3 = {
-  prop3: 'obj3 prop3',
-  prop5: 3,
-};
-
-var merged = s.merge(obj1, obj2, obj3);
-console.log(merged);
-/*=>
-{
-  prop1: 'obj2 prop1',
-  prop2: 'obj1 prop2',
-  prop3: 'obj3 prop3',
-  prop4: 1,
-  prop5:3
-}
-*/
-```
-
-#### deepMerge
-Deep merge provided objects.
-
-```javascript
-var merged = s.deepMerge(obj1, obj2);
-```
-
-
 Is
 -----
 true if not false.
@@ -482,6 +412,16 @@ s.is.email('stefan@st@mail.com'); //=> false
 s.is.email('fake'); //=> false
 ``` 
 
+##### is.strongpassword
+check if string is strong password.
+To be strong password string must contain at least one lowercase latter, 
+one uppercase letter, one number and min 6 characters
+```javascript
+s.is.strongpassword('Stefan1'); //=> true
+s.is.strongpassword('password'); //=> false
+s.is.strongpassword('S1t'); //=> false
+``` 
+
 ##### is.ip
 returns truy only for IPv6 addresses. it will return false for IPv6 addresses
 ```javascript
@@ -489,3 +429,105 @@ s.is.ip('31.45.238.138'); //=> true
 s.is.ip('1.45.238.1234'); //=> false
 ``` 
 
+
+Messaging
+-----
+Subscribe based messaging. 
+ex sMsg https://github.com/snovakovic/sMsg
+
+```javascript
+//subscribe to message/event
+s.listen('message-name', function(optionalParam) {
+  /*subscriber implementation*/
+});
+//we can have as many subscribers for single message as we like.
+s.listen('message-name', function() {});
+
+//this will trigger execution of all subscribers to this message
+s.broadcast('message-name', {additionalInfo: 'info'});
+//we can trigger it as many time as we like
+s.broadcast('message-name', {additionalInfo: 'info'});
+``` 
+
+```javascript
+s.listen('new-contact-saved', function(contact) {
+  /*This can be in different file than ajax request to save contact*/
+});
+
+var contact = { name: "John", email: "john@doe.com" };
+$.post( "save-contact-url", )
+  .then(function(response) {
+    //this will execute all new-contact-saved subscribers
+    s.broadcast('new-contact-saved', contact);
+  });
+``` 
+
+Object Helpers
+-----
+!Object helpers may be depreciated or completely removed in near future.
+
+#### getProperties
+Loop over object properties.
+Looping can be terminated by using return false in callback function.
+
+```javascript
+var obj = {
+  prop1: 'val1',
+  prop2: 'val2'
+};
+s.getProperties(obj, function(key, value) {
+  console.log(key + ' => ' + value);
+});
+//=> prop1 => val1
+//=> prop2 => val2
+
+s.getProperties(obj, function(key, value) {
+  console.log(key + ' => ' + value);
+  if(key === 'prop1') { return false; }
+});
+//=> prop1 => val1
+
+```
+
+#### merge
+Shallow merge provided objects.
+In case of the same property value from second object will override the values in the first object.
+Method accepts arbitrary number of object that will be merged together.
+
+```javascript
+var obj1 = {
+  prop1: 'obj1 prop1',
+  prop2: 'obj1 prop2',
+  prop3: [1,2,3,4],
+};
+
+var obj2 = {
+  prop1: 'obj2 prop1',
+  prop3: 'obj2 prop3',
+  prop4: 1,
+};
+
+var obj3 = {
+  prop3: 'obj3 prop3',
+  prop5: 3,
+};
+
+var merged = s.merge(obj1, obj2, obj3);
+console.log(merged);
+/*=>
+{
+  prop1: 'obj2 prop1',
+  prop2: 'obj1 prop2',
+  prop3: 'obj3 prop3',
+  prop4: 1,
+  prop5:3
+}
+*/
+```
+
+#### deepMerge
+Deep merge provided objects.
+
+```javascript
+var merged = s.deepMerge(obj1, obj2);
+```
