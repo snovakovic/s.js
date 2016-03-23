@@ -83,6 +83,39 @@ s.execute(function() {}).when(function() {
 ```
 
 
+Messaging
+-----
+Subscribe based messaging. 
+ex sMsg https://github.com/snovakovic/sMsg
+
+```javascript
+//subscribe to message/event
+s.listen('message-name', function(optionalParam) {
+  /*subscriber implementation*/
+});
+//we can have as many subscribers for single message as we like.
+s.listen('message-name', function() {});
+
+//this will trigger execution of all subscribers to this message
+s.broadcast('message-name', {additionalInfo: 'info'});
+//we can trigger it as many time as we like
+s.broadcast('message-name', {additionalInfo: 'info'});
+``` 
+
+```javascript
+s.listen('new-contact-saved', function(contact) {
+  /*This can be in different file than ajax request to save contact*/
+});
+
+var contact = { name: "John", email: "john@doe.com" };
+$.post( "save-contact-url", )
+  .then(function(response) {
+    //this will execute all new-contact-saved subscribers
+    s.broadcast('new-contact-saved', contact);
+  });
+``` 
+
+
 String Helpers
 -----
 
@@ -430,41 +463,9 @@ s.is.ip('1.45.238.1234'); //=> false
 ``` 
 
 
-Messaging
------
-Subscribe based messaging. 
-ex sMsg https://github.com/snovakovic/sMsg
-
-```javascript
-//subscribe to message/event
-s.listen('message-name', function(optionalParam) {
-  /*subscriber implementation*/
-});
-//we can have as many subscribers for single message as we like.
-s.listen('message-name', function() {});
-
-//this will trigger execution of all subscribers to this message
-s.broadcast('message-name', {additionalInfo: 'info'});
-//we can trigger it as many time as we like
-s.broadcast('message-name', {additionalInfo: 'info'});
-``` 
-
-```javascript
-s.listen('new-contact-saved', function(contact) {
-  /*This can be in different file than ajax request to save contact*/
-});
-
-var contact = { name: "John", email: "john@doe.com" };
-$.post( "save-contact-url", )
-  .then(function(response) {
-    //this will execute all new-contact-saved subscribers
-    s.broadcast('new-contact-saved', contact);
-  });
-``` 
-
 Object Helpers
 -----
-!Object helpers may be depreciated or completely removed in near future.
+!!! Object helpers may be depreciated or completely removed in near future.
 
 #### getProperties
 Loop over object properties.
