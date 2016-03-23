@@ -298,13 +298,13 @@ var obj3 = {
 var merged = s.merge(obj1, obj2, obj3);
 console.log(merged);
 /*=>
-  {
-    prop1: 'obj2 prop1',
-    prop2: 'obj1 prop2',
-    prop3: 'obj3 prop3',
-    prop4: 1,
-    prop5:3
-  }
+{
+  prop1: 'obj2 prop1',
+  prop2: 'obj1 prop2',
+  prop3: 'obj3 prop3',
+  prop4: 1,
+  prop5:3
+}
 */
 ```
 
@@ -316,136 +316,156 @@ var merged = s.deepMerge(obj1, obj2);
 ```
 
 
-Tests
+IS
 -----
 
-#### isDefined
-Test if variable is initialized
+#### is.defined
+Test if variable is defined
 
 ```javascript
-    var not,
-        arr = [],
-        nll = null;
-    s.isDefined(not); //=> false
-    s.isDefined(arr); //=> true
-    s.isDefined(nll); //=> true
+s.is.defined(nonExistingVar); //=> false
+s.is.defined([]); //=> true
+s.is.defined(null); //=> true
+s.is.defined(0); //=> true
 ```
 
-#### hasValue
+#### is.empty
 Test if variable has been defined and is not empty.
 
-    Things that are treated as if they don't have value:
-        1) null
-        2) not initialized variable
-        3) empty array
-        4) empty object
-        5) empty string
-        6) string with only spaces in
-
 ```javascript
-    var tmp;
+s.is.empty(nonExistingVar); //=> true
+s.is.empty(null); //=> true
+s.is.empty([]); //=> true
+s.is.empty({}); //=> true
+s.is.empty(""); //=> true
+s.is.empty("  "); //=> true
 
-    s.hasValue(tmp); //=> false
-    s.hasValue(null); //=> false
-    s.hasValue([]); //=> false
-    s.hasValue({}); //=> false
-    s.hasValue(""); //=> false
-    s.hasValue("  "); //=> false
-
-    s.hasValue(0); //=> true
-    s.hasValue(false); //=> true
-    s.hasValue(true); //=> true
-    s.hasValue(","); //=> true
+s.is.empty(0); //=> false
+s.is.empty(false); //=> false
+s.is.empty(true); //=> false
+s.is.empty(","); //=> false
 
 ```
 
-#### isString
+#### is.string
 Check if variable type is string
 
 ```javascript
-    s.isString(""); //=> true
-    s.isString(2); //=> false
+s.is.string(""); //=> true
+s.is.string(2); //=> false
 ```
 
-#### isNumber
-Check if variable type is isNumber
+#### is.number
+Check if variable type is number
 
 ```javascript
-    s.isNumber(2); //=> true
-    s.isNumber(""); //=> false
+s.is.number(2); //=> true
+s.is.number(""); //=> false
 ```
 
-#### isBoolean
+#### is.boolean
 Check if variable type is Boolean
 
 ```javascript
-    s.isBoolean(false); //=> true
-    s.isBoolean(2); //=> false
+s.is.boolean(false); //=> true
+s.is.boolean(2); //=> false
 ```
 
-### isObject
-Check if variable type is Object.
-Array is also considered as object in JS.
-type of NULL is object in JS but isObject returns false for null.
+#### is.object
+Check if variable type is object.
 
 ```javascript
-    s.isObject({}); //=> true
-    s.isObject([]); //=> true
-    s.isObject(null); //=> false
-    s.isObject(false); //=> false
+s.is.object({}); //=> true
+s.is.object([]); //=> false
+s.is.object(null); //=> false
+s.is.object(function(){}); //=> false
+s.is.object(false); //=> false
 ```   
+#### is.function
+Check if variable type is function.
 
-#### isArray
+```javascript
+s.is.function(function(){}); //=> true
+s.is.function([]); //=> false
+s.is.function({}); //=> false
+s.is.function(false); //=> false
+```  
+
+#### is.array
 Check if variable is Array.
 
 ```javascript
-    s.isArray([]); //=> true
-    s.isArray({}); //=> false
-    s.isArray(null); //=> false
+s.is.array([]); //=> true
+s.is.array({}); //=> false
+s.is.array(null); //=> false
 ```  
 
-#### is
-Test string using any regular expresion or by using any of defined keywords.
-
-Example of testing the string by using regular expresion:
+#### is.arrayWithValue
+Check if variable is Array and is not empty.
 
 ```javascript
-    //test if string contains only alphabetical characters spaces are ignored
-    s.is("te st", /^[a-zA-Z ]*$/); //>>true
-    s.is("te st2", /^[a-zA-Z ]*$/); //>>false
+s.is.arrayWithValue([1]); //=> true
+s.is.arrayWithValue([]); //=> false
+s.is.arrayWithValue({}); //=> false
+s.is.arrayWithValue(null); //=> false
+``` 
+#### Regular Expression tests
+check string against predefined regular expressions.
 
-    //test if the string is valid eMail
-    s.is("stefan.novakovich@gmail.com", /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); // >> true
-    s.is("not.email", /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); // >> false
-
-```
-
-the same thing from above could be achived by using already defined keywords alphabetic and email.
+##### is.alphabetic
 
 ```javascript
-    //test if string contains only alphabetical characters spaces are ignored
-    s.is("te st", 'alphabetic'); //>>true
-    s.is("te st2", 'alphabetic'); //>>false
+s.is.alphabetic('abCd'); //=> true
+s.is.alphabetic('Ab1'); //=> false
+s.is.alphabetic('@a/'); //=> false
+```  
 
-    //test if the string is valid eMail
-    s.is("stefan.novakovich@gmail.com", 'email');// >> true
-    s.is("not.email", 'email'); // >> false
-```
+##### is.alphanumeric
 
-Available keywords:
+```javascript
+s.is.alphanumeric('abCd'); //=> true
+s.is.alphanumeric('Ab1'); //=> true
+s.is.alphanumeric('@a/'); //=> false
+```  
+##### is.numeric
 
-    - alphabetic : string contains only alphabetic characters (spaces are alowed, empty string is valid)
-    - numeric : string contains only numeric characters (spaces are alowed, empty string is valid)
-    - alphanumeric : string contains only alphanumeric characters (spaces are alowed, empty string is valid)
-    - lowercase : string contains only lowercase characters (spaces are alowed, empty string is valid)
-    - uppercase : string contains only uppercase characters (spaces are alowed, empty string is valid)
-    - email : check if string is valid email address
-    - strongPassword : check if string is strong password
-                       To be strong password string must conatain at least:
-                        - one lowercase latter,
-                       - one uppercase letter
-                        - one number
-                        - 6 characters
-    -ip: check if string is valid ip address
+```javascript
+s.is.numeric('103'); //=> true
+s.is.numeric('-103'); //=> false
+s.is.numeric('103.1'); //=> false
+s.is.numeric('103a'); //=> false
+``` 
 
-Keyword is case in-sensitive.
+##### is.lowercase
+
+```javascript
+s.is.lowercase('a'); //=> true
+s.is.lowercase('abcd'); //=> true
+s.is.lowercase('abD'); //=> false
+s.is.lowercase('a@'); //=> false
+``` 
+
+##### is.uppercase
+
+```javascript
+s.is.lowercase('A'); //=> true
+s.is.lowercase('ABC'); //=> true
+s.is.lowercase('abD'); //=> false
+s.is.lowercase('A@'); //=> false
+``` 
+
+##### is.email
+```javascript
+s.is.email('stefan.novakovich@gmail.com'); //=> true
+s.is.email('s@b.com'); //=> true
+s.is.email('stefan@st@mail.com'); //=> false
+s.is.email('fake'); //=> false
+``` 
+
+##### is.ip
+returns truy only for IPv6 addresses. it will return false for IPv6 addresses
+```javascript
+s.is.ip('31.45.238.138'); //=> true
+s.is.ip('1.45.238.1234'); //=> false
+``` 
+
