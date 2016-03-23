@@ -68,7 +68,7 @@ Default timeout for checking condition is set to 5ms.
 This can be configured to different time by passing argument after condition callback in when function. We can also limit max number of tries that can be preformed before we stop checking for condition to become true.
 
 ```javascript
-//condition is now checked every 100ms except default 5ms
+//condition is now checked every 100ms instead of default 5ms
 s.execute(function() {}).when(function() {
   return $('.something').length;
 }, 100);
@@ -244,6 +244,34 @@ s.unique([1,1,2,3,2,1,3]); //=> [1,2,3]
 s.unique(["a", "b", "a"]); //=> ["a","b"]
 ```
 
+#### first
+Returns first element of array that match the condition in callback function or undefined if there is no match.
+if no condition is passed it returns first element of array.
+
+```javascript
+s.first([1,1,2,3,2,1,3]); //=> 1
+s.first([1,1,2,3,2,1,3], function(e) { 
+  return e === 2; 
+}); //=> 2
+s.first([{name:'test'}], function(e) {
+  return e.name = 'test';
+}); //=> {name:'test'}
+```
+
+#### last
+Returns last element of array that match the condition in callback function or undefined if there is no match.
+if no condition is passed it returns last element of array
+
+```javascript
+s.last([1,1,2,3,2,1,3]); //=> 3
+s.last([1,1,2,3,2,1,3], function(e) { 
+  return e === 2; 
+}); //=> 2
+s.last([{name:'test'}], function(e) {
+  return e.name = 'test';
+}); //=> {name:'test'}
+```
+
 
 Object Helpers
 -----
@@ -320,7 +348,6 @@ Is
 true if not false.
 
 #### is.defined
-Find your truth and live it.
 
 ```javascript
 s.is.defined(nonExistingVar); //=> false

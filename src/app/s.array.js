@@ -120,6 +120,8 @@
     } else {
       return arr[0]
     }
+    
+    return undefined;
 
   };
 
@@ -142,6 +144,8 @@
     } else {
       return arr[arr.length - 1]
     }
+    
+    return undefined;
 
   };
 
