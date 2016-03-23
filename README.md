@@ -194,24 +194,19 @@ Use return false in callback function to stop iterating.
 ```javascript
 s.iterate(4, function(i) {
   console.log(i);
-});
-//=> 0 1 2 3
+}); //=> 0 1 2 3
 
 s.iterate(10, function (i) {
   console.log(i);
-  if (i === 2) {
-    return false;
-  }
-});
-//=> 0 1 2
+  if (i === 2) { return false; }
+}); //=> 0 1 2
 ```
 
 #### remove
 Remove all occurrences of element from array.
 
 ```javascript
-s.remove(['a', 'b', 'c', 'd', 'c'], 'c');
-//=> ['a', 'b', 'd']
+s.remove(['a', 'b', 'c', 'd', 'c'], 'c'); //=> ['a', 'b', 'd']
 ```
 
 Remove accepts optional third parameter that limit maximum number of occurrences to remove.
@@ -220,10 +215,8 @@ If number is negative it will remove that many occurrences starting from end of 
 ```javascript
 //remove first c from the array
 s.remove(['a', 'b', 'c', 'd', 'c'], 'c', 1); //=> ['a', 'b', 'd', 'c']
-
 //remove last c from the array
 s.remove(['a', 'b', 'c', 'd', 'c'], 'c', -1); //=> ['a', 'b', 'c', 'd']
-
 //remove last 2 c from the array
 s.remove(['c','a', 'b', 'c', 'd', 'c'], 'c', -2); //=> ['c', 'a', 'b', 'd']
 ```
