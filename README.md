@@ -178,12 +178,12 @@ var p = document.querySelectorAll('p');
 
 //native forEach will throw exception when looping DOM elements
 p.forEach(function(el,i) {
-    el.innerHTML = "new string value";
+  el.innerHTML = "new string value";
 });
 
 //And this is working as expected
 s.each(p, function(el, i) {
-    el.innerHTML = "new string value";
+  el.innerHTML = "new string value";
 });
 ```
 
@@ -254,22 +254,21 @@ Loop over object properties.
 Looping can be terminated by using return false in callback function.
 
 ```javascript
-    var obj = {
-        prop1: 'val1',
-        prop2: 'val2'
-    };
-    s.getProperties(obj, function(key, value) {
-        console.log(key + ' => ' + value);
-    });
-    //prop1 => val1
-    //prop2 => val2
+var obj = {
+  prop1: 'val1',
+  prop2: 'val2'
+};
+s.getProperties(obj, function(key, value) {
+  console.log(key + ' => ' + value);
+});
+//=> prop1 => val1
+//=> prop2 => val2
 
-    s.getProperties(obj, function(key, value) {
-        console.log(key + ' => ' + value);
-        if(key === 'prop1')
-            return false;
-    });
-    //prop1 => val1
+s.getProperties(obj, function(key, value) {
+  console.log(key + ' => ' + value);
+  if(key === 'prop1') { return false; }
+});
+//=> prop1 => val1
 
 ```
 
@@ -279,92 +278,41 @@ In case of the same property value from second object will override the values i
 Method accepts arbitrary number of object that will be merged together.
 
 ```javascript
-    var obj1 = {
-        prop1: "obj1 prop1",
-        prop2: "obj1 prop2",
-        prop3: [1,2,3,4],
-    };
+var obj1 = {
+  prop1: 'obj1 prop1',
+  prop2: 'obj1 prop2',
+  prop3: [1,2,3,4],
+};
 
-    var obj2 = {
-        prop1: "obj2 prop1",
-        prop3: "obj2 prop3",
-        prop4: 1,
-    };
+var obj2 = {
+  prop1: 'obj2 prop1',
+  prop3: 'obj2 prop3',
+  prop4: 1,
+};
 
-    var obj3 = {
-        prop3: "obj3 prop3",
-        prop5: 3,
-    };
+var obj3 = {
+  prop3: 'obj3 prop3',
+  prop5: 3,
+};
 
-    var merged = s.merge(obj1, obj2, obj3);
-    console.log(merged);
-    /*>>
-        {
-            prop1: "obj2 prop1",
-            prop2: "obj1 prop2",
-            prop3: "obj3 prop3",
-            prop4: 1,
-            prop5:3
-        }
-    */
+var merged = s.merge(obj1, obj2, obj3);
+console.log(merged);
+/*=>
+  {
+    prop1: 'obj2 prop1',
+    prop2: 'obj1 prop2',
+    prop3: 'obj3 prop3',
+    prop4: 1,
+    prop5:3
+  }
+*/
 ```
-
 
 #### deepMerge
 Deep merge provided objects.
-Objects inside array won't be taken into consideration for deep merging.
-In case of the same property value from second object will override the values in the first object.
-Method accepts arbitrary number of object that will be merged together.
 
 ```javascript
-    var obj1 = {
-        prop1: "obj1 prop1",
-        prop2: {
-            a: "a1",
-            b: "b1",
-            c: {
-                d:"d1",
-                e: "e1",
-            },
-            f: {
-                g: "g1",
-            }
-        },
-        prop3: [{
-            a: "a1",
-            b: "b1"
-        }],
-    };
-
-    var obj2 = {
-        prop2: {
-            a: "a2",
-            c: {
-                d: "d2",
-            },
-            f: "f2",
-        },
-        prop3: [{a:"a2"}],
-    };
-
-
-    var merged = s.merge(obj1, obj2);
-    console.log(merged);
-    /*>>
-     {
-        prop1: "obj1 prop1",
-        prop2: {
-            a: "a2",
-            b: "b1",
-            c: {
-                d:"d2",
-                e: "e1",
-                },
-            f: "f2"
-        },
-        prop3: [{a:"a2"}],
-     }
-    */
+var merged = s.deepMerge(obj1, obj2);
 ```
 
 
