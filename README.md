@@ -316,11 +316,12 @@ var merged = s.deepMerge(obj1, obj2);
 ```
 
 
-IS
+Is
 -----
+true if not false.
 
 #### is.defined
-Test if variable is defined
+Find your truth and live it.
 
 ```javascript
 s.is.defined(nonExistingVar); //=> false
