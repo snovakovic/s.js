@@ -15,7 +15,7 @@ s.random(['a', 'b', 'c']); //=> random return one element from array ('a' or 'b'
 ```
 
 #### getUrlParam
-Get the value from url parameter.
+Get a value from url parameter.
 
 ```javascript
 //example url: http://index.html?firstName=John&LastName=Doe
@@ -25,7 +25,7 @@ s.getUrlParam("something"); //=> null
 ```
 
 #### once
-returns function that can be executed only once
+returns a function that can be executed only once.
 
 ```javascript
 var init = s.once(function() { /*function implementations*/ });
@@ -34,7 +34,7 @@ init(); //=>  function won't be executed
 ```
 
 #### debounce
-Returns a function, that as long as it continues to be invoked, will not be triggered 
+Returns a function, that as long as it continues to be invoked, will not be triggered.
 
 ```javascript
 var wait = 5;
@@ -49,7 +49,7 @@ setTimeout(function() {
 ```
 
 #### execute
-execute function when condition becomes true.
+Execute a function when condition becomes true.
 
 ```javascript
 var condition = false;
@@ -64,7 +64,7 @@ setTimeout(function() {
 }, 300);
 ```
 
-default timeout for checking condition is set to 5ms.
+Default timeout for checking condition is set to 5ms.
 This can be configured to different time by passing argument after condition callback in when function. We can also limit max number of tries that can be preformed before we stop checking for condition to become true.
 
 ```javascript
@@ -83,7 +83,6 @@ s.execute(function() {}).when(function() {
 ```
 
 
-
 String Helpers
 -----
 
@@ -96,7 +95,7 @@ s.replaceAll("this is old value in old string", "old", "new"); //=> this is new 
 ```
 
 #### capitalize
-Converts first letter of the string to uppercase.
+Converts first letter of a string to uppercase.
 If true is passed as second argument the rest of the string will be converted to lower case.
 
 ```javascript
@@ -106,8 +105,8 @@ s.capitalize('MAte', true); //=> Mate
 ```
 
 #### contains
-test if string contains substring.
-By default it's case sensitive which can be turned of by providing last optional parameter.
+Test if string contains provided substring.
+By default it's case-sensitive which can be turned of by providing last optional parameter.
 
 ```javascript
 s.contains(string, substringToCheck, ignoreCase);
@@ -118,7 +117,7 @@ s.contains('abc Da', 'bc'); //=> true
 ```
 
 #### chop
-Break string in array of substring
+Breaks a string in array of substring
 
 ```javascript
 s.chop('whitespace', 3); //=> ['whi', 'tes', 'pac', 'e']
@@ -150,7 +149,7 @@ Array Helpers
 -----
 
 #### each
-Loop over array elements.
+Loop over the array.
 Use return false in callback function to break from loop.
 
 ```javascript
@@ -203,7 +202,7 @@ s.iterate(10, function (i) {
 ```
 
 #### remove
-Remove all occurrences of element from array.
+Remove all occurrences of element from the array.
 
 ```javascript
 s.remove(['a', 'b', 'c', 'd', 'c'], 'c'); //=> ['a', 'b', 'd']
@@ -222,14 +221,14 @@ s.remove(['c','a', 'b', 'c', 'd', 'c'], 'c', -2); //=> ['c', 'a', 'b', 'd']
 ```
 
 #### shuffle
-Shuffle values in the array
+Shuffle values in the array.
 
 ```javascript
 s.shuffle(['a', 'b', 'c', 'd', 'c']);
 ```
 
 #### getFilledArray
-Returns array filled with default values
+Returns array filled with the default values
 
 ```javascript
 s.getFilledArray(defaultValue, arrayLength);
@@ -238,7 +237,7 @@ s.getFilledArray('a', 3); //=> ['a','a','a']
 ```
 
 #### unique
-Returns new array that contain only unique values from from original array.
+Returns new array that contain only unique values from the original array.
 
 ```javascript
 s.unique([1,1,2,3,2,1,3]); //=> [1,2,3]
@@ -349,7 +348,7 @@ s.is.empty(","); //=> false
 ```
 
 #### is.string
-Check if variable type is string
+Check if variable type is string.
 
 ```javascript
 s.is.string(""); //=> true
@@ -357,7 +356,7 @@ s.is.string(2); //=> false
 ```
 
 #### is.number
-Check if variable type is number
+Check if variable type is number.
 
 ```javascript
 s.is.number(2); //=> true
@@ -365,7 +364,7 @@ s.is.number(""); //=> false
 ```
 
 #### is.boolean
-Check if variable type is Boolean
+Check if variable type is boolean.
 
 ```javascript
 s.is.boolean(false); //=> true
@@ -393,7 +392,7 @@ s.is.function(false); //=> false
 ```  
 
 #### is.array
-Check if variable is Array.
+Check if variable is array.
 
 ```javascript
 s.is.array([]); //=> true
