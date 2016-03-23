@@ -19,9 +19,9 @@ Get the value from url parameter.
 
 ```javascript
 //example url: http://index.html?firstName=John&LastName=Doe
-s.getUrlParam("firstName"); //=>John
-s.getUrlParam("lastName"); //=>Doe
-s.getUrlParam("something"); //=>null
+s.getUrlParam("firstName"); //=> John
+s.getUrlParam("lastName"); //=> Doe
+s.getUrlParam("something"); //=> null
 ```
 
 #### once
@@ -29,9 +29,8 @@ returns function that can be executed only once
 
 ```javascript
 var init = s.once(function() { /*function implementations*/ });
-init();  //function will be executed
-init(); // function won't be executed
-
+init();  //=> function will be executed
+init(); //=>  function won't be executed
 ```
 
 #### debounce
@@ -40,14 +39,13 @@ Returns a function, that as long as it continues to be invoked, will not be trig
 ```javascript
 var wait = 5;
 var debounce = s.debounce(function() { /*function implementations*/ }, wait);
-debounce();  //function will be executed
-debounce(); // function won't be executed
-debounce(); // function won't be executed
+debounce();  //=> function will be executed
+debounce(); //=>  function won't be executed
+debounce(); //=>  function won't be executed
 setTimeout(function() {
-  debounce(); //function will be executed
-  debounce(); // function won't be executed
-}, 10)
-
+  debounce(); //=> function will be executed
+  debounce(); //=>  function won't be executed
+}, 10);
 ```
 
 #### execute
@@ -64,7 +62,6 @@ s.execute(function() {
 setTimeout(function() {
   condition = true;
 }, 300);
-
 ```
 
 default timeout for checking condition is set to 5ms.
@@ -83,7 +80,6 @@ s.execute(function() {}).when(function() {
   return $('.something').length;
 }, 100)
 .limit(10);
-
 ```
 
 
@@ -96,8 +92,7 @@ Replace all occurrences of a string with a new value.
 
 ```javascript
 s.replaceAll(originalString, currentValue, newValue);
-s.replaceAll("this is old value in old string", "old", "new");
-//=> this is new value in new string
+s.replaceAll("this is old value in old string", "old", "new"); //=> this is new value in new string
 ```
 
 #### capitalize
@@ -116,10 +111,17 @@ By default it's case sensitive which can be turned of by providing last optional
 
 ```javascript
 s.contains(string, substringToCheck, ignoreCase);
-s.contains('abc Da', 'da'); //=>false
-s.contains('abc Da', 'da', true); //=>true
-s.contains('abc Da', 'Da'); //=>true
-s.contains('abc Da', 'bc'); //=>true
+s.contains('abc Da', 'da'); //=> false
+s.contains('abc Da', 'da', true); //=> true
+s.contains('abc Da', 'Da'); //=> true
+s.contains('abc Da', 'bc'); //=> true
+```
+
+#### chop
+Break string in array of substring
+
+```javascript
+s.chop("whitespace", 3); //=> ['whi', 'tes', 'pac', 'e']
 ```
 
 #### clean
@@ -143,139 +145,113 @@ s.truncate('stefan.novakovich@gmail.com', 10) //=> 'stefan.nov...'
 s.truncate('stefan.novakovich@gmail.com', 10, ' ...more') //=> 'stefan.nov ...more'
 ```
 
-#### chop
-Break string in array of substring
-
-```javascript
-s.chop("whitespace", 3); => ['whi', 'tes', 'pac', 'e']
-```
 
 Array Helpers
 -----
 
 #### each
-Loop over arrays.
+Loop over array elements.
 Use return false in callback function to break from loop.
 
 ```javascript
+var testArr = ['a', 'b','c', 'd', 'e'];
+s.each(testArr, function(val, i) {
+  console.log(val);
+  console.log(i);
+}); 
+//=> a b c d e
+//=> 0 1 2 3 4
 
-    var testArr = [1, 2, 3, 4, 5];
-    s.each(testArr, function(val, i) {
-      console.log(val);
-    });
-    //>> 1 2 3 4 5
-
-    //break from foreach loop
-    s.each(testArr, function (val, i) {
-      console.log(val);
-      if (val === 2) {
-        return false; //break the each loop
-        }
-    });
-    //>> 1 2
-
+//break from each loop
+s.each(testArr, function (val, i) {
+  console.log(val);
+  if (val === 'b') {
+    return false; //break the each loop
+  }
+});
+//=>> a b
 ```
-
-why should you use this when there is native Array.prototype.forEach()
-and by providing polyfill it is working in every browser. https://github.com/snovakovic/poly
-
-But wait there is actualy something that forEach can't do. And I like the each sintaks more.
+We can also use each on DOM elements
 
 ```javascript
+var p = document.querySelectorAll('p');
 
-    var p = document.querySelectorAll('p');
-    console.log(p);
+//native forEach will throw exception when looping DOM elements
+p.forEach(function(el,i) {
+    el.innerHTML = "new string value";
+});
 
-    //This will throw exception
-    //p.forEach(function(el,i) {
-    //    el.innerHTML = "new string value";
-    //});
-
-    //And this is working as expected
-    s.each(p, function(el, i) {
-        el.innerHTML = "new string value";
-    });
-
+//And this is working as expected
+s.each(p, function(el, i) {
+    el.innerHTML = "new string value";
+});
 ```
-
-There is nice article on this issue here
-http://toddmotto.com/ditch-the-array-foreach-call-nodelist-hack/
-
 
 #### iterate
 Iterate specific number of times. Iteration starts from 0.
 Use return false in callback function to stop iterating.
 
 ```javascript
-    s.iterate(4, function(i) {
-      console.log(i);
-    });
-    //>> 0 1 2 3
+s.iterate(4, function(i) {
+  console.log(i);
+});
+//=> 0 1 2 3
 
-    s.iterate(10, function (i) {
-      console.log(i);
-      if (i === 2) {
-        return false;
-      }
-    });
-    //>>0 1 2
+s.iterate(10, function (i) {
+  console.log(i);
+  if (i === 2) {
+    return false;
+  }
+});
+//=> 0 1 2
 ```
 
 #### remove
 Remove all occurrences of element from array.
 
 ```javascript
-    var withoutC = s.remove(['a', 'b', 'c', 'd', 'c'], 'c');
-    console.log(withoutC);
-    //>>a b d
+s.remove(['a', 'b', 'c', 'd', 'c'], 'c');
+//=> ['a', 'b', 'd']
 ```
 
-Remove accepts optional third parametar that tels what is the maximim number of occurences to remove.
-If number is negative it will remove that many occurrences but starting from end of array.
+Remove accepts optional third parameter that limit maximum number of occurrences to remove.
+If number is negative it will remove that many occurrences starting from end of array.
 
 ```javascript
-    //remove first c from the array
-    var withoutC = s.remove(['a', 'b', 'c', 'd', 'c'], 'c', 1);
-    console.log(withoutC);
-    //>>a b d c
+//remove first c from the array
+s.remove(['a', 'b', 'c', 'd', 'c'], 'c', 1); //=> ['a', 'b', 'd', 'c']
 
-    //remove last c from the array
-    var withoutC = s.remove(['a', 'b', 'c', 'd', 'c'], 'c', -1);
-    console.log(withoutC);
-    //>>a b c d
+//remove last c from the array
+s.remove(['a', 'b', 'c', 'd', 'c'], 'c', -1); //=> ['a', 'b', 'c', 'd']
 
-    //remove last 2 c from the array
-    var withoutC = s.remove(['c','a', 'b', 'c', 'd', 'c'], 'c', -2);
-    console.log(withoutC);
-    //>>c a b d
+//remove last 2 c from the array
+s.remove(['c','a', 'b', 'c', 'd', 'c'], 'c', -2); //=> ['c', 'a', 'b', 'd']
 ```
 
 #### shuffle
 Shuffle values in the array
 
 ```javascript
-    var shuffle = s.shuffle(['a', 'b', 'c', 'd', 'c']);
-    console.log(shuffle);
-    //>> new order cannot be determined
+s.shuffle(['a', 'b', 'c', 'd', 'c']);
 ```
 
 #### getFilledArray
-Returns new array filled with default values.
-s.getFilledArray(defaultValue, arrayLength);
+Returns array filled with default values
 
 ```javascript
-    s.getFilledArray(0, 3); //>> [0,0,0]
-    s.getFilledArray("a", 3); //>> ["a","a","a"]
+s.getFilledArray(defaultValue, arrayLength);
+s.getFilledArray(0, 4); //=> [0,0,0,0]
+s.getFilledArray("a", 3); //=> ["a","a","a"]
 ```
 
 #### unique
-Returns new array containing only unique values from input array.
-Doesn't support nested objects and arrays.
+Returns new array that contain only unique values from from original array.
 
 ```javascript
-    s.unique([1,1,2,3,2,1,3]); //>> [1,2,3]
-    s.unique(["a", "b", "a"]); //>> ["a","b"]
+s.unique([1,1,2,3,2,1,3]); //=> [1,2,3]
+s.unique(["a", "b", "a"]); //=> ["a","b"]
 ```
+
 
 Object Helpers
 -----
@@ -290,17 +266,17 @@ Looping can be terminated by using return false in callback function.
         prop2: 'val2'
     };
     s.getProperties(obj, function(key, value) {
-        console.log(key + ' >> ' + value);
+        console.log(key + ' => ' + value);
     });
-    //prop1 >> val1
-    //prop2 >> val2
+    //prop1 => val1
+    //prop2 => val2
 
     s.getProperties(obj, function(key, value) {
-        console.log(key + ' >> ' + value);
+        console.log(key + ' => ' + value);
         if(key === 'prop1')
             return false;
     });
-    //prop1 >> val1
+    //prop1 => val1
 
 ```
 
@@ -409,9 +385,9 @@ Test if variable is initialized
     var not,
         arr = [],
         nll = null;
-    s.isDefined(not); //>> false
-    s.isDefined(arr); //>> true
-    s.isDefined(nll); //>> true
+    s.isDefined(not); //=> false
+    s.isDefined(arr); //=> true
+    s.isDefined(nll); //=> true
 ```
 
 #### hasValue
@@ -428,17 +404,17 @@ Test if variable has been defined and is not empty.
 ```javascript
     var tmp;
 
-    s.hasValue(tmp); //>> false
-    s.hasValue(null); //>> false
-    s.hasValue([]); //>> false
-    s.hasValue({}); //>> false
-    s.hasValue(""); //>> false
-    s.hasValue("  "); //>> false
+    s.hasValue(tmp); //=> false
+    s.hasValue(null); //=> false
+    s.hasValue([]); //=> false
+    s.hasValue({}); //=> false
+    s.hasValue(""); //=> false
+    s.hasValue("  "); //=> false
 
-    s.hasValue(0); //>> true
-    s.hasValue(false); //>> true
-    s.hasValue(true); //>> true
-    s.hasValue(","); //>> true
+    s.hasValue(0); //=> true
+    s.hasValue(false); //=> true
+    s.hasValue(true); //=> true
+    s.hasValue(","); //=> true
 
 ```
 
@@ -446,24 +422,24 @@ Test if variable has been defined and is not empty.
 Check if variable type is string
 
 ```javascript
-    s.isString(""); //>> true
-    s.isString(2); //>> false
+    s.isString(""); //=> true
+    s.isString(2); //=> false
 ```
 
 #### isNumber
 Check if variable type is isNumber
 
 ```javascript
-    s.isNumber(2); //>> true
-    s.isNumber(""); //>> false
+    s.isNumber(2); //=> true
+    s.isNumber(""); //=> false
 ```
 
 #### isBoolean
 Check if variable type is Boolean
 
 ```javascript
-    s.isBoolean(false); //>> true
-    s.isBoolean(2); //>> false
+    s.isBoolean(false); //=> true
+    s.isBoolean(2); //=> false
 ```
 
 ### isObject
@@ -472,19 +448,19 @@ Array is also considered as object in JS.
 type of NULL is object in JS but isObject returns false for null.
 
 ```javascript
-    s.isObject({}); //>> true
-    s.isObject([]); //>> true
-    s.isObject(null); //>> false
-    s.isObject(false); //>> false
+    s.isObject({}); //=> true
+    s.isObject([]); //=> true
+    s.isObject(null); //=> false
+    s.isObject(false); //=> false
 ```   
 
 #### isArray
 Check if variable is Array.
 
 ```javascript
-    s.isArray([]); //>> true
-    s.isArray({}); //>> false
-    s.isArray(null); //>> false
+    s.isArray([]); //=> true
+    s.isArray({}); //=> false
+    s.isArray(null); //=> false
 ```  
 
 #### is
