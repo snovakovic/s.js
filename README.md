@@ -260,7 +260,7 @@ s.first([{name:'test'}], function(e) {
 
 #### last
 Returns last element of array that match the condition in callback function or undefined if there is no match.
-if no condition is passed it returns last element of array
+if no condition is passed it returns last element of array.
 
 ```javascript
 s.last([1,1,2,3,2,1,3]); //=> 3
@@ -375,7 +375,6 @@ s.is.empty(","); //=> false
 ```
 
 #### is.string
-Check if variable type is string.
 
 ```javascript
 s.is.string(""); //=> true
@@ -383,7 +382,6 @@ s.is.string(2); //=> false
 ```
 
 #### is.number
-Check if variable type is number.
 
 ```javascript
 s.is.number(2); //=> true
@@ -391,7 +389,6 @@ s.is.number(""); //=> false
 ```
 
 #### is.boolean
-Check if variable type is boolean.
 
 ```javascript
 s.is.boolean(false); //=> true
@@ -399,7 +396,6 @@ s.is.boolean(2); //=> false
 ```
 
 #### is.object
-Check if variable type is object.
 
 ```javascript
 s.is.object({}); //=> true
@@ -409,7 +405,6 @@ s.is.object(function(){}); //=> false
 s.is.object(false); //=> false
 ```   
 #### is.function
-Check if variable type is function.
 
 ```javascript
 s.is.function(function(){}); //=> true
@@ -419,7 +414,6 @@ s.is.function(false); //=> false
 ```  
 
 #### is.array
-Check if variable is array.
 
 ```javascript
 s.is.array([]); //=> true
@@ -428,7 +422,6 @@ s.is.array(null); //=> false
 ```  
 
 #### is.arrayWithValue
-Check if variable is Array and is not empty.
 
 ```javascript
 s.is.arrayWithValue([1]); //=> true
@@ -437,7 +430,7 @@ s.is.arrayWithValue({}); //=> false
 s.is.arrayWithValue(null); //=> false
 ``` 
 #### Regular Expression tests
-check string against predefined regular expressions.
+Test string against predefined regular expressions.
 
 ##### is.alphabetic
 
