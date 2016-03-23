@@ -11,7 +11,7 @@ Get random number between 2 provided numbers or random element from array if arr
 
 ```javascript
 s.random(1,10); //=> random number between 1 and 10 (1 and 10 are also included)
-s.random(['a', 'b', 'c']); //=> random return once element from array
+s.random(['a', 'b', 'c']); //=> random return one element from array ('a' or 'b' or 'c')
 ```
 
 #### getUrlParam
@@ -29,8 +29,24 @@ returns function that can be executed only once
 
 ```javascript
 var init = s.once(function() { /*function implementations*/ });
-init();  //init function will be executed
-init(); // init function won't be executed
+init();  //function will be executed
+init(); // function won't be executed
+
+```
+
+#### debounce
+Returns a function, that as long as it continues to be invoked, will not be triggered 
+
+```javascript
+var wait = 5;
+var debounce = s.debounce(function() { /*function implementations*/ }, wait);
+debounce();  //function will be executed
+debounce(); // function won't be executed
+debounce(); // function won't be executed
+setTimeout(function() {
+  debounce(); //function will be executed
+  debounce(); // function won't be executed
+}, 10)
 
 ```
 
