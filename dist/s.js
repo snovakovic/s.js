@@ -54,7 +54,11 @@
   };
 
   s.is.object = function(testVar) {
-    return typeof testVar === 'object' && testVar !== null;
+    return typeof testVar === 'object' && testVar !== null && !Array.isArray(testVar);
+  };
+
+  s.is.function = function(testVar) {
+    return typeof testVar === 'function';
   };
 
   s.is.array = function(testVar) {
@@ -261,52 +265,6 @@
 
 })(window.s = window.s || {});
 
-
-/*************************
- * s.execute aka Pesky 
- * execute method when condition becomes true
- * example: 
- ** a = false; 
- ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 
- ** setTimeout(function(){ a= true; },30);
- ************************/
-(function(s) {
-
-  s.execute = function(executeCb) {
-    return new PeskyInstance(executeCb);
-  };
-
-  function PeskyInstance(executeCb) {
-    var _executeCb = executeCb;
-    var _conditionCb;
-    var _maxTries;
-    var _timeOut;
-    var _noTries = 0;
-
-    function when() {
-      _noTries++;
-      if (_conditionCb()) {
-        _executeCb();
-      } else if (!_maxTries || (_noTries < _maxTries)) {
-        setTimeout(when, _timeOut);
-      }
-    }
-
-    return {
-      when: function(conditionCb, timeOut) {
-        _timeOut = timeOut || 5;
-        _conditionCb = conditionCb;
-
-        setTimeout(when);
-        return this;
-      },
-      limit: function(maxTries) {
-        _maxTries = maxTries;
-      }
-    };
-  }
-} (window.s = window.s || {}));
-
 /*****************************
  * sMsg - broadcast messages
  * example s.broadcast('something-happened', objToSend)
@@ -452,33 +410,35 @@ if (!window.matchMedia) {
 
 
 /************************************
- * sResizeWatch : https://github.com/snovakovic/sResizeWatch
+ * sResizeWatch
  * whatch for resize events - and switching between layouts. 
+ * Detect when media query is triggered
  ****************************************/
 (function(s) {
-  var onFunctionStack = [],
-    offFunctionStack = [],
-    onceFunctionStack = [],
-    resizeEndFunctionStack = [],
-    onResizeFunctionStack = [],
-    i,
-    currentScreenSizes = [],
-    //based on bootstrap breakpoints
-    screenSizes = [
-      {
-        minWidth: 992,
-        name: 'desktop'
-      },
-      {
-        minWidth: 768,
-        maxWidth: 991,
-        name: 'tablet'
-      },
-      {
-        maxWidth: 767,
-        name: 'mobile'
-      }
-    ];
+  var onFunctionStack = [];
+  var offFunctionStack = [];
+  var onceFunctionStack = [];
+  var resizeEndFunctionStack = [];
+  var onResizeFunctionStack = [];
+  var i;
+  var doit;
+  var currentScreenSizes = [];
+  //based on bootstrap breakpoints
+  var screenSizes = [
+    {
+      minWidth: 992,
+      name: 'desktop'
+    },
+    {
+      minWidth: 768,
+      maxWidth: 991,
+      name: 'tablet'
+    },
+    {
+      maxWidth: 767,
+      name: 'mobile'
+    }
+  ];
 
   //set current screen sizes
   function setCurrentScreenSizes() {
@@ -490,9 +450,6 @@ if (!window.matchMedia) {
     });
   }
   setCurrentScreenSizes();
-
-
-  var doit;
 
   //MAIN RESIZE EVENT LISTENER
   window.addEventListener('resize', function() {
@@ -666,10 +623,6 @@ if (!window.matchMedia) {
 
   /**
   * Replace all occurrences in a string with a new value   
-  * @param  str {String} string where occurrences will be replaced
-  * @param find {String} string that we want to replace with new value    
-  * @param replace {String} new string value which will replace old value   
-  * @return {[string]} new string with replaced values
   * @example console.log(s.replaceAll("this is old value in old string", "old", "new"))
    */
   s.replaceAll = function(str, find, replace) {
@@ -729,7 +682,7 @@ if (!window.matchMedia) {
 
 
   /**
-  * Truncate string if it exceed max number of caracters, 
+  * Truncate string if it exceed max number of characters, 
   * apply provided truncate string at the end of truncated string (default: '...')
   */
   s.truncate = function(str, length, truncateStr) {
@@ -751,10 +704,7 @@ if (!window.matchMedia) {
   }
 
   /**
-	* Returns random number between 2 provided numbers numbers
-  * If array is provided instead it returns random element from array
-	* @param from {string} min number
-	* @param to {string|regExpresion} max number
+  * Get random number between 2 provided numbers or random element from array if array is provided as argument.
 	* @example s.random(1, 10); get random number between 1 and 10 (1 and 10 are included)
 	*/
   s.random = function(from, to) {
@@ -782,23 +732,88 @@ if (!window.matchMedia) {
   };
 
   /**********************************************
-  * return function that can be executed only once
+  * returns function that can be executed only once
   * @example var init = s.once(function(){ }): init();
  ************************************************/
-  s.once = function(cb) {
-    return new Once(cb);
+  s.once = function(fn, context) {
+    var result;
 
-    function Once(cb) {
-      var _executed = false;
+    return function() {
+      if (fn) {
+        result = fn.apply(context || this, arguments);
+        fn = null;
+      }
 
-      return function() {
-        if (!_executed) {
-          _executed = true;
-          cb.apply(window, arguments);
+      return result;
+    };
+  }
+
+  /**********************************************
+  * Returns a function, that, as long as it continues to be invoked, will not be triggered 
+   ************************************************/
+  s.debounce = function(func, wait) {
+    var timeout;
+    return function() {
+      var context = this; 
+      var callNow = !timeout;
+
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        timeout = null;
+      }, wait);
+
+      if (callNow) {
+        func.apply(context, arguments);
+      }
+    };
+  };
+
+  /*************************
+  * execute function when condition becomes true
+  * example: 
+  ** a = false; 
+  ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 
+  ** setTimeout(function(){ a= true; },30);
+  ************************/
+  s.execute = function(executeCb) {
+    return (function() {
+      var _executeCb = executeCb;
+      var _conditionCb;
+      var _maxTries;
+      var _timeOut;
+      var _noTries = 0;
+
+      function when() {
+        _noTries++;
+        if (_conditionCb()) {
+          _executeCb();
+          clean();
+        } else if (!_maxTries || (_noTries < _maxTries)) {
+          setTimeout(when, _timeOut);
+        } else {
+          clean();
         }
       }
-    }
+
+      function clean() {
+        _executeCb = _conditionCb = _maxTries = _timeOut = _noTries = null;
+      }
+
+      return {
+        when: function(conditionCb, timeOut) {
+          _timeOut = timeOut || 5;
+          _conditionCb = conditionCb;
+
+          setTimeout(when);
+          return this;
+        },
+        limit: function(maxTries) {
+          _maxTries = maxTries;
+        }
+      };
+    } ());
   };
+
 
 })(window.s = window.s || {});
 
