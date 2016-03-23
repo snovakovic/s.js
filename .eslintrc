@@ -11,12 +11,14 @@
     "templateStrings": true
   },
   "globals": {
+    "s": true
   },
   "rules": {
     "no-console": 1,
     "quotes": [1, "single"],
     "eol-last": 1,
     "space-before-blocks": [1, "always"],
-    "indent": [2, 2, {"SwitchCase": 1}]
+    "indent": [1, 2, {"SwitchCase": 1}],
+    "curly": 1
   }
 }

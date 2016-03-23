@@ -70,6 +70,45 @@ describe('s.utilities', function() {
 
   });
 
+  describe('debounce', function() {
+
+    it('should call function only twice', function(done) {
+      var noCalls = 0;
+      var debounceFunction = s.debounce(function() {
+        noCalls++;
+      }, 1);
+
+      expect(noCalls).toEqual(0);
+      debounceFunction();
+      debounceFunction();
+      debounceFunction();
+
+      setTimeout(function() {
+        debounceFunction();
+        debounceFunction();
+        expect(noCalls).toEqual(2);
+        done();
+      }, 2);
+
+    });
+
+    it('should call function once', function() {
+      var noCalls = 0;
+      var debounceFunction = s.debounce(function() {
+        noCalls++;
+      }, 1);
+
+      expect(noCalls).toEqual(0);
+      debounceFunction();
+      debounceFunction();
+      debounceFunction();
+      debounceFunction();
+      expect(noCalls).toEqual(1);
+
+    });
+
+  });
+
   describe('execute', function() {
 
     it('should execute on async condition change', function(done) {

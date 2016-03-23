@@ -7,7 +7,6 @@
     return Math.floor(Math.random() * (to - from + 1) + from);
   }
 
-
   /**
   * Get random number between 2 provided numbers or random element from array if array is provided as argument.
 	* @example s.random(1, 10); get random number between 1 and 10 (1 and 10 are included)
@@ -59,18 +58,20 @@
   * N milliseconds. If `immediate` is passed, trigger the function on the
   * leading edge, instead of the trailing.
    ************************************************/
-  s.debounce = function(func, wait, immediate) {
+  s.debounce = function(func, wait ) {
     var timeout;
     return function() {
-      var context = this, args = arguments;
-      var later = function() {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      var callNow = immediate && !timeout;
+      var context = this; 
+      var callNow = !timeout;
+
       clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
+      timeout = setTimeout(function() {
+        timeout = null;
+      }, wait);
+
+      if (callNow) {
+        func.apply(context, arguments);
+      }
     };
   };
 
