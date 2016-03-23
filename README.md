@@ -121,7 +121,7 @@ s.contains('abc Da', 'bc'); //=> true
 Break string in array of substring
 
 ```javascript
-s.chop("whitespace", 3); //=> ['whi', 'tes', 'pac', 'e']
+s.chop('whitespace', 3); //=> ['whi', 'tes', 'pac', 'e']
 ```
 
 #### clean
@@ -140,9 +140,9 @@ This can be changed to anything by providing last optional argument
 
 ```javascript
 s.truncate = function(str, length, truncateStrAppender);
-s.truncate('stefan.novakovich@gmail.com', 100) //=> 'stefan.novakovich@gmail.com'
-s.truncate('stefan.novakovich@gmail.com', 10) //=> 'stefan.nov...'
-s.truncate('stefan.novakovich@gmail.com', 10, ' ...more') //=> 'stefan.nov ...more'
+s.truncate('stefan.novakovich@gmail.com', 100); //=> 'stefan.novakovich@gmail.com'
+s.truncate('stefan.novakovich@gmail.com', 10); //=> 'stefan.nov...'
+s.truncate('stefan.novakovich@gmail.com', 10, ' ...more'); //=> 'stefan.nov ...more'
 ```
 
 
@@ -241,7 +241,7 @@ Returns array filled with default values
 ```javascript
 s.getFilledArray(defaultValue, arrayLength);
 s.getFilledArray(0, 4); //=> [0,0,0,0]
-s.getFilledArray("a", 3); //=> ["a","a","a"]
+s.getFilledArray('a', 3); //=> ['a','a','a']
 ```
 
 #### unique
