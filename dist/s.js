@@ -1,5 +1,7 @@
 /*****************************************************
-	  Test Module part
+	  s.js https://github.com/snovakovic/s.js
+    author: stefan.novakovich@gmail.com
+    version: 1.0.0
  ***************************************************/
 (function(s) {
 

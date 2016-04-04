@@ -1,4 +1,4 @@
-s.js
+s.js (v1.0.0)
 ======
 
 In a nutshell mishmash of js methods.
