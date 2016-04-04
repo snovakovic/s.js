@@ -116,6 +116,18 @@ $.post( "save-contact-url", )
 ``` 
 
 
+Resize watch
+-----
+Watch for layout change in media queries and other resize events. 
+for documentation reference to 
+https://github.com/snovakovic/sResizeWatch
+
+Usage is same except we call it now with s.resizeWatch instead of sResizeWatch
+
+e.g sResizeWatch.on('mobile', function() {}); is now 
+s.resizeWatch.on('mobile', function() {});
+
+
 String Helpers
 -----
 
@@ -465,7 +477,7 @@ s.is.ip('1.45.238.1234'); //=> false
 
 Object Helpers
 -----
-!!! Object helpers may be depreciated or completely removed in near future.
+!!! Object helpers may be depreciated in near future.
 
 #### getProperties
 Loop over object properties.
