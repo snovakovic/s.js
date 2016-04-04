@@ -499,7 +499,7 @@ You may ask what is 'mobile' inside s.resizeWatch.on ?
 
 It's just friendly defined name for screen size. 
 
-Here is the list of default screen sizes, that match bootstrap media query breakpoints:
+Here is the list of default screen sizes(based on bootstrap breakpoints):
 ```javascript
        //default screen sizes
 		screenSizes = [
