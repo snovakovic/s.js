@@ -66,7 +66,7 @@
   };
 
   s.is.arrayWithValue = function(testVar) {
-    return s.is.array(testVar) && testVar.length > 0;
+    return s.common.arrayWithValue(testVar);
   };
 
   /****

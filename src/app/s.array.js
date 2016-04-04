@@ -107,7 +107,7 @@
   * if element is not found undefined is returned
   */
   s.first = function(arr, condition) {
-    if (!s.is.arrayWithValue(arr)) {
+    if (!s.common.isArrayWithValue(arr)) {
       return undefined;
     }
 
@@ -131,7 +131,7 @@
   * if element is not found undefined is returned
   */
   s.last = function(arr, condition) {
-    if (!s.is.arrayWithValue(arr)) {
+    if (!s.common.isArrayWithValue(arr)) {
       return undefined;
     }
 
