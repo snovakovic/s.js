@@ -534,7 +534,7 @@ s.resizeWatch.addSize({
 ```
 
 But what if default screen sizes is not your coup of tea?
-Ok, ok I hear you no need to yell, just override default screen sizes with you precious screen sizes and leave me alone.  
+OK, OK I hear you no need to yell, just override default screen sizes with you precious screen sizes and leave me alone.  
 
 ```javascript
 //change screen sizes completely
