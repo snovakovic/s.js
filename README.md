@@ -471,28 +471,28 @@ Did you notice that $(window).width() < 768 does not match media query 768 insid
 Meet small s.resizeWatch library to make your life easier and your code cleaner. 
 
 ```javascript
-sResizeWatch.on('mobile', function() {
+s.resizeWatch.on('mobile', function() {
   console.log("function that will be executed if current screen size is mobile and every time screen sizes switche to mobile screen size");
 });
 
-sResizeWatch.queueOn('mobile', function() {
+s.resizeWatch.queueOn('mobile', function() {
   console.log("function that will be executed every time screen size switche to mobile screen size");
 });
 
-sResizeWatch.off('mobile', function() {
+s.resizeWatch.off('mobile', function() {
   console.log("function that will be executed if current screen size is not mobile and every time screen size switch from mobile to some other screen size");
 });
 
-sResizeWatch.queueOff('mobile', function() {
+s.resizeWatch.queueOff('mobile', function() {
   console.log("function that will be executed every time screen size switch from mobile to some other screen size");
 });
 
-sResizeWatch.once('desktop', function() {
+s.resizeWatch.once('desktop', function() {
   console.log("This function will execute only once if current screen size is desktop or first time it change to desktop screen size.");
 });
 
 
-sResizeWatch.is('desktop') //=> true is current screen size is desktop
+s.resizeWatch.is('desktop') //=> true is current screen size is desktop
 ```
 
 You may ask what is 'mobile' inside s.resizeWatch.on ?
@@ -527,7 +527,7 @@ Where is the fuss just add it.
 
 ```javascript
 //add new screen size
-sResizeWatch.addSize({
+s.resizeWatch.addSize({
   maxWidth: 1088,
   name: 'services-break-point'
 });
@@ -539,7 +539,7 @@ Ok, ok I hear you no need to yell, just override default screen sizes with you p
 
 ```javascript
 //change screen sizes completely
-sResizeWatch.setNewScreenSizes([{
+s.resizeWatch.setNewScreenSizes([{
   maxWidth: 1088,
   name: 'services-break-point'
 }, 
@@ -549,7 +549,7 @@ sResizeWatch.setNewScreenSizes([{
   name: 'custom-size'
 }]);
 
-sResizeWatch.on('custom-size', function(){
+s.resizeWatch.on('custom-size', function(){
   console.log('thats what I talking about!');
 });
 ```
@@ -561,13 +561,13 @@ window.addEventListener('resize', function () {
   console.log('This function will execute many times while browser is resizing.');
 }, true);
 
-sResizeWatch.onResizeEnd( function(){
+s.resizeWatch.onResizeEnd( function(){
   console.log('This function will execute after browser stops resizing.');
   //delay of 50ms is used to detect resize end. on slow resize it can execute more than once.
 });
 
 //or you youst want a cleaner way of writing resize event listener. 
-sResizeWatch.onResize( function() {
+s.resizeWatch.onResize( function() {
   console.log('this will be called contentiously while window is resized. onResizeEnd is more suitable for recourse intensive operations. ');
 });
 ```
