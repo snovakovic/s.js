@@ -472,11 +472,11 @@ Meet small s.resizeWatch library to make your life easier and your code cleaner.
 
 ```javascript
 s.resizeWatch.on('mobile', function() {
-  console.log("function that will be executed if current screen size is mobile and every time screen sizes switche to mobile screen size");
+  console.log("function that will be executed if current screen size is mobile and every time screen sizes switch to mobile screen size");
 });
 
 s.resizeWatch.queueOn('mobile', function() {
-  console.log("function that will be executed every time screen size switche to mobile screen size");
+  console.log("function that will be executed every time screen size switch to mobile screen size");
 });
 
 s.resizeWatch.off('mobile', function() {
