@@ -464,6 +464,7 @@ s.is.ip('1.45.238.1234'); //=> false
 
 ResizeWatch
 -----
+ex: https://github.com/snovakovic/sResizeWatch
 Do you need to execute JavaScript function when screen size change to match CSS inside media query? 
 Did you notice that $(window).width() < 768 does not match media query 768 inside your css code. 
 
