@@ -501,24 +501,23 @@ It's just friendly defined name for screen size.
 
 Here is the list of default screen sizes(based on bootstrap breakpoints):
 ```javascript
-       //default screen sizes
-		screenSizes = [
-      {
-        minWidth: 992,
-        name: 'desktop'
-      },
-      {
-        minWidth: 768,
-        maxWidth: 991,
-        name: 'tablet'
-      },
-      {
-        maxWidth: 767,
-        name: 'mobile'
-      }
-    ]; 
-    });
-
+//default screen sizes
+screenSizes = [
+  {
+    minWidth: 992,
+    name: 'desktop'
+  },
+  {
+    minWidth: 768,
+    maxWidth: 991,
+    name: 'tablet'
+  },
+  {
+    maxWidth: 767,
+    name: 'mobile'
+  }
+]; 
+});
 ```
 
 Jep this is great but what if I need some other screen size? 
