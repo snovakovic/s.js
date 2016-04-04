@@ -116,18 +116,6 @@ $.post( "save-contact-url", )
 ``` 
 
 
-Resize watch
------
-Watch for layout change in media queries and other resize events. 
-for documentation reference to 
-https://github.com/snovakovic/sResizeWatch
-
-Usage is same except we call it now with s.resizeWatch instead of sResizeWatch
-
-e.g sResizeWatch.on('mobile', function() {}); is now 
-s.resizeWatch.on('mobile', function() {});
-
-
 String Helpers
 -----
 
@@ -473,6 +461,115 @@ returns truy only for IPv6 addresses. it will return false for IPv6 addresses
 s.is.ip('31.45.238.138'); //=> true
 s.is.ip('1.45.238.1234'); //=> false
 ``` 
+
+ResizeWatch
+-----
+Do you need to execute JavaScript function when screen size change to match CSS inside media query? 
+Did you notice that $(window).width() < 768 does not match media query 768 inside your css code. 
+
+Meet small s.resizeWatch library to make your life easier and your code cleaner. 
+
+```javascript
+sResizeWatch.on('mobile', function() {
+  console.log("function that will be executed if current screen size is mobile and every time screen sizes switche to mobile screen size");
+});
+
+sResizeWatch.queueOn('mobile', function() {
+  console.log("function that will be executed every time screen size switche to mobile screen size");
+});
+
+sResizeWatch.off('mobile', function() {
+  console.log("function that will be executed if current screen size is not mobile and every time screen size switch from mobile to some other screen size");
+});
+
+sResizeWatch.queueOff('mobile', function() {
+  console.log("function that will be executed every time screen size switch from mobile to some other screen size");
+});
+
+sResizeWatch.once('desktop', function() {
+  console.log("This function will execute only once if current screen size is desktop or first time it change to desktop screen size.");
+});
+
+
+sResizeWatch.is('desktop') //=> true is current screen size is desktop
+```
+
+You may ask what is 'mobile' inside s.resizeWatch.on ?
+
+It's just friendly defined name for screen size. 
+
+Here is the list of default screen sizes, that match bootstrap media query breakpoints:
+```javascript
+       //default screen sizes
+		screenSizes = [
+      {
+        minWidth: 992,
+        name: 'desktop'
+      },
+      {
+        minWidth: 768,
+        maxWidth: 991,
+        name: 'tablet'
+      },
+      {
+        maxWidth: 767,
+        name: 'mobile'
+      }
+    ]; 
+    });
+
+```
+
+Jep this is great but what if I need some other screen size? 
+
+Where is the fuss just add it. 
+
+```javascript
+//add new screen size
+sResizeWatch.addSize({
+  maxWidth: 1088,
+  name: 'services-break-point'
+});
+
+```
+
+But what if default screen sizes is not your coup of tea?
+Ok, ok I hear you no need to yell, just override default screen sizes with you precious screen sizes and leave me alone.  
+
+```javascript
+//change screen sizes completely
+sResizeWatch.setNewScreenSizes([{
+  maxWidth: 1088,
+  name: 'services-break-point'
+}, 
+{
+  maxWidth: 700,
+  minWidth: 450,
+  name: 'custom-size'
+}]);
+
+sResizeWatch.on('custom-size', function(){
+  console.log('thats what I talking about!');
+});
+```
+
+Want to execute function after browser stops resizing? 
+
+```javascript
+window.addEventListener('resize', function () {
+  console.log('This function will execute many times while browser is resizing.');
+}, true);
+
+sResizeWatch.onResizeEnd( function(){
+  console.log('This function will execute after browser stops resizing.');
+  //delay of 50ms is used to detect resize end. on slow resize it can execute more than once.
+});
+
+//or you youst want a cleaner way of writing resize event listener. 
+sResizeWatch.onResize( function() {
+  console.log('this will be called contentiously while window is resized. onResizeEnd is more suitable for recourse intensive operations. ');
+});
+```
 
 
 Object Helpers
