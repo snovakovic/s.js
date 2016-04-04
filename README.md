@@ -492,7 +492,7 @@ s.resizeWatch.once('desktop', function() {
 });
 
 
-s.resizeWatch.is('desktop') //=> true is current screen size is desktop
+s.resizeWatch.is('desktop') //=> true if current screen size is desktop.
 ```
 
 You may ask what is 'mobile' inside s.resizeWatch.on ?
