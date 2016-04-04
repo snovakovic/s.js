@@ -1,0 +1,37 @@
+{
+  "name": "s.js",
+  "version": "1.0.0",
+  "description": "s.js https://github.com/snovakovic/s.js",
+  "main": "dist/s.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snovakovic/s.js.git"
+  },
+  "keywords": [
+    "s.js"
+  ],
+  "author": "stefan.novakovich@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/snovakovic/s.js/issues"
+  },
+  "homepage": "https://github.com/snovakovic/s.js#readme",
+  "dependencies": {
+    "connect-livereload": "^0.5.4",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.0",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "^0.5.3",
+    "karma-jasmine": "^0.3.6",
+    "karma-junit-reporter": "^0.3.8",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "phantomjs": "^1.9.19"
+  }
+}

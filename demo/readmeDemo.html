@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>sModule example</title>
+
+  <script type="text/javascript" src="../dist/s.js"></script>
+  
+</head>
+
+<body>
+  <h1>Look at console for output</h1>
+  <p>It contails examples provided in readme file</p>
+  
+  <script>
+    console.log("UTILITIES\n");
+    console.log(s.random(1,10), "=> s.random(1,10)");
+    console.log(s.random(['a', 'b', 'c']), "=> s.random(['a', 'b', 'c'])");
+    
+    console.log("\nSTRING HELPERS\n");
+    console.log(s.replaceAll("this is old value in old string", "old", "new"), '=> s.replaceAll("this is old value in old string", "old", "new");');
+    console.log(s.capitalize('mAte'), '=> s.capitalize("mAte")');
+    console.log(s.capitalize('mAte', true), "=> s.capitalize('mAte', true)");
+    console.log(s.capitalize('MAte', true), "=> s.capitalize('MAte', true)");
+    console.log(s.contains('abc Da', 'da'), "=> s.contains('abc Da', 'da')");
+    console.log(s.contains('abc Da', 'da', true), "=> s.contains('abc Da', 'da', true)");
+    console.log(s.contains('abc Da', 'Da'), "=> s.contains('abc Da', 'Da')");
+    console.log(s.contains('abc Da', 'bc'), "=> s.contains('abc Da', 'bc')");
+    console.log(s.chop('whitespace', 3), "=> s.chop('whitespace', 3)");
+    console.log(s.clean('abc'), "=> s.clean('abc')`");
+    console.log(s.clean('abc '), "=> s.clean('abc ')");
+    console.log(s.clean('  ab   c  '), "=> s.clean('  ab   c  ')");
+    console.log(s.truncate('stefan.novakovich@gmail.com', 100), "=> s.truncate('stefan.novakovich@gmail.com', 100)");
+    console.log(s.truncate('stefan.novakovich@gmail.com', 10), "=> s.truncate('stefan.novakovich@gmail.com', 10)");
+    console.log(s.truncate('stefan.novakovich@gmail.com', 10, ' ...more'), "=> s.truncate('stefan.novakovich@gmail.com', 10, ' ...more')");
+    console.log(s.chop('whitespace', 3), "=> s.chop('whitespace', 3)");
+    
+    console.log("\n ARRAY HELPERS\n");
+
+    console.log(s.remove(['a', 'b', 'c', 'd', 'c'], 'c'), "=> s.remove(['a', 'b', 'c', 'd', 'c'], 'c')");
+    console.log(s.remove(['a', 'b', 'c', 'd', 'c'], 'c', 1), "=> s.remove(['a', 'b', 'c', 'd', 'c'], 'c', 1)");
+    console.log(s.remove(['a', 'b', 'c', 'd', 'c'], 'c', -1), "=> s.remove(['a', 'b', 'c', 'd', 'c'], 'c', -1)");
+    console.log(s.remove(['c','a', 'b', 'c', 'd', 'c'], 'c', -2), "=> s.remove(['c','a', 'b', 'c', 'd', 'c'], 'c', -2)");
+    console.log(s.shuffle(['a', 'b', 'c', 'd', 'c']), "=> s.shuffle(['a', 'b', 'c', 'd', 'c'])");
+    console.log(s.getFilledArray(0, 4), "=> s.getFilledArray(0, 4)");
+    console.log(s.getFilledArray("a", 3), "=> s.getFilledArray('a', 3)");
+    console.log(s.unique([1,1,2,3,2,1,3]), "=> s.unique([1,1,2,3,2,1,3])");
+    console.log(s.unique(["a", "b", "a"]), "=> s.unique(['a', 'b', 'a'])");
+    console.log();
+    console.log();
+    console.log();
+    
+  </script>
+
+</body>
+
+</html>
