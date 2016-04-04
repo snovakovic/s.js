@@ -565,7 +565,7 @@ s.resizeWatch.onResizeEnd( function(){
   //delay of 50ms is used to detect resize end. on slow resize it can execute more than once.
 });
 
-//or you youst want a cleaner way of writing resize event listener. 
+//or you want cleaner way for writing resize listeners. 
 s.resizeWatch.onResize( function() {
   console.log('this will be called contentiously while window is resized. onResizeEnd is more suitable for recourse intensive operations. ');
 });
