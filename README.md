@@ -319,8 +319,8 @@ console.log(val); //=> 3
 stack.length(); //=> 1
 stack.array; //=> [2]
 
-//if there is no value in stack .remove will return null instead of removed value
-var stack2  s.stack();
+//if there is no value in stack .remove() will return null instead of removed value
+var stack2 = s.stack();
 console.log(stack2.remove()) //=> null
 stack2.array //=> []
 
@@ -344,12 +344,12 @@ queue.add(3);
 queue.length(); //get length of queue. => 2
 queue.array; //get raw queue array => [2,3]
 var val = queue.remove(); //remove last added value from queue
-console.log(val); //=> 3
+console.log(val); //=> 2
 queue.length(); //=> 1
-queue.array; //=> [2]
+queue.array; //=> [3]
 
-//if there is no value in queue .remove will return null instead of removed value
-var queue2  s.queue();
+//if there is no value in queue .remove() will return null instead of removed value
+var queue2 = s.queue();
 console.log(queue2.remove()) //=> null
 queue2.array //=> []
 

@@ -210,6 +210,29 @@ describe('s.array', function() {
       expect(stack2.array).toEqual([6]);
       expect(stack3.array).toEqual([7, 8]);
     });
+
+    it('readme example should be correct', function() {
+      var stack = s.stack();
+      stack.add(2);
+      stack.add(3);
+      expect(stack.length()).toEqual(2);
+      expect(stack.array).toEqual([2, 3]);
+      var val = stack.remove();
+      expect(val).toEqual(3);
+      expect(stack.length()).toEqual(1);
+      expect(stack.array).toEqual([2]);
+
+      var stack2 = s.stack();
+      expect(stack2.remove()).toEqual(null);
+      expect(stack2.array).toEqual([]);
+
+      var stack3 = s.stack([1, 2, 3]);
+      stack3.add(4);
+      expect(stack3.array).toEqual([1, 2, 3, 4]);
+      expect(stack3.remove()).toEqual(4);
+      expect(stack3.remove()).toEqual(3);
+      expect(stack3.array).toEqual([1, 2]);
+    });
   });
 
 
@@ -254,6 +277,29 @@ describe('s.array', function() {
       expect(queue1.array).toEqual([1, 5]);
       expect(queue2.array).toEqual([6]);
       expect(queue3.array).toEqual([7, 8]);
+    });
+
+    it('readme example should be correct', function() {
+      var queue = s.queue();
+      queue.add(2);
+      queue.add(3);
+      expect(queue.length()).toEqual(2);
+      expect(queue.array).toEqual([2, 3]);
+      var val = queue.remove();
+      expect(val).toEqual(2);
+      expect(queue.length()).toEqual(1);
+      expect(queue.array).toEqual([3]);
+
+      var queue2 = s.queue();
+      expect(queue2.remove()).toEqual(null);
+      expect(queue2.array).toEqual([]);
+
+      var queue3 = s.queue([1, 2, 3]);
+      queue3.add(4);
+      expect(queue3.array).toEqual([1, 2, 3, 4]);
+      expect(queue3.remove()).toEqual(1);
+      expect(queue3.remove()).toEqual(2);
+      expect(queue3.array).toEqual([3, 4]);
     });
   });
 
