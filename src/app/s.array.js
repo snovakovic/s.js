@@ -157,7 +157,7 @@
       var _stack = defaultArray || [];
       return {
         add: function(val) {
-          _stack.push(val);
+          Array.isArray(val) ? Array.prototype.push.apply(_stack, val) : _stack.push(val);
         },
         remove: function() {
           return _stack.length ? _stack.pop() : null;
@@ -181,7 +181,10 @@
       var _queue = defaultArray || [];
       return {
         add: function(val) {
-          _queue.push(val);
+          Array.isArray(val) ? Array.prototype.push.apply(_queue, val) : _queue.push(val);
+        },
+        addRange: function(range) {
+          Array.prototype.push.apply(_queue, range);
         },
         remove: function() {
           return _queue.length ? _queue.shift() : null;

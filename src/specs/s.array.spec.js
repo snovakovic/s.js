@@ -214,6 +214,14 @@ describe('s.array', function() {
       expect(stack3.array).toEqual([7, 8]);
     });
 
+    it('add multiple values should work as expected', function() {
+      var stack = s.stack([1]);
+      stack.add(2);
+      stack.add([3, 4]);
+      expect(stack.array).toEqual([1, 2, 3, 4]);
+      expect(stack.peek()).toEqual(4);
+    });
+
     it('readme example should be correct', function() {
       var stack = s.stack();
       stack.add(2);
@@ -230,8 +238,8 @@ describe('s.array', function() {
       expect(stack2.remove()).toEqual(null);
       expect(stack2.array).toEqual([]);
 
-      var stack3 = s.stack([1, 2, 3]);
-      stack3.add(4);
+      var stack3 = s.stack([1, 2]);
+      stack3.add([3, 4]);
       expect(stack3.array).toEqual([1, 2, 3, 4]);
       expect(stack3.remove()).toEqual(4);
       expect(stack3.remove()).toEqual(3);
@@ -287,6 +295,14 @@ describe('s.array', function() {
       expect(queue3.array).toEqual([7, 8]);
     });
 
+    it('add multiple values should work as expected', function() {
+      var queue = s.queue([1]);
+      queue.add(2);
+      queue.add([3, 4]);
+      expect(queue.array).toEqual([1, 2, 3, 4]);
+      expect(queue.peek()).toEqual(1);
+    });
+
     it('readme example should be correct', function() {
       var queue = s.queue();
       queue.add(2);
@@ -303,8 +319,8 @@ describe('s.array', function() {
       expect(queue2.remove()).toEqual(null);
       expect(queue2.array).toEqual([]);
 
-      var queue3 = s.queue([1, 2, 3]);
-      queue3.add(4);
+      var queue3 = s.queue([1, 2]);
+      queue3.add([3, 4]);
       expect(queue3.array).toEqual([1, 2, 3, 4]);
       expect(queue3.remove()).toEqual(1);
       expect(queue3.remove()).toEqual(2);

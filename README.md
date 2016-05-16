@@ -311,7 +311,7 @@ Stack is instantiated by calling s.stack().
 We can instantiate stack by passing optional start array s.stack([1,2,3]).
 
 Stack Operations:
-  * .add() - add new item to stack
+  * .add() - add new item to stack. We can one value or array of values into stack
   * .remove() - remove item from stack. Removed items is returned or in case of empty stack null is returned.
   * .peek() - peek next value in stack without modifying stack
   * .length() - get size of stack
@@ -336,8 +336,8 @@ console.log(stack2.remove()) //=> null
 stack2.array //=> []
 
 //stack can be instantiated with default array
-var stack3 = s.stack([1,2,3]);
-stack3.add(4);
+var stack3 = s.stack([1,2]);
+stack3.add([3,4]);
 stack3.array; //=> [1,2,3,4]
 stack3.remove(); //=> 4
 stack3.remove(); //=> 3
@@ -351,7 +351,7 @@ Queue is instantiated by calling s.queue().
 We can instantiate queue by passing optional start array s.queue([1,2,3]).
 
 Queue Operations:
-  * .add() - add new item to queue
+  * .add() - add new item to queue. We can one value or array of values into stack
   * .remove() - remove item from queue. Removed items is returned or in case of empty queue null is returned.
   * .peek() - peek next value in queue without modifying queue
   * .length() - get size of queue
@@ -375,8 +375,8 @@ console.log(queue2.remove()) //=> null
 queue2.array //=> []
 
 //queue can be instantiated with default array
-var queue3 = s.queue([1,2,3]);
-queue3.add(4);
+var queue3 = s.queue([1,2]);
+queue3.add([3, 4]);
 queue3.array; //=> [1,2,3,4]
 queue3.remove(); //=> 1
 queue3.remove(); //=> 2
