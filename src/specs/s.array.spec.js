@@ -167,4 +167,96 @@ describe('s.array', function() {
     });
   });
 
+
+  describe('stack', function() {
+    it('should operate with stack correctly', function() {
+      var stack = s.stack();
+      stack.add(2);         // stack is now [2]
+      stack.add(5);         // stack is now [2, 5]
+      expect(stack.array).toEqual([2, 5]);
+      var i = stack.remove(); // stack is now [2]
+      expect(i).toEqual(5);
+      expect(stack.array).toEqual([2]);
+      i = stack.remove();
+      expect(i).toEqual(2);
+      expect(stack.array).toEqual([]);
+      i = stack.remove();
+      expect(i).toEqual(null);
+      i = stack.remove();
+      expect(i).toEqual(null);
+      expect(stack.array).toEqual([]);
+    });
+
+    it('should operate with default stack correctly', function() {
+      var stack = s.stack([1, 2, 3]);
+      stack.add(2);
+      expect(stack.array).toEqual([1, 2, 3, 2]);
+      expect(stack.length()).toEqual(4);
+      expect(stack.remove()).toEqual(2);
+      expect(stack.remove()).toEqual(3);
+    });
+
+    it('stack arrays should operate independently', function() {
+      var stack1 = s.stack([1]);
+      var stack2 = s.stack();
+      var stack3 = s.stack();
+
+      stack1.add(5);
+      stack2.add(6);
+      stack3.add(7);
+      stack3.add(8);
+
+      expect(stack1.array).toEqual([1, 5]);
+      expect(stack2.array).toEqual([6]);
+      expect(stack3.array).toEqual([7, 8]);
+    });
+  });
+
+
+  describe('queue', function() {
+    it('should operate with queue correctly', function() {
+      var queue = s.queue();
+      queue.add(2);         // queue is now [2]
+      queue.add(5);         // queue is now [2, 5]
+      expect(queue.array).toEqual([2, 5]);
+      var i = queue.remove(); // queue is now [5]
+      expect(i).toEqual(2);
+      expect(queue.array).toEqual([5]);
+      i = queue.remove();
+      expect(i).toEqual(5);
+      expect(queue.array).toEqual([]);
+      i = queue.remove();
+      expect(i).toEqual(null);
+      i = queue.remove();
+      expect(i).toEqual(null);
+      expect(queue.array).toEqual([]);
+    });
+
+    it('should operate with default queue correctly', function() {
+      var queue = s.queue([1, 2, 3]);
+      queue.add(2);
+      expect(queue.array).toEqual([1, 2, 3, 2]);
+      expect(queue.length()).toEqual(4);
+      expect(queue.remove()).toEqual(1);
+      expect(queue.remove()).toEqual(2);
+    });
+
+    it('queue arrays should operate independently', function() {
+      var queue1 = s.queue([1]);
+      var queue2 = s.queue();
+      var queue3 = s.queue();
+
+      queue1.add(5);
+      queue2.add(6);
+      queue3.add(7);
+      queue3.add(8);
+
+      expect(queue1.array).toEqual([1, 5]);
+      expect(queue2.array).toEqual([6]);
+      expect(queue3.array).toEqual([7, 8]);
+    });
+  });
+
+
+
 });

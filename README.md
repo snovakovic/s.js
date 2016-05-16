@@ -85,7 +85,7 @@ s.execute(function() {}).when(function() {
 
 Messaging
 -----
-Subscribe based messaging. 
+Subscribe based messaging.
 ex sMsg https://github.com/snovakovic/sMsg
 
 ```javascript
@@ -100,7 +100,7 @@ s.listen('message-name', function() {});
 s.broadcast('message-name', {additionalInfo: 'info'});
 //we can trigger it as many time as we like
 s.broadcast('message-name', {additionalInfo: 'info'});
-``` 
+```
 
 ```javascript
 s.listen('new-contact-saved', function(contact) {
@@ -113,7 +113,7 @@ $.post( "save-contact-url", )
     //this will execute all new-contact-saved subscribers
     s.broadcast('new-contact-saved', contact);
   });
-``` 
+```
 
 
 String Helpers
@@ -190,7 +190,7 @@ var testArr = ['a', 'b','c', 'd', 'e'];
 s.each(testArr, function(val, i) {
   console.log(val);
   console.log(i);
-}); 
+});
 //=> a b c d e
 //=> 0 1 2 3 4
 
@@ -283,8 +283,8 @@ if no condition is passed it returns first element of array.
 
 ```javascript
 s.first([1,1,2,3,2,1,3]); //=> 1
-s.first([1,1,2,3,2,1,3], function(e) { 
-  return e === 2; 
+s.first([1,1,2,3,2,1,3], function(e) {
+  return e === 2;
 }); //=> 2
 s.first([{name:'test'}], function(e) {
   return e.name = 'test';
@@ -297,14 +297,69 @@ if no condition is passed it returns last element of array.
 
 ```javascript
 s.last([1,1,2,3,2,1,3]); //=> 3
-s.last([1,1,2,3,2,1,3], function(e) { 
-  return e === 2; 
+s.last([1,1,2,3,2,1,3], function(e) {
+  return e === 2;
 }); //=> 2
 s.last([{name:'test'}], function(e) {
   return e.name = 'test';
 }); //=> {name:'test'}
 ```
 
+#### stack
+Stack implementation. FIFO: first in first out.
+
+```javascript
+var stack = s.stack(); //instantiate new stack
+stack.add(2); //add new value in stack.
+stack.add(3);
+stack.length(); //get length of stack. => 2
+stack.array; //get raw stack array => [2,3]
+var val = stack.remove(); //remove last added value from stack
+console.log(val); //=> 3
+stack.length(); //=> 1
+stack.array(); //=> [2]
+
+//if there is no value in stack .remove will return null instead of removed value
+var stack2  s.stack();
+console.log(stack2.remove()) //=> null
+stack2.array //=> []
+
+//stack can be instantiated with default array
+var stack3 = s.stack([1,2,3]);
+stack3.add(4);
+stack3.array; //=> [1,2,3,4]
+stack3.remove(); //=> 4
+stack3.remove(); //=> 3
+stack3.array; //=> [1,2]
+
+```
+
+#### queue
+Queue implementation. LIFO: last in first out.
+
+```javascript
+var queue = s.queue(); //instantiate new queue
+queue.add(2); //add new value in queue.
+queue.add(3);
+queue.length(); //get length of queue. => 2
+queue.array; //get raw queue array => [2,3]
+var val = queue.remove(); //remove last added value from queue
+console.log(val); //=> 3
+queue.length(); //=> 1
+queue.array(); //=> [2]
+
+//if there is no value in queue .remove will return null instead of removed value
+var queue2  s.queue();
+console.log(queue2.remove()) //=> null
+queue2.array //=> []
+
+//queue can be instantiated with default array
+var queue3 = s.queue([1,2,3]);
+queue3.add(4);
+queue3.array; //=> [1,2,3,4]
+queue3.remove(); //=> 1
+queue3.remove(); //=> 2
+queue3.array; //=> [3,4]
 
 Is
 -----
@@ -366,7 +421,7 @@ s.is.object([]); //=> false
 s.is.object(null); //=> false
 s.is.object(function(){}); //=> false
 s.is.object(false); //=> false
-```   
+```
 #### is.function
 
 ```javascript
@@ -374,7 +429,7 @@ s.is.function(function(){}); //=> true
 s.is.function([]); //=> false
 s.is.function({}); //=> false
 s.is.function(false); //=> false
-```  
+```
 
 #### is.array
 
@@ -382,7 +437,7 @@ s.is.function(false); //=> false
 s.is.array([]); //=> true
 s.is.array({}); //=> false
 s.is.array(null); //=> false
-```  
+```
 
 #### is.arrayWithValue
 
@@ -391,7 +446,7 @@ s.is.arrayWithValue([1]); //=> true
 s.is.arrayWithValue([]); //=> false
 s.is.arrayWithValue({}); //=> false
 s.is.arrayWithValue(null); //=> false
-``` 
+```
 #### Regular Expression tests
 Test string against predefined regular expressions.
 
@@ -401,7 +456,7 @@ Test string against predefined regular expressions.
 s.is.alphabetic('abCd'); //=> true
 s.is.alphabetic('Ab1'); //=> false
 s.is.alphabetic('@a/'); //=> false
-```  
+```
 
 ##### is.alphanumeric
 
@@ -409,7 +464,7 @@ s.is.alphabetic('@a/'); //=> false
 s.is.alphanumeric('abCd'); //=> true
 s.is.alphanumeric('Ab1'); //=> true
 s.is.alphanumeric('@a/'); //=> false
-```  
+```
 ##### is.numeric
 
 ```javascript
@@ -417,7 +472,7 @@ s.is.numeric('103'); //=> true
 s.is.numeric('-103'); //=> false
 s.is.numeric('103.1'); //=> false
 s.is.numeric('103a'); //=> false
-``` 
+```
 
 ##### is.lowercase
 
@@ -426,7 +481,7 @@ s.is.lowercase('a'); //=> true
 s.is.lowercase('abcd'); //=> true
 s.is.lowercase('abD'); //=> false
 s.is.lowercase('a@'); //=> false
-``` 
+```
 
 ##### is.uppercase
 
@@ -435,7 +490,7 @@ s.is.lowercase('A'); //=> true
 s.is.lowercase('ABC'); //=> true
 s.is.lowercase('abD'); //=> false
 s.is.lowercase('A@'); //=> false
-``` 
+```
 
 ##### is.email
 ```javascript
@@ -443,32 +498,32 @@ s.is.email('stefan.novakovich@gmail.com'); //=> true
 s.is.email('s@b.com'); //=> true
 s.is.email('stefan@st@mail.com'); //=> false
 s.is.email('fake'); //=> false
-``` 
+```
 
 ##### is.strongpassword
 check if string is strong password.
-To be strong password string must contain at least one lowercase latter, 
+To be strong password string must contain at least one lowercase latter,
 one uppercase letter, one number and min 6 characters
 ```javascript
 s.is.strongpassword('Stefan1'); //=> true
 s.is.strongpassword('password'); //=> false
 s.is.strongpassword('S1t'); //=> false
-``` 
+```
 
 ##### is.ip
 returns truy only for IPv6 addresses. it will return false for IPv6 addresses
 ```javascript
 s.is.ip('31.45.238.138'); //=> true
 s.is.ip('1.45.238.1234'); //=> false
-``` 
+```
 
 ResizeWatch
 -----
 ex: https://github.com/snovakovic/sResizeWatch
-Do you need to execute JavaScript function when screen size change to match CSS inside media query? 
-Did you notice that $(window).width() < 768 does not match media query 768 inside your css code. 
+Do you need to execute JavaScript function when screen size change to match CSS inside media query?
+Did you notice that $(window).width() < 768 does not match media query 768 inside your css code.
 
-Meet small s.resizeWatch library to make your life easier and your code cleaner. 
+Meet small s.resizeWatch library to make your life easier and your code cleaner.
 
 ```javascript
 s.resizeWatch.on('mobile', function() {
@@ -497,7 +552,7 @@ s.resizeWatch.is('desktop') //=> true if current screen size is desktop.
 
 You may ask what is 'mobile' inside s.resizeWatch.on ?
 
-It's just friendly defined name for screen size. 
+It's just friendly defined name for screen size.
 
 Here is the list of default screen sizes(based on bootstrap breakpoints):
 ```javascript
@@ -516,13 +571,13 @@ screenSizes = [
     maxWidth: 767,
     name: 'mobile'
   }
-]; 
+];
 });
 ```
 
-Jep this is great but what if I need some other screen size? 
+Jep this is great but what if I need some other screen size?
 
-Where is the fuss just add it. 
+Where is the fuss just add it.
 
 ```javascript
 //add new screen size
@@ -534,14 +589,14 @@ s.resizeWatch.addSize({
 ```
 
 But what if default screen sizes is not your coup of tea?
-OK, OK I hear you no need to yell, just override default screen sizes with you precious screen sizes and leave me alone.  
+OK, OK I hear you no need to yell, just override default screen sizes with you precious screen sizes and leave me alone.
 
 ```javascript
 //change screen sizes completely
 s.resizeWatch.setNewScreenSizes([{
   maxWidth: 1088,
   name: 'services-break-point'
-}, 
+},
 {
   maxWidth: 700,
   minWidth: 450,
@@ -553,7 +608,7 @@ s.resizeWatch.on('custom-size', function(){
 });
 ```
 
-Want to execute function after browser stops resizing? 
+Want to execute function after browser stops resizing?
 
 ```javascript
 window.addEventListener('resize', function () {
@@ -565,7 +620,7 @@ s.resizeWatch.onResizeEnd( function(){
   //delay of 50ms is used to detect resize end. on slow resize it can execute more than once.
 });
 
-//or you want cleaner way for writing resize listeners. 
+//or you want cleaner way for writing resize listeners.
 s.resizeWatch.onResize( function() {
   console.log('this will be called contentiously while window is resized. onResizeEnd is more suitable for recourse intensive operations. ');
 });

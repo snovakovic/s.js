@@ -102,8 +102,8 @@
   };
 
   /**
-  * Returns first element of array if no condition is passed, 
-  * else if there is condition returns first element of array that meets condition 
+  * Returns first element of array if no condition is passed,
+  * else if there is condition returns first element of array that meets condition
   * if element is not found undefined is returned
   */
   s.first = function(arr, condition) {
@@ -120,14 +120,14 @@
     } else {
       return arr[0]
     }
-    
+
     return undefined;
 
   };
 
   /**
-  * Returns last element of array if no condition is passed, 
-  * else if there is condition returns last element of array that meets condition 
+  * Returns last element of array if no condition is passed,
+  * else if there is condition returns last element of array that meets condition
   * if element is not found undefined is returned
   */
   s.last = function(arr, condition) {
@@ -144,9 +144,51 @@
     } else {
       return arr[arr.length - 1]
     }
-    
+
     return undefined;
 
+  };
+
+  /*****
+   * Stack implementation FIFI: first in first out
+  ******/
+  s.stack = function(defaultArray) {
+    return (function() {
+      var _stack = defaultArray || [];
+      return {
+        add: function(val) {
+          _stack.push(val);
+        },
+        remove: function() {
+          return _stack.length ? _stack.pop() : null;
+        },
+        array: _stack,
+        length: function() {
+          return _stack.length;
+        }
+      }
+    })();
+  };
+
+  /*****
+  * Queue implementation LIFO last in first out
+  ******/
+  s.queue = function(defaultArray) {
+    return (function() {
+      var _queue = defaultArray || [];
+      return {
+        add: function(val) {
+          _queue.push(val);
+        },
+        remove: function() {
+          return _queue.length ? _queue.shift() : null;
+        },
+        array: _queue,
+        length: function() {
+          return _queue.length;
+        }
+      }
+    })();
   };
 
 
