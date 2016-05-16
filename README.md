@@ -382,6 +382,8 @@ queue3.array; //=> [1,2,3,4]
 queue3.remove(); //=> 1
 queue3.remove(); //=> 2
 queue3.array; //=> [3,4]
+```
+
 
 Is
 -----
