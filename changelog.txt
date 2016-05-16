@@ -1,4 +1,31 @@
-﻿/***************** Version 0.23 ***********************/
+﻿
+
+/***************** Version 1.1.0 ***********************/
+
+added s.queue
+added s.stack
+
+/***************** Version 1.1.0 ***********************/
+
+/***************** Version 1.0.0 ***********************/
+
+Library refacotring and merging of external modules sResizeWatch
+and sMsg. Change of unit test specs to Jasmine specs.
+
+/***************** Version 1.0.0 ***********************/
+
+
+
+
+
+
+/***************** LEGACY CHANGES ***********************/
+/********************************************************/
+
+Below are legacy pre 1.0.0 version changes
+
+
+/***************** Version 0.23 ***********************/
 
 add s.siblings
 
