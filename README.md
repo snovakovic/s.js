@@ -312,7 +312,7 @@ We can instantiate stack by passing optional start array s.stack([1,2,3]).
 
 Stack Operations:
   * .add() - add new item to stack
-  * .remove() - remove item from stack. Removed items is return value of function. In case of empty stack null is returned.
+  * .remove() - remove item from stack. Removed items is returned or in case of empty stack null is returned.
   * .peek() - peek next value in stack without modifying stack
   * .length() - get size of stack
   * .array - get raw stack array
@@ -353,7 +353,7 @@ We can instantiate queue by passing optional start array s.queue([1,2,3]).
 
 Queue Operations:
   * .add() - add new item to queue
-  * .remove() - remove item from queue. Removed items is return value of function. In case of empty queue null is returned.
+  * .remove() - remove item from queue. Removed items is returned or in case of empty queue null is returned.
   * .peek() - peek next value in queue without modifying queue
   * .length() - get size of queue
   * .array - get raw queue array
