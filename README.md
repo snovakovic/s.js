@@ -306,7 +306,7 @@ s.last([{name:'test'}], function(e) {
 ```
 
 #### stack
-Stack implementation. FIFO: first in first out.`
+Stack implementation. FIFO: first in first out.
 Stack is instantiated by calling s.stack().
 We can instantiate stack by passing optional start array s.stack([1,2,3]).
 
