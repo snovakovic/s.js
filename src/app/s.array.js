@@ -162,6 +162,9 @@
         remove: function() {
           return _stack.length ? _stack.pop() : null;
         },
+        peek: function() {
+          return _stack.length ? _stack[_stack.length - 1] : null;
+        },
         array: _stack,
         length: function() {
           return _stack.length;
@@ -182,6 +185,9 @@
         },
         remove: function() {
           return _queue.length ? _queue.shift() : null;
+        },
+        peek: function() {
+          return _queue.length ? _queue[0] : null;
         },
         array: _queue,
         length: function() {

@@ -306,7 +306,17 @@ s.last([{name:'test'}], function(e) {
 ```
 
 #### stack
-Stack implementation. FIFO: first in first out.
+Stack implementation. FIFO: first in first out.`
+Stack is instantiated by calling s.stack().
+We can instantiate stack by passing optional start array s.stack([1,2,3]).
+
+Stack Operations:
+  .add() - add new item to stack
+  .remove() - remove item from stack. removed items is return value of function. In case of empty stack null is returned.
+  .peek() - peek next value in stack without modifying stack
+  .length() - get size of stack
+  .array - get raw stack array
+
 
 ```javascript
 var stack = s.stack(); //instantiate new stack
@@ -314,6 +324,7 @@ stack.add(2); //add new value in stack.
 stack.add(3);
 stack.length(); //get length of stack. => 2
 stack.array; //get raw stack array => [2,3]
+stack.peek(); //=> 3 peek next value in stack without removing it
 var val = stack.remove(); //remove last added value from stack
 console.log(val); //=> 3
 stack.length(); //=> 1
@@ -337,12 +348,23 @@ stack3.array; //=> [1,2]
 #### queue
 Queue implementation. LIFO: last in first out.
 
+Queue is instantiated by calling s.queue().
+We can instantiate queue by passing optional start array s.queue([1,2,3]).
+
+Queue Operations:
+  .add() - add new item to queue
+  .remove() - remove item from queue. removed items is return value of function. In case of empty queue null is returned.
+  .peek() - peek next value in queue without modifying queue
+  .length() - get size of queue
+  .array - get raw queue array
+
 ```javascript
 var queue = s.queue(); //instantiate new queue
 queue.add(2); //add new value in queue.
 queue.add(3);
 queue.length(); //get length of queue. => 2
 queue.array; //get raw queue array => [2,3]
+stack.peek(); //=> 2 peek next value in stack without removing it
 var val = queue.remove(); //remove last added value from queue
 console.log(val); //=> 2
 queue.length(); //=> 1

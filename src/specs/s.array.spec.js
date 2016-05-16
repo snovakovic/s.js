@@ -192,7 +192,10 @@ describe('s.array', function() {
       stack.add(2);
       expect(stack.array).toEqual([1, 2, 3, 2]);
       expect(stack.length()).toEqual(4);
+      expect(stack.peek()).toEqual(2);
+      expect(stack.length()).toEqual(4);
       expect(stack.remove()).toEqual(2);
+      expect(stack.length()).toEqual(3);
       expect(stack.remove()).toEqual(3);
     });
 
@@ -217,6 +220,7 @@ describe('s.array', function() {
       stack.add(3);
       expect(stack.length()).toEqual(2);
       expect(stack.array).toEqual([2, 3]);
+      expect(stack.peek()).toEqual(3);
       var val = stack.remove();
       expect(val).toEqual(3);
       expect(stack.length()).toEqual(1);
@@ -260,7 +264,11 @@ describe('s.array', function() {
       queue.add(2);
       expect(queue.array).toEqual([1, 2, 3, 2]);
       expect(queue.length()).toEqual(4);
+      expect(queue.peek()).toEqual(1);
+      expect(queue.length()).toEqual(4);
       expect(queue.remove()).toEqual(1);
+      expect(queue.length()).toEqual(3);
+      expect(queue.peek()).toEqual(2);
       expect(queue.remove()).toEqual(2);
     });
 
@@ -285,6 +293,7 @@ describe('s.array', function() {
       queue.add(3);
       expect(queue.length()).toEqual(2);
       expect(queue.array).toEqual([2, 3]);
+      expect(queue.peek()).toEqual(2);
       var val = queue.remove();
       expect(val).toEqual(2);
       expect(queue.length()).toEqual(1);
