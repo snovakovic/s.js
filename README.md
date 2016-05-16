@@ -342,7 +342,6 @@ stack3.array; //=> [1,2,3,4]
 stack3.remove(); //=> 4
 stack3.remove(); //=> 3
 stack3.array; //=> [1,2]
-
 ```
 
 #### queue

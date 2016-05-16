@@ -1,7 +1,7 @@
 /*****************************************************
 	  s.js https://github.com/snovakovic/s.js
     author: stefan.novakovich@gmail.com
-    version: 1.0.0
+    version: 1.1.0
  ***************************************************/
 (function(s) {
 
@@ -177,6 +177,9 @@
         remove: function() {
           return _stack.length ? _stack.pop() : null;
         },
+        peek: function() {
+          return _stack.length ? _stack[_stack.length - 1] : null;
+        },
         array: _stack,
         length: function() {
           return _stack.length;
@@ -197,6 +200,9 @@
         },
         remove: function() {
           return _queue.length ? _queue.shift() : null;
+        },
+        peek: function() {
+          return _queue.length ? _queue[0] : null;
         },
         array: _queue,
         length: function() {
