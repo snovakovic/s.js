@@ -150,7 +150,7 @@
   };
 
   /*****
-   * Stack implementation FIFI: first in first out
+   * Stack implementation LIFO last in first out
   ******/
   s.stack = function(defaultArray) {
     return (function() {
@@ -174,7 +174,7 @@
   };
 
   /*****
-  * Queue implementation LIFO last in first out
+  * Queue implementation FIFI: first in first out
   ******/
   s.queue = function(defaultArray) {
     return (function() {

@@ -306,7 +306,7 @@ s.last([{name:'test'}], function(e) {
 ```
 
 #### stack
-Stack implementation. FIFO: first in first out.
+Stack implementation. LIFO: last in first out.
 Stack is instantiated by calling s.stack().
 We can instantiate stack by passing optional start array s.stack([1,2,3]).
 
@@ -345,7 +345,7 @@ stack3.array; //=> [1,2]
 ```
 
 #### queue
-Queue implementation. LIFO: last in first out.
+Queue implementation. FIFO: first in first out.
 
 Queue is instantiated by calling s.queue().
 We can instantiate queue by passing optional start array s.queue([1,2,3]).
