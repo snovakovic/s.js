@@ -1,7 +1,7 @@
 /*****************************************************
 	  s.js https://github.com/snovakovic/s.js
     author: stefan.novakovich@gmail.com
-    version: 1.2.1
+    version: 1.2.2
  ***************************************************/
 (function(s) {
 

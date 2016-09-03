@@ -1,7 +1,7 @@
 /*****************************************************
 	  s.js https://github.com/snovakovic/s.js
     author: stefan.novakovich@gmail.com
-    version: 1.2.1
+    version: 1.2.2
  ***************************************************/
 (function(s) {
 
@@ -714,18 +714,14 @@ if (!window.matchMedia) {
  ***************************************************/
 (function(s) {
 
-  /**
-  * Replace all occurrences in a string with a new value
-  * @example console.log(s.replaceAll("this is old value in old string", "old", "new"))
-   */
-  s.replaceAll = function(str, find, replace) {
-    return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
+  s.replaceAll = function(str, find) {
+    return {
+      with: function(replace) {
+        return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
+      }
+    }
   };
 
-    /*
-  * Converts first letter of the string to uppercase.
-  * @example capitalize("foo Bar"); => "Foo Bar";
-  */
   s.capitalize = function(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };

@@ -134,8 +134,7 @@ String Helpers
 Replace all occurrences of a string with a new value.
 
 ```javascript
-s(originalString).replaceAll(currentValue, newValue);
-s('this is old value in old string').replaceAll('old', 'new'); //=> this is new value in new string
+s('this is old value in old string').replaceAll('old').with('new'); //=> this is new value in new string
 ```
 
 #### capitalize
