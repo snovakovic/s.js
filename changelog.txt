@@ -1,4 +1,7 @@
-﻿/***************** Version 1.2.2 ***********************/
+﻿/***************** Version 1.3.0 ***********************/
+removing object helpers from library
+
+/***************** Version 1.2.2 ***********************/
 change s.replaceAll interface from s(str).replaceAll(oldValue, newValue) to s(str).replaceAll(oldValue).with(newValue)
 
 /***************** Version 1.2.1 ***********************/

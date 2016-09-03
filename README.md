@@ -1,4 +1,4 @@
-s.js (v1.2.2)
+s.js (v1.3.0)
 ======
 
 In a nutshell mishmash of helpful js methods.
@@ -655,75 +655,4 @@ s.resizeWatch.onResizeEnd( function(){
 s.resizeWatch.onResize( function() {
   console.log('this will be called contentiously while window is resized. onResizeEnd is more suitable for recourse intensive operations. ');
 });
-```
-
-
-Object Helpers
------
-!!! Object helpers may be depreciated in near future.
-
-#### getProperties
-Loop over object properties.
-Looping can be terminated by using return false in callback function.
-
-```javascript
-var obj = {
-  prop1: 'val1',
-  prop2: 'val2'
-};
-s.getProperties(obj, function(key, value) {
-  console.log(key + ' => ' + value);
-});
-//=> prop1 => val1
-//=> prop2 => val2
-
-s.getProperties(obj, function(key, value) {
-  console.log(key + ' => ' + value);
-  if(key === 'prop1') { return false; }
-});
-//=> prop1 => val1
-
-```
-
-#### merge
-Shallow merge provided objects.
-In case of the same property value from second object will override the values in the first object.
-Method accepts arbitrary number of object that will be merged together.
-
-```javascript
-var obj1 = {
-  prop1: 'obj1 prop1',
-  prop2: 'obj1 prop2',
-  prop3: [1,2,3,4],
-};
-
-var obj2 = {
-  prop1: 'obj2 prop1',
-  prop3: 'obj2 prop3',
-  prop4: 1,
-};
-
-var obj3 = {
-  prop3: 'obj3 prop3',
-  prop5: 3,
-};
-
-var merged = s.merge(obj1, obj2, obj3);
-console.log(merged);
-/*=>
-{
-  prop1: 'obj2 prop1',
-  prop2: 'obj1 prop2',
-  prop3: 'obj3 prop3',
-  prop4: 1,
-  prop5:3
-}
-*/
-```
-
-#### deepMerge
-Deep merge provided objects.
-
-```javascript
-var merged = s.deepMerge(obj1, obj2);
 ```
