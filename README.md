@@ -1,8 +1,9 @@
 s.js (v1.2.0)
 ======
 
-In a nutshell mishmash of helpfull js methods.
-global variable for s.js is snovakovic and it has to be unused in order for library to work.
+In a nutshell mishmash of helpful js methods.
+
+Global variable for s.js is snovakovic and it has to be unused in order for library to work.
 s.js will alias it self to variable s for easier/compact usage but only if variable s is unused.
 In case s var is used or you have other preferences then s you can use snovakovic.noConflict() to assing it to any variable of your choosing.
 all examples below will use shorter version s instead of full snovakovic version.
