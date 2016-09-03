@@ -3,20 +3,13 @@
  ***************************************************/
 (function(s) {
 
-  function getRandomNumber(from, to) {
-    return Math.floor(Math.random() * (to - from + 1) + from);
-  }
-
   /**
-  * Get random number between 2 provided numbers or random element from array if array is provided as argument.
+  * Get random number between 2 provided numbers.
 	* @example s.random(1, 10); get random number between 1 and 10 (1 and 10 are included)
 	*/
   s.random = function(from, to) {
     if (s.is.numeric(from) && s.is.numeric(to)) {
-      return getRandomNumber(parseInt(from), parseInt(to));
-    } else if (s.is.array(from)) {
-      var randIndex = getRandomNumber(0, from.length - 1);
-      return from.length > 0 ? from[randIndex] : undefined;
+      return Math.floor(Math.random() * (to - from + 1) + from);
     } else {
       throw new Error('Invalid argument exception');
     }
@@ -25,7 +18,7 @@
   /**
   * Get the parameter from URL by the name
   * @param key {string} the key for which value will be retrieved
-  * @example s.getUrlParam("firstName"); 
+  * @example s.getUrlParam("firstName");
   */
   s.getUrlParam = function(key) {
     var val = RegExp(key + '=' + '(.+?)(&|$)').exec(location.search) || null;
@@ -53,12 +46,12 @@
   }
 
   /**********************************************
-  * Returns a function, that, as long as it continues to be invoked, will not be triggered 
+  * Returns a function, that, as long as it continues to be invoked, will not be triggered
    ************************************************/
   s.debounce = function(func, wait) {
     var timeout;
     return function() {
-      var context = this; 
+      var context = this;
       var callNow = !timeout;
 
       clearTimeout(timeout);
@@ -74,9 +67,9 @@
 
   /*************************
   * execute function when condition becomes true
-  * example: 
-  ** a = false; 
-  ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 
+  * example:
+  ** a = false;
+  ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}):
   ** setTimeout(function(){ a= true; },30);
   ************************/
   s.execute = function(executeCb) {

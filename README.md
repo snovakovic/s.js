@@ -1,4 +1,4 @@
-s.js (v1.1.0)
+s.js (v1.1.1)
 ======
 
 In a nutshell mishmash of js methods.
@@ -7,11 +7,11 @@ Utilities
 ------
 
 #### random
-Get random number between 2 provided numbers or random element from array if array is provided as argument.
+Get random number between 2 provided numbers.
 
 ```javascript
+s.random(minNumber,maxNumber);
 s.random(1,10); //=> random number between 1 and 10 (1 and 10 are also included)
-s.random(['a', 'b', 'c']); //=> random return one element from array ('a' or 'b' or 'c')
 ```
 
 #### getUrlParam
