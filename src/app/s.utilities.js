@@ -112,4 +112,4 @@
   };
 
 
-})(window.s = window.s || {});
+})(window.snovakovic);

@@ -19,4 +19,4 @@
     subscribers[subscribe].push(cb);
   };
 
-})(window.s = window.s || {});
+})(window.snovakovic);

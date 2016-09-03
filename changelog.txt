@@ -1,4 +1,7 @@
-﻿
+﻿/***************** Version 1.2.0 ***********************/
+change s.js to be function not object
+add options for string helpers to be called as functions e.g s('test').capitalize instead of s.capitalize('test')
+add noConflict
 /***************** Version 1.1.1 ***********************/
 
 removed option to return random element from array with s.random

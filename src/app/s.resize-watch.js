@@ -53,7 +53,7 @@ if (!window.matchMedia) {
 
 /************************************
  * sResizeWatch
- * whatch for resize events - and switching between layouts. 
+ * whatch for resize events - and switching between layouts.
  * Detect when media query is triggered
  ****************************************/
 (function(s) {
@@ -255,5 +255,5 @@ if (!window.matchMedia) {
     return screenSizes;
   };
 
-})(window.s = window.s || {});
+})(window.snovakovic);
 

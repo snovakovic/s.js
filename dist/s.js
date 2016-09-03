@@ -1,9 +1,19 @@
 /*****************************************************
 	  s.js https://github.com/snovakovic/s.js
     author: stefan.novakovich@gmail.com
-    version: 1.1.0
+    version: 1.2.0
  ***************************************************/
 (function(s) {
+
+  //It will be added as s to global scope only if it does not exist already
+  window.s = window.s || s;
+
+  s.noConflict = function() {
+    if(window.s === window.snovakovic) {
+      window.s = undefined;
+    }
+    return window.snovakovic;
+  }
 
   s.common = {};
 
@@ -11,7 +21,20 @@
     return s.is.array(testVar) && testVar.length > 0;
   };
 
-})(window.s = window.s || {});
+})(window.snovakovic = function(callContext) {
+  var s = window.snovakovic;
+  //ALIASES THAT CAN BE USED AS FUNCTIONS AND AS OBJECT PROPERTIES
+  return {
+    //s.string.js
+    replaceAll: s.replaceAll.bind(null, callContext),
+    capitalize: s.capitalize.bind(null, callContext),
+    contains: s.contains.bind(null, callContext),
+    chop: s.chop.bind(null, callContext),
+    clean: s.clean.bind(null, callContext),
+    truncate: s.truncate.bind(null, callContext)
+  }
+
+});
 
 /*****************************************************
 	  Array Modification
@@ -165,14 +188,14 @@
   };
 
   /*****
-   * Stack implementation FIFI: first in first out
+   * Stack implementation LIFO last in first out
   ******/
   s.stack = function(defaultArray) {
     return (function() {
       var _stack = defaultArray || [];
       return {
         add: function(val) {
-          _stack.push(val);
+          Array.isArray(val) ? Array.prototype.push.apply(_stack, val) : _stack.push(val);
         },
         remove: function() {
           return _stack.length ? _stack.pop() : null;
@@ -189,14 +212,17 @@
   };
 
   /*****
-  * Queue implementation LIFO last in first out
+  * Queue implementation FIFI: first in first out
   ******/
   s.queue = function(defaultArray) {
     return (function() {
       var _queue = defaultArray || [];
       return {
         add: function(val) {
-          _queue.push(val);
+          Array.isArray(val) ? Array.prototype.push.apply(_queue, val) : _queue.push(val);
+        },
+        addRange: function(range) {
+          Array.prototype.push.apply(_queue, range);
         },
         remove: function() {
           return _queue.length ? _queue.shift() : null;
@@ -213,7 +239,7 @@
   };
 
 
-})(window.s = window.s || {});
+})(window.snovakovic);
 
 /*****************************************************
 	  Test Module part
@@ -227,7 +253,7 @@
   };
 
   /**
-   * Test if variable has been defined and is not empty, 
+   * Test if variable has been defined and is not empty,
    * Following will be treated as false
    * s.is.empty(null); => true
    * s.is.empty(undefined); => true
@@ -330,7 +356,7 @@
     return re.test(str);
   };
 
-})(window.s = window.s || {});
+})(window.snovakovic);
 
 /*****************************
  * sMsg - broadcast messages
@@ -353,7 +379,7 @@
     subscribers[subscribe].push(cb);
   };
 
-})(window.s = window.s || {});
+})(window.snovakovic);
 
 /*****************************************************
 	  Array Modification
@@ -361,7 +387,7 @@
 (function(s) {
 
   /**
-    * Loop over object properties. 
+    * Loop over object properties.
     * @param arr {Object} object which properties will be looped over
     * @example s.getProperties({prop1:'val1', prop2:'val2'}, function(key, value){console.log(key + ' >> ' + value);});
     */
@@ -421,7 +447,7 @@
     return merged;
   };
 
-})(window.s = window.s || {});
+})(window.snovakovic);
 
 /************************************
  * MatchMedia polyfill for IE9 or below
@@ -478,7 +504,7 @@ if (!window.matchMedia) {
 
 /************************************
  * sResizeWatch
- * whatch for resize events - and switching between layouts. 
+ * whatch for resize events - and switching between layouts.
  * Detect when media query is triggered
  ****************************************/
 (function(s) {
@@ -680,7 +706,7 @@ if (!window.matchMedia) {
     return screenSizes;
   };
 
-})(window.s = window.s || {});
+})(window.snovakovic);
 
 
 /*****************************************************
@@ -689,7 +715,7 @@ if (!window.matchMedia) {
 (function(s) {
 
   /**
-  * Replace all occurrences in a string with a new value   
+  * Replace all occurrences in a string with a new value
   * @example console.log(s.replaceAll("this is old value in old string", "old", "new"))
    */
   s.replaceAll = function(str, find, replace) {
@@ -727,7 +753,7 @@ if (!window.matchMedia) {
   };
 
   /*
-   * Break string in array of substring 
+   * Break string in array of substring
    * @example: chop("whitespace", 3); => ['whi', 'tes', 'pac', 'e']
   */
   s.chop = function(str, step) {
@@ -749,7 +775,7 @@ if (!window.matchMedia) {
 
 
   /**
-  * Truncate string if it exceed max number of characters, 
+  * Truncate string if it exceed max number of characters,
   * apply provided truncate string at the end of truncated string (default: '...')
   */
   s.truncate = function(str, length, truncateStr) {
@@ -759,27 +785,20 @@ if (!window.matchMedia) {
   };
 
 
-})(window.s = window.s || {});
+})(window.snovakovic);
 
 /*****************************************************
    Utilities
  ***************************************************/
 (function(s) {
 
-  function getRandomNumber(from, to) {
-    return Math.floor(Math.random() * (to - from + 1) + from);
-  }
-
   /**
-  * Get random number between 2 provided numbers or random element from array if array is provided as argument.
+  * Get random number between 2 provided numbers.
 	* @example s.random(1, 10); get random number between 1 and 10 (1 and 10 are included)
 	*/
   s.random = function(from, to) {
     if (s.is.numeric(from) && s.is.numeric(to)) {
-      return getRandomNumber(parseInt(from), parseInt(to));
-    } else if (s.is.array(from)) {
-      var randIndex = getRandomNumber(0, from.length - 1);
-      return from.length > 0 ? from[randIndex] : undefined;
+      return Math.floor(Math.random() * (to - from + 1) + from);
     } else {
       throw new Error('Invalid argument exception');
     }
@@ -788,7 +807,7 @@ if (!window.matchMedia) {
   /**
   * Get the parameter from URL by the name
   * @param key {string} the key for which value will be retrieved
-  * @example s.getUrlParam("firstName"); 
+  * @example s.getUrlParam("firstName");
   */
   s.getUrlParam = function(key) {
     var val = RegExp(key + '=' + '(.+?)(&|$)').exec(location.search) || null;
@@ -816,12 +835,12 @@ if (!window.matchMedia) {
   }
 
   /**********************************************
-  * Returns a function, that, as long as it continues to be invoked, will not be triggered 
+  * Returns a function, that, as long as it continues to be invoked, will not be triggered
    ************************************************/
   s.debounce = function(func, wait) {
     var timeout;
     return function() {
-      var context = this; 
+      var context = this;
       var callNow = !timeout;
 
       clearTimeout(timeout);
@@ -837,9 +856,9 @@ if (!window.matchMedia) {
 
   /*************************
   * execute function when condition becomes true
-  * example: 
-  ** a = false; 
-  ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}): 
+  * example:
+  ** a = false;
+  ** s.execute(function() { console.log('a has become true')}).when(function() { return a;}):
   ** setTimeout(function(){ a= true; },30);
   ************************/
   s.execute = function(executeCb) {
@@ -882,6 +901,6 @@ if (!window.matchMedia) {
   };
 
 
-})(window.s = window.s || {});
+})(window.snovakovic);
 
 //# sourceMappingURL=s.js.map

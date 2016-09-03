@@ -4,7 +4,7 @@
 (function(s) {
 
   /**
-  * Replace all occurrences in a string with a new value   
+  * Replace all occurrences in a string with a new value
   * @example console.log(s.replaceAll("this is old value in old string", "old", "new"))
    */
   s.replaceAll = function(str, find, replace) {
@@ -42,7 +42,7 @@
   };
 
   /*
-   * Break string in array of substring 
+   * Break string in array of substring
    * @example: chop("whitespace", 3); => ['whi', 'tes', 'pac', 'e']
   */
   s.chop = function(str, step) {
@@ -64,7 +64,7 @@
 
 
   /**
-  * Truncate string if it exceed max number of characters, 
+  * Truncate string if it exceed max number of characters,
   * apply provided truncate string at the end of truncated string (default: '...')
   */
   s.truncate = function(str, length, truncateStr) {
@@ -74,4 +74,4 @@
   };
 
 
-})(window.s = window.s || {});
+})(window.snovakovic);

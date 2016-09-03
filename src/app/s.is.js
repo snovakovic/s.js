@@ -10,7 +10,7 @@
   };
 
   /**
-   * Test if variable has been defined and is not empty, 
+   * Test if variable has been defined and is not empty,
    * Following will be treated as false
    * s.is.empty(null); => true
    * s.is.empty(undefined); => true
@@ -113,4 +113,4 @@
     return re.test(str);
   };
 
-})(window.s = window.s || {});
+})(window.snovakovic);

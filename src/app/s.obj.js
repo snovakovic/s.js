@@ -4,7 +4,7 @@
 (function(s) {
 
   /**
-    * Loop over object properties. 
+    * Loop over object properties.
     * @param arr {Object} object which properties will be looped over
     * @example s.getProperties({prop1:'val1', prop2:'val2'}, function(key, value){console.log(key + ' >> ' + value);});
     */
@@ -64,4 +64,4 @@
     return merged;
   };
 
-})(window.s = window.s || {});
+})(window.snovakovic);

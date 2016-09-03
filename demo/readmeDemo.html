@@ -6,36 +6,33 @@
   <title>sModule example</title>
 
   <script type="text/javascript" src="../dist/s.js"></script>
-  
+
 </head>
 
 <body>
   <h1>Look at console for output</h1>
   <p>It contails examples provided in readme file</p>
-  
+
   <script>
     console.log("UTILITIES\n");
     console.log(s.random(1,10), "=> s.random(1,10)");
-    console.log(s.random(['a', 'b', 'c']), "=> s.random(['a', 'b', 'c'])");
-    
+
     console.log("\nSTRING HELPERS\n");
-    console.log(s.replaceAll("this is old value in old string", "old", "new"), '=> s.replaceAll("this is old value in old string", "old", "new");');
-    console.log(s.capitalize('mAte'), '=> s.capitalize("mAte")');
-    console.log(s.capitalize('mAte', true), "=> s.capitalize('mAte', true)");
-    console.log(s.capitalize('MAte', true), "=> s.capitalize('MAte', true)");
-    console.log(s.contains('abc Da', 'da'), "=> s.contains('abc Da', 'da')");
-    console.log(s.contains('abc Da', 'da', true), "=> s.contains('abc Da', 'da', true)");
-    console.log(s.contains('abc Da', 'Da'), "=> s.contains('abc Da', 'Da')");
-    console.log(s.contains('abc Da', 'bc'), "=> s.contains('abc Da', 'bc')");
-    console.log(s.chop('whitespace', 3), "=> s.chop('whitespace', 3)");
-    console.log(s.clean('abc'), "=> s.clean('abc')`");
-    console.log(s.clean('abc '), "=> s.clean('abc ')");
-    console.log(s.clean('  ab   c  '), "=> s.clean('  ab   c  ')");
-    console.log(s.truncate('stefan.novakovich@gmail.com', 100), "=> s.truncate('stefan.novakovich@gmail.com', 100)");
-    console.log(s.truncate('stefan.novakovich@gmail.com', 10), "=> s.truncate('stefan.novakovich@gmail.com', 10)");
-    console.log(s.truncate('stefan.novakovich@gmail.com', 10, ' ...more'), "=> s.truncate('stefan.novakovich@gmail.com', 10, ' ...more')");
-    console.log(s.chop('whitespace', 3), "=> s.chop('whitespace', 3)");
-    
+    console.log(s("this is old value in old string").replaceAll("old", "new"), '=> s("this is old value in old string").replaceAll("old", "new")');
+    console.log(s('mAte').capitalize(), "=> s('mAte').capitalize()");
+    console.log(s('mAte').capitalize(true), "=> s('mAte').capitalize(true)");
+    console.log(s('abc Da').contains('da'), "=> s('abc Da').contains('da')");
+    console.log(s('abc Da').contains('da', true), "=> s('abc Da').contains('da', true)");
+    console.log(s('abc Da').contains('Da'), "=> s('abc Da').contains('Da')");
+    console.log(s('abc Da').contains('bc'), "=> s('abc Da').contains('bc')");
+    console.log(s('whitespace').chop(3), "=> s('whitespace').chop(3)");
+    console.log(s('abc').clean(), "=> s('abc').clean()`");
+    console.log(s('abc ').clean(), "=> s('abc ').clean()");
+    console.log(s('  ab   c  ').clean(), "=> s('  ab   c  ').clean()");
+    console.log(s('stefan.novakovich@gmail.com').truncate(100), "=> s('stefan.novakovich@gmail.com').truncate(100)");
+    console.log(s('stefan.novakovich@gmail.com').truncate(10), "=> s('stefan.novakovich@gmail.com').truncate(10)");
+    console.log(s('stefan.novakovich@gmail.com').truncate(10, ' ...more'), "=> s('stefan.novakovich@gmail.com').truncate(10, ' ...more')");
+
     console.log("\n ARRAY HELPERS\n");
 
     console.log(s.remove(['a', 'b', 'c', 'd', 'c'], 'c'), "=> s.remove(['a', 'b', 'c', 'd', 'c'], 'c')");
@@ -50,7 +47,7 @@
     console.log();
     console.log();
     console.log();
-    
+
   </script>
 
 </body>

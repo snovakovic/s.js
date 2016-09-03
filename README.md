@@ -1,7 +1,17 @@
-s.js (v1.1.1)
+s.js (v1.2.0)
 ======
 
-In a nutshell mishmash of js methods.
+In a nutshell mishmash of helpfull js methods.
+global variable for s.js is snovakovic and it has to be unused in order for library to work.
+s.js will alias it self to variable s for easier/compact usage but only if variable s is unused.
+In case s var is used or you have other preferences then s you can use snovakovic.noConflict() to assing it to any variable of your choosing.
+all examples below will use shorter version s instead of full snovakovic version.
+
+```javascript
+var ss = snovakovic.noClonflict();
+ ss.random(1, 10);
+```
+
 
 Utilities
 ------
@@ -123,8 +133,8 @@ String Helpers
 Replace all occurrences of a string with a new value.
 
 ```javascript
-s.replaceAll(originalString, currentValue, newValue);
-s.replaceAll("this is old value in old string", "old", "new"); //=> this is new value in new string
+s(originalString).replaceAll(currentValue, newValue);
+s('this is old value in old string').replaceAll('old', 'new'); //=> this is new value in new string
 ```
 
 #### capitalize
@@ -132,9 +142,9 @@ Converts first letter of a string to uppercase.
 If true is passed as second argument the rest of the string will be converted to lower case.
 
 ```javascript
-s.capitalize('mAte'); //=> MAte
-s.capitalize('mAte', true); //=> Mate
-s.capitalize('MAte', true); //=> Mate
+s('mAte').capitalize(); //=> MAte
+s('mAte').capitalize('mAte', true); //=> Mate
+s('MAte').capitalize('MAte', true); //=> Mate
 ```
 
 #### contains
@@ -142,27 +152,27 @@ Test if string contains provided substring.
 By default it's case-sensitive which can be turned of by providing last optional parameter.
 
 ```javascript
-s.contains(string, substringToCheck, ignoreCase);
-s.contains('abc Da', 'da'); //=> false
-s.contains('abc Da', 'da', true); //=> true
-s.contains('abc Da', 'Da'); //=> true
-s.contains('abc Da', 'bc'); //=> true
+s(stringToCheck).contains(substringToCheck, ignoreCase);
+s('abc Da').contains('da'); //=> false
+s('abc Da').contains('da', true); //=> true
+s('abc Da').contains('Da'); //=> true
+s('abc Da').contains('bc'); //=> true
 ```
 
 #### chop
 Breaks a string in array of substring
 
 ```javascript
-s.chop('whitespace', 3); //=> ['whi', 'tes', 'pac', 'e']
+s('whitespace').chop(3); //=> ['whi', 'tes', 'pac', 'e']
 ```
 
 #### clean
 Trim and replace multiple spaces with a single space.
 
 ```javascript
-s.clean('abc')); //=> 'abc';
-s.clean('abc ')); //=> 'abc';
-s.clean('  ab   c  ')); //=> 'ab c';
+s('abc').clean(); //=> 'abc';
+s('abc ').clean(); //=> 'abc';
+s('  ab   c  ').clean(); //=> 'ab c';
 ```
 
 #### truncate
@@ -171,10 +181,10 @@ By default if string is truncated at the end of string will be appended "..."
 This can be changed to anything by providing last optional argument
 
 ```javascript
-s.truncate = function(str, length, truncateStrAppender);
-s.truncate('stefan.novakovich@gmail.com', 100); //=> 'stefan.novakovich@gmail.com'
-s.truncate('stefan.novakovich@gmail.com', 10); //=> 'stefan.nov...'
-s.truncate('stefan.novakovich@gmail.com', 10, ' ...more'); //=> 'stefan.nov ...more'
+s(originalString).truncate(length, truncateStrAppender);
+s('stefan.novakovich@gmail.com').truncate(100); //=> 'stefan.novakovich@gmail.com'
+s('stefan.novakovich@gmail.com').truncate(10); //=> 'stefan.nov...'
+s('stefan.novakovich@gmail.com').truncate(10, ' ...more'); //=> 'stefan.nov ...more'
 ```
 
 
