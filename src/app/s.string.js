@@ -11,21 +11,19 @@
     return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
   };
 
+    /*
+  * Converts first letter of the string to uppercase.
+  * @example capitalize("foo Bar"); => "Foo Bar";
+  */
+  s.capitalize = function(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
 
   /***********************************************
    * Below methods has been taken from
    * https://github.com/epeli/underscore.string
   ************************************************/
-
-  /*
-   * Converts first letter of the string to uppercase. If true is passed as second argument the rest of the string will be converted to lower case.
-   * @example capitalize("foo Bar"); => "Foo Bar"; capitalize("FOO Bar", true); => "Foo bar"
-   * https://github.com/epeli/underscore.string
-  */
-  s.capitalize = function(str, lowercaseRest) {
-    var remainingChars = !lowercaseRest ? str.slice(1) : str.slice(1).toLowerCase();
-    return str.charAt(0).toUpperCase() + remainingChars;
-  };
 
   /*
    * test if string contains substring

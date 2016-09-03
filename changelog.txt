@@ -1,4 +1,7 @@
-﻿/***************** Version 1.2.0 ***********************/
+﻿/***************** Version 1.2.1 ***********************/
+remove lower case rest option from capitalize
+
+/***************** Version 1.2.0 ***********************/
 change s.js to be function not object
 add options for string helpers to be called as functions e.g s('test').capitalize instead of s.capitalize('test')
 add noConflict

@@ -1,4 +1,4 @@
-s.js (v1.2.0)
+s.js (v1.2.1)
 ======
 
 In a nutshell mishmash of helpful js methods.
@@ -143,9 +143,7 @@ Converts first letter of a string to uppercase.
 If true is passed as second argument the rest of the string will be converted to lower case.
 
 ```javascript
-s('mAte').capitalize(); //=> MAte
-s('mAte').capitalize('mAte', true); //=> Mate
-s('MAte').capitalize('MAte', true); //=> Mate
+s('mate').capitalize(); //=> Mate
 ```
 
 #### contains

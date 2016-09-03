@@ -10,7 +10,6 @@ describe('s.string', function() {
   describe('capitalize', function() {
     it('should capitalize string', function() {
       expect(s.capitalize('abc Da')).toEqual('Abc Da');
-      expect(s.capitalize('abc Da', true)).toEqual('Abc da');
       expect(s.capitalize('Abc Da')).toEqual('Abc Da');
     });
   });
